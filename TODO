@@ -6,17 +6,13 @@ Key:	[ ] To-do (Agreed To-Do)
 	[+] In progress
 -------------------------------------------------------
 
-[X] NickServ: GROUP => ADDNICK, GLIST => MYNICKS
+[X] NickServ: GROUP => ADDNICK, GLIST => MYNICKS (DigitalMan)
 [ ] Rename all Anope-named functions
-[~] Add the following file header format to each file. (See XHEADER in main dir)
+[ ] Add the following file header format to each file. (See XHEADER in main dir)
     Note: You MUST change some of the code to legally remove the Anope Copyright.
           Please also make sure Anope, Epona, and IRC Services (Andy C.) get credit for
           appropriate files. (This may be removed from the TODO once everyone has read it.)
-
-Liber
-[ ] Add logging for cs_access_add/cs_access_change/cs_access_del
-
-TheKing
-[~] Add the ShadowIRCd protocol.
-[~] Add regex tracing for operserv.
-[~] Add flags system to ChanServ. 
+[ ] Add logging for cs_access_add/cs_access_change/cs_access_del (Liber)
+[ ] Add the ShadowIRCd protocol. (TheKing)
+[ ] Add regex tracing for operserv. (TheKing)
+[ ] Add flags system to ChanServ. (TheKing)
