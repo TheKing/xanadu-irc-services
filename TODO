@@ -12,9 +12,8 @@ Key:	[ ] To-do (Agreed To-Do)
           Please also make sure Anope, Epona, and IRC Services (Andy C.) get credit for
           appropriate files. (This may be removed from the TODO once everyone has read it.)
 
-Liber
+
 [ ] Add logging for cs_access_add/cs_access_change/cs_access_del
-
-TheKing
 [~] Add the ShadowIRCd protocol.
-
+[~] Add regex tracing for operserv.
+[~] Add flags system to ChanServ. 
