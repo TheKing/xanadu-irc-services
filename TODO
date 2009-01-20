@@ -15,3 +15,6 @@ Key:	[ ] To-do (Agreed To-Do)
 Liber
 [ ] Add logging for cs_access_add/cs_access_change/cs_access_del
 
+TheKing
+[~] Add the ShadowIRCd protocol.
+
