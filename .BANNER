@@ -1,0 +1,15 @@
+__   __                     _       
+\ \ / /                    | |      
+ \ V / __ _ _ __   __ _  __| |_   _ 
+  > < / _` | '_ \ / _` |/ _` | | | |
+ / . \ (_| | | | | (_| | (_| | |_| |
+/_/ \_\__,_|_| |_|\__,_|\__,_|\__,_|
+------------------------IRC Services
+Version: 0.1.0a Alpha
+
+This program will guide you through the process of compiling
+your Xanadu IRC Services. If you are in need of assistance
+you can contact the Xanadu Support Team on the DrivenIRC
+network: #Xanadu - irc.drivenirc.com
+
+For more options type: ./Config --help

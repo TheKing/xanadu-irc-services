@@ -1,0 +1,104 @@
+#############################################################################################
+###---------------------------------------------------------------------------------------###
+###-------------------------------------- bs_fantasy_ext ---------------------------------###
+###---------------------------------------------------------------------------------------###
+#############################################################################################
+
+####
+# Module Name   : bs_fantasy_ext
+# Author        : Viper <Viper@Absurd-IRC.net>
+# Last Edited   : 31/01/2008
+###
+
+---------------------------------------------------------------------------------------------
+
+Linux Installation Instructions :
+-----------------------------------
+
+	- wget the latest version of bs_fantasy_ext (link on Anope forums) 
+	     to the anope-1.7.x/src/modules directory
+	- extract it with 'tar -zxvf bs_fantasy_ext-1.x.y.tar.gz'
+	- If required, change compile time settings in config.h
+	- cd to main anope source directory
+	- run 'make modules'
+	- run 'make install'
+	- copy/paste configuration directives below to services.conf (at the bottom
+	     there s a section for modules' configuration directives)
+	- possibly add the module to the ModuleDelayedAutoload directive
+	- load module with /os modload bs_fantasy_ext
+
+
+---------------------------------------------------------------------------------------------
+
+
+Configuration directives that should be copy-pasted to services.conf
+---------------------------------------------------------------------
+
+# ListExempNick [OPTIONAL]
+# Module: bs_fantasy_ext
+#
+# Nicks that will never appear in the network staff listing (!staff, !ircops and !admins).
+# For example bots like statserv should be put here.
+# Wildcards are permitted.
+# You can specify more than one nick or wildcard string by separating each one by a space.
+#ListExempNick ""
+
+# OverrideCoreCmds [OPTIONAL]
+# Module: bs_fantasy_ext
+#
+# Override the fantasy commands implemented by the Anope Core to add extra functionalities
+# like multiuser commands support (up to 6 users/line). 
+# This will also override the !kb and !unban implemented by the core.
+# To enable the extra functionalities uncomment this line, to disable it, leave the line commented out.
+#OverrideCoreCmds
+
+# EnOperCmds <option> [OPTIONAL] [DISCOURAGED]
+# Module: bs_fantasy_ext
+#
+# This will enable IRC operator fantasy commands in all channels with botserv fantasy
+# commands enabled. IRCops will not need the fantasy access level to that channel,
+# but if NSStrictPrivileges is set they will need to be opered to be able to use it, 
+# provided their Services access level is high enough.
+# Note that if access to this command is granted to all Services Opers (3), access
+# may still be denied later on depending on the command issued.
+# Using this is discouraged because of the high risk of power abuse by opers.
+# By default this is disabled.
+# Possible Option Values:
+# 0 - Disabled
+# 1 - Enabled for Services Root Administrators
+# 2 - Enabled for Services Admins (and above)
+# 3 - Enabled for Services Opers (and above)
+#EnOperCmds 0
+
+# SAdminOverride [OPTIONAL] [DISCOURAGED]
+# Module: bs_fantasy_ext
+#
+# This will allow Services Root Administrator and Services Admins to use the fantasy
+# commands to override channel settings and modes the same way they can use regular
+# ChanServ commands.
+# Using this is discouraged because of the high risk of power abuse by opers.
+# To enable this, uncomment following line, to disable it, leave the line commented out.
+#SAdminOverride
+
+# EnUnbanIP [OPTIONAL] [DISCOURAGED]
+# Module: bs_fantasy_ext
+#
+# This directive has been added because of the possibly abusive behaviour of the !unban command.
+# !unban can be used to gradually guess a target users' IP address.
+# While i have added several preventive measures to avoid anyone from guessing someone elses IP
+# address, I cannot guarantee for 100% that it s impossible.
+#
+# When defined, the !unban command will be fully operational, with a few restrictions on its use:
+# When issueing the command with a target nick...
+#   - it can only be used on registered and identified users
+#   - it will not remove IP based bans matching the target user if he has NS SET HIDE USERMASK turned on
+#   - it may not be used more then three times (set in config.h) (by anyone) on any given user, 
+#     unless the users' IP has changed. 
+# Keep in mind that the tracking of users' IPs and count is reset when restarting services!
+# When not defined, !unban will NOT check IP based bans.
+# All other !unban options are unaffected by this setting, so !unban will always work for mask and
+# bans matching a users' mask or vhost even if this is not defined.
+#
+#EnUnbanIP
+
+---------------------------------------------------------------------------------------------

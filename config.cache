@@ -1,0 +1,7 @@
+BINDEST="/home/zach/services"
+DATDEST="/home/zach/services"
+RUNGROUP=""
+UMASK=077
+IRCTYPE="no default"
+IRCTYPE_DEF=""
+MYSQL="yes"

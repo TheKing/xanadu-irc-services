@@ -1,0 +1,28 @@
+#############################################################################################
+###---------------------------------------------------------------------------------------###
+###-------------------------------------- bs_fantasy_ext ---------------------------------###
+###---------------------------------------------------------------------------------------###
+#############################################################################################
+
+####
+# Module Name   : bs_fantasy_ext
+# Author        : Viper <Viper@Absurd-IRC.net>
+# Last Edited   : 20/04/2008
+###
+
+---------------------------------------------------------------------------------------------
+
+TODO:
+------
+
+--- feature freeze (at least nothing big will be added for now) ---
+
+.17:	- get some1 to update french lang file
+	- bug SNU for german language file
+		
+.xx	- release a stable 1.2
+	- add dutch translation... translations are always welcome
+		(someone was going to do this for me (boring), but haven't heard from him...)
+	- fix possible bugs as they pop up
+
+---------------------------------------------------------------------------------------------

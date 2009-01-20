@@ -1,0 +1,346 @@
+#############################################################################################
+###---------------------------------------------------------------------------------------###
+###-------------------------------------- bs_fantasy_ext ---------------------------------###
+###---------------------------------------------------------------------------------------###
+#############################################################################################
+
+---------------------------------------------------------------------------------------------
+
+Module Name   : bs_fantasy_ext
+Author        : Viper <Viper@Absurd-IRC.net>
+Date          : 16/04/2006 
+Last Update   : 20/04/2008
+Last Edited   : 20/04/2008
+
+URL           : http://modules.anope.org/viewmod.php?id=61 
+Forums        : http://forum.anope.org/viewthread.php?tid=312
+
+This Version  : 1.1.16
+Up-to-Date with Anope 1.7 Revision 1391
+
+---------------------------------------------------------------------------------------------
+
+Requires      : Anope 1.7.21
+Recommended   : Anope 1.7.21 or higher
+Tested        : Anope 1.7.21 + UnrealIRCd 3.2.6 (Should work on any IRCd)
+                Anope 1.7.21 + Charybdis 2.1.5
+
+---------------------------------------------------------------------------------------------
+
+Description:
+-------------
+This module can add commands to the botserv fantasy engine, as well as override some of the
+allready present commands to extend their functionality.
+This module combines some functions of the old bs_fan, bs_fantasy and bs_moremodesperline,
+while adding some new features as well. The more modes per line functionality allows up to
+6 users on one line (for example: !op user1 user2 user3 user4 user5 user6).
+A new feature added in Version 1.1.11 is a more complex implementation of kickban.
+For example: !kb *@*.be will add a ban on *!*@*.be and kick all users matching the ban.
+If a user is present who matches the gives host and is protected, the process will be aborted.
+Another new feature, added in Version 1.1.12, is an implementation of !tb(an) and !tkb. Both
+of these work similar to the new implementation of !kb. Therefore use of thus module in 
+combination of bs_fantasy_tb should be discouraged, except when this modules' !tb is disabled
+in the config.h before compiling the module. (On windows you would have to compile the 
+module manually.)
+- I am no longer adding every new feature here.. there are simply too many... -
+
+Unlike previous versions of these modules, this module has been written for 
+Anope1.7.x and higher and will NOT work on any version pre 1.7.21. There will not be 
+made a version made for the older 1.6 branche since this branch will become to outdated 
+when 1.7 becomes stable. Also, this module has been created to replace the old module that
+allready existed for the 1.6 branch, this one though has slightly different options and cmds.
+Except for the latest development version of Anope, this module comes 'as is', meaning i do
+not officially support this modules with any other version of Anope then the latest 1.7 release.
+I will not offer any support either if you have RAW enabled on your network (so don't even 
+bother asking).
+
+This module no longer uses any code from SGR's original bs_fantasy module, nor from
+ProjectDEAD's original bs_fan module code, though many of the ideas are based on theirs.
+Therefore the credit for coming up with many of the ideas goes to them.
+There are on the other hand entire code blocks that were copied with minimal changes 
+from the Anope core so a lot of the credit goes the Anope Development crew.
+I also want to thank Rob (actually the entire Dev Crew) for helping me through some hard
+parts during development and especially Trystan, who did a wonderful job helping me out with 
+some of my memory leak problems and crashbugs.
+
+
+---------------------------------------------------------------------------------------------
+
+Installation:
+--------------
+
+cf INSTALL.
+
+
+---------------------------------------------------------------------------------------------
+
+Technical:
+------------
+
+A few technical need-to-knows and usefull tips about this module
+
+- There are a number of pre-compile configuration options that will allow you to disable
+  most of the commands in bs_fantasy_ext without having to touch any of the source code.
+  Another option - aimed towards large networks with high loads - allows admins to put certain
+  commands in a form of low-resource-usage mode.
+  More information can be found in "config.h".
+  Note that after changing config.h it may be required to delete bs_fantasy_ext/main.o and 
+  bs_fantasy_ext.so from the src/modules directory to force the module to recompile 
+  with "make modules".
+  
+- This modules' behaviour may change depending on what other modules are loaded.
+  For example if os_shun is loaded the !shun and !tshun command will become available.
+  I implemented it this way because i do not want to create a fantasy command that has no "normal"
+  counterpart.
+  !sync will become available when cs_sync is loaded.
+  (Also read note below regarding the detecting of other modules.)
+  
+- While i generally refrain from integrating other 3rd party modules in mine, this modules
+  behaviour will change to reflect the extra restrictions made to the core when cs_restrict_kb
+  is loaded. This module by n00bie restricts the use of CHANSERV kick/ban by normal users against 
+  Services Operators and above. bs_fantasy_ext will also adpot this behaviour when the module
+  is detected. With one change however: channel founders are still able to kick/ban SO's, but
+  none of the above. (Also read note below regarding the detecting of other modules.)
+  
+- Note regarding the detection of other modules:
+  bs_fantasy_ext requires the other modules to be loaded before this one, so it s safest to load
+  this module as last one, for the other module to be automatically detected.
+  You can force bs_fantasy_ext to re-detect other modules by issueing the RELOAD command
+
+- The module will attempt to unload unneeded core modules, more precisely: bs_fantasy, 
+  bs_fantasy_kickban and bs_fantasy_unban. It should automatically reload them when the module
+  is unloaded or OverrideCoreCmds is disabled, however it may be a good idea to check this.
+  Note that bs_fantasy_unban is NOT be automatically reloaded as this is no longer considered
+  a core module because of the privacy issues related to ussing it.
+  This functionality is NOT available on WINDOWS systems.
+
+- The EnUnbanIP directive has been added in the services.conf because !unban can potentially be
+  abused to guess another users' IP. In Anope-1.7.21 SVN it has also been removed as a core module.
+  When the directive is not enabled, !unban will still work, however it will not check IP based
+  bans. When EnUnbanIP is defined, unban will remove up to MaxUnbanIP IP bans matching a registered user.
+  The bancount is reset when the users' IP changes or services is restarted. (Keep this in mind! 
+  Restarting services regulary  can affect the protection of your users' privacy.)
+  MaxUnbanIP can be set before compiling and is by default set to 3.
+  !unban has been completely rewritten in this module and no longer left to the IRCd so anope
+  can control which bans are unset (non IP based bans). This however also means that there
+  is no 100% guarantee that !unban <nick> will remove ALL bans matching a user.
+  On unrealIRCd !unban now also supports the extended bantypes.
+
+---------------------------------------------------------------------------------------------
+
+Loading Restrictions:
+-----------------------
+
+As of bs_fantasy_ext 1.1.13 (RC2) some pre-loading checks are performed to change the behaviour
+of this module and (if applicable) enable more functionality. Hoewever I also added some
+restrictions regarding what other modules/functionality may be enabled.
+Currently this only affects the use of RAW, however for the next versions I might look into adding
+third party modules to this list that have the same effect as using RAW. 
+
+As of version 1.1.16 additional checks have been added for third party modules that may cause
+cause desyncs and in combination with which I refuse to support this module.
+The presence of these modules is however not fatal and will only result in bs_fantasy_ext
+switch to unsupported module instead of disabling the entire module as is done with os_raw.
+The Module currently on this blacklist are: ircd_init, cs_join, bs_logchanmon and ircd_gameserv
+because they all introduce new services clients, join them to channels and do not respect 
+the BSMinUsers setting. (This can cause a channel to "die" internally, but still exist according 
+to the ircd.)
+
+Since I am aware that a lot of people use these modules or can't live without RAW (no-one has so
+far given me a valid reason to do so however), I have added a pre-compile directive (SUPPORTED)
+in config.h which can disable these sanity checks. 
+Be aware though that when you disable (undefine) this directive you will LOSE ALL SUPPORT I
+am willing to provide for this module.
+Note that even though bs_fantasy_ext still runs in combination with non-fatal modules, 
+it is recommended to compile bs_fantasy_ext in unsupported mode if you use these modules.
+
+To Windows users: this WILL REQUIRE YOU TO COMPILE THE MODULE YOURSELF !!!
+For obvious reasons, I won't be distributing an unsupported version myself...
+
+---------------------------------------------------------------------------------------------
+
+Translation:
+-------------
+
+If you are willing to translate this module into a language that is not yet available, 
+please get in touch with me on IRC (irc.anope.org #anope) and will tell you what exactly you
+have to do. It is not hard, you don't need coding skills of any kind, just a bit of patience.
+
+If you have allready made a translation and are willing to share it, mail the <language>.c file
+to me at Viper@Absurd-IRC.net and it will be added in the next release.
+
+---------------------------------------------------------------------------------------------
+
+Contact:
+---------
+
+I (Jan Milants aka Viper) can be contacted through mail at Viper@Absurd-IRC.net or through IRC on 
+YOURnet (irc.anope.org #anope). I prefer people contacting me on YOURnet and please ask me before 
+PM'ing me for a simple question, other people in the channel might be able to answer as well.
+I also watch the Anope forums ( http://forum.anope.org ), so if there is any problem and you
+can't reach me on IRC, please try using the forums before mailing me.
+
+If you think you found a bug in my module, either post it on the forums, in the thread
+related to this module in the section Modules or mail me the details. Pleas do NOT bother
+the Anope Development crew with bugs in this module as they are NOT resposible for something
+they did not write and prefer modules to be maintained by their authors.
+
+---------------------------------------------------------------------------------------------
+
+Copyright:
+------------
+
+This module is released under the GPL 2 license, with the exclusion of the my_match_wild_nocase()
+subroutine in misc.c on which all copyrights belong to Alessandro Felice Cantatore.
+It should also be noted that much of the code in this module is forked from Anope itself.
+
+
+---------------------------------------------------------------------------------------------
+
+Supported Commands:
+--------------------
+
+	Regular Commands
+	
+		!cmdlist
+		!help
+		!help [cmd [param]]
+
+		!modinfo
+		!sversion
+
+		!clear MODES
+		!clear BANS
+		!clear EXCEPTS
+		!clear INVITES
+		!clear OPS
+		!clear HOPS
+		!clear VOICES
+		!clear USERS
+
+		!sop add [nick]
+		!sop del [nick|entry-num|list]
+		!sop list [mask|list]
+		!sop clear
+		!aop add [nick]
+		!aop del [nick|entry-num|list]
+		!aop list [mask|list]
+		!aop clear
+		!hop add [nick]
+		!hop del [nick|entry-num|list]
+		!hop list [mask|list]
+		!hop clear
+		!vop add [nick]
+		!vop del [nick|entry-num|list]
+		!vop list [mask|list]
+		!vop clear
+
+		!access add [nick] [level]
+		!access del [nick|entry-num|list]
+		!access list [mask|list]
+		!access clear
+
+		!levels set [type] [level]
+		!levels {dis|disable} [type]
+		!levels list
+		!levels reset
+
+		!akick add [mask] [reason]
+		!akick {stick|unstick} [mask]
+		!akick del [mask]
+		!akick {list|view} [mask]
+		!akick enforce
+		!akick clear
+
+		!badwords add [word] {single|start|end|any}
+		!badwords del [word|entry-num|list]
+		!badwords list [mask|list]
+		!badwords clear
+
+		!set founder [nick]
+		!set successor [nick]
+		!set desc [description]
+		!set email [email]
+		!set url [url]
+		!set entrymsg [message]
+		!set bantype [0|1|2|3]
+		!set mlock [modes]
+		!set keeptopic [on|off]
+		!set topiclock [on|off]
+		!set opnotice [on|off]
+		!set peace [on|off]
+		!set private [on|off]
+		!set restricted [on|off]
+		!set secure [on|off]
+		!set secureops [on|off]
+		!set securefounder [on|off]
+		!set signkick [on|off]
+		!set xop [on|off]
+		!set noexpire [on|off]
+		
+		!set dontkickops [on|off]
+		!set dontkickvoices [on|off]
+		!set greet [on|off]
+		!set fantasy [on|off]
+		!set symbiosis [on|off]
+		!set nobot [on|off]
+		
+		!bkick bolds [on|off] [ttb]
+		!bkick badwords [on|off] [ttb]
+		!bkick caps [on|off] [ttb [min [percent]]]
+		!bkick colors [on|off] [ttb]
+		!bkick flood [on|off] [ttb [ln [secs]]]
+		!bkick repeat [on|off] [ttb [num]]
+		!bkick reverses [on|off] [ttb]
+		!bkick underlines [on|off] [ttb]
+
+		!topic [topic]
+		!ctopic
+
+		!appendtopic [topic text]
+		!tappend [topic text]
+
+		!invite [nick]
+
+		!ircops | !staff
+		!admins
+
+		!up [nick]
+		!down [nick] [target level]
+
+		!minfo
+		!sversion
+
+		!ban [nick|mask]
+		!unban [nick|mask]
+		!tban [nick|mask] [time]
+		!mute [nick|mask]
+		!unmute [nick|mask]
+		!kb [nick|mask] [reason]
+		!tkb [nick|mask] [time] [reason]
+
+		!info
+		
+		!sync
+
+
+	Services Opers/Admins Commands:
+
+		!kill [nick] [reason]
+		!mode [mode(s)]
+
+		!akill add [+expiry] mask reason
+		!akill del {mask | entry-num | list}
+		!akill view [mask | list]
+		!akill clear
+
+		!ignore add [time] [nick]
+		!ignore del [nick]
+		!ignore list
+		!ignore clear
+		
+		!shun [add] [ nick | user@host] [+time] [reason]
+		!shun del [nick | user@host]
+
+
+---------------------------------------------------------------------------------------------

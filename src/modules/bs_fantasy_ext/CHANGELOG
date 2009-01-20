@@ -1,0 +1,178 @@
+#############################################################################################
+###---------------------------------------------------------------------------------------###
+###-------------------------------------- bs_fantasy_ext ---------------------------------###
+###---------------------------------------------------------------------------------------###
+#############################################################################################
+
+####
+# Module Name   : bs_fantasy_ext
+# Author        : Viper <Viper@Absurd-IRC.net>
+# Last Edited   : 20/04/2008
+###
+
+---------------------------------------------------------------------------------------------
+
+Current Version: 1.1.16
+
+---------------------------------------------------------------------------------------------
+
+Changelog:
+-----------
+
+1.1.16 Added version flags to modlist and modinfo version reply as well.
+       Added runtime supported mode, checks and flags.
+       Updated documentation in README
+       Fixed unloading of os_raw causing a segfault (replaced by fatal error during load).
+       Fixed a minor shortcoming in documentation on !shun (Reported by n00bie)
+       Fixed !tshun not returning an error when used on ircops (ircd restriction) (Reported by n00bie)
+       Fixed !topic replying (null) if no topic is set. (Reported by n00bie)
+
+1.1.15 Fixed auto core module reloading not setting proper module settings.
+       Fixed !unban causing a never ending loop when used on a stickied akick.
+
+1.1.14 Changed !akick: add <user> now adds akick on the users' mask instead of nick if user
+           exists and isn't a registered nick (akicks based on user account).
+       Fixed crashbug in !ban
+       Fixed !unban not always removing bans placed by !ban with same arguments.
+       Fixed & Reworked !minfo (again..)
+
+1.1.13 Fixed typo in english language file. (Reported by paulmer2003)
+       Fixed akick cutting off reason after 1 word.
+       When (un)muting on charybdis we now use the +q channel mode.
+       !up also now works when AUTOOP is turned off. (Reported by EvilSeph)
+       Corrected some errors in the description of several configuration directives.
+       Added missing second layer services oper check for !akill
+       !down no longer removes voice if channel is moderated and user has more then just voice...
+       !mute now allows superadmins to mute the channel founder (reported by EvilSeph)
+           (No bug in bs_fantasy_ext so works only when used with Anope-1.7.20+. CF Anope bug #770)
+       All founders (CS IDENTIFY) can now use "!down/!up [nick]", even when securefounder is on.
+       Added !suspend command.
+       Added similar checks on !tkb, !ban, !tban and !mute as on !kb.
+       Added CPU_USAGE_REDUCTION pre-compile configuration option.
+       Changed !(un)ignore to be SA only as it is in the core.
+       Restructured code and moved some parts to new/other files.
+       Synchronized modules' code with Core changes made in Anope-1.7.20
+       Added the help for "levels desc" and "access levels" to !help
+       Extended the help on some of the firtly implemented commands.
+       Applied patch for anope bug #816 (Still exists in Anope-1.7.20, but we can already fix it)
+       !down now supports target level (vhoaq). If level is above current, current modes will be unset
+           and new modes will be set. Maybe at one time this should go under a seperate cmd...
+       Added auto(un)load functionality for core modules if they are overriden.
+       Changed !topic: now shows topic when issued without arguments
+       Added !ctopic: clears topic and it actually works this time (not using !topic to prevent accidental use)
+       Added support for 3rd party module cs_restrict_kb by n00bie. (Read Technical Chapter in README for more info)
+       Added improved unban routine, specifically for UnrealIRCd, but it cannot detect ALL bans.
+       Fixed !unban banning the user executing the command..
+       (RC2) Added !admins to cmdlist and help.
+       (RC2) Added some details to output of !modinfo
+       (RC2) Added loading requirements regarding RAW (cf README)
+       (RC2) Fixed Crashbug in !up when used by unidentified/unregistered users.
+       (RC2) Fixed !unban which is now also using a faster wildcard matching routine
+       (RC2) For privacy reasons no longer loading bs_fantasy_unban when unloading (Anope bug #854)
+       (RC2) Completely rewrote !unban and added EnUnbanIP config directive (cf README and Anope bug #854)
+       (RC2) Added AppendToTopicDel pre-compile directive which detemines delimiter used by !tappend.
+       (RC2) Fixed !kb,!mute and !ban not properly adding *@* targets to internal banlist as *!*@*
+       (RC2) Fixed potential crashbug in!mute
+       (RC2) Added !sync command
+       (RC2) Added !shun and !tshun commands
+       (RC2) Applied several bugfixes from Anope 1.7.21 SVN (Changes to appenttopic, #842, #849, ..)
+       (RC2) Re-Added win32 support by disabling part of the functionality on Windows.
+       (Final) Replaced all calls for match_wild_nocase() by my_match_wild_nocase() which is a lot faster.
+
+1.1.12 Removed redundant check in do_levels that caused the set to fail if level is 0
+       !down now voices people if the channel is moderated (except when performed by voice)
+       !down can now also be performed by the founder of a channel on another user.
+       Renamed ListExcempNick to ListExempNick (Will need to be changed in services.conf!)
+       !kb was listed twice in !cmdlist  due to our own implementation and the cores'...
+       Replaced several occurrences of // comments by /*...*/
+       Added !t(k)b(an), partially based on the tban module by Rob that ships with anope
+       Use of !mode and a few other oper cmds now reports back to logchan like /os <cmd> does... 
+       A few other minor code changes i have forgotten by now...
+       (RC2) Fixed a crashbug present in the !tb implementation in RC1 (Fix by Trystan)
+       (RC2) Fixed EnOperCmds causing an error when set to 0. Had no further consequences.
+       (RC2) !staff no longer includes users with +H (if supported by IRCd)
+       (RC2) Fixed bug causing !set mlock to fail when issued with extra params (Reported by SNU)
+       (RC3) Fixed a crashbug in !set mlock introduced by the fix in RC2 (Thx to Trystan)
+       (RC4) Fixed a crashbug in !up/down when given an invalid parameter (Reported by SNU)
+       (RC5) Updated headers
+       (RC5) Modified language system for easier translating, added (incomplete) french translation some lang fixes.
+       (RC5) Updated module with bugfixes in anope 1.7.19.
+       (RC5) Renamed "!help access" to "!help chaccess" to make help for access list reachable. (Reported by Jobe)
+       (RC5) Fixed a bug in the core fantasy system causing it to send empty mode changes. (Reported by paulmer2003)
+       (Final) Updated French language file. French language now fully supported.
+       (Final) Fixed missing !tkban trigger (help said it existed, but it was inactive).
+       (Final) Fixed bug causing compile errors if !tb was disabled but !tkb was not.
+       (Final) Fixed some compile errors.
+
+1.1.11 Fix Anope bug #598 (fixed in rev. 1149) - fix ported from core to keep module behavious similar.
+       Made module comply with new QA requirements ( Removed 1 forgotten strtok().)
+       Added implementation of kickban by the module as requested by owine to support kb's on masks.
+       Updated help... forgot a few details apparently
+
+1.1.10 Mode will now accept more then 1 parameter - little mistake when calling function
+       Fixed a segmentation fault in !ban when banning a user who is excempted
+       Fixed a bug where core overriden fantasy commands did not respect secureops setting (due to module
+          not correctly updating anope's internal list) - partially rewritten, should be faster as well now
+            (All above bugs were reported by TRAiNER4)
+       !ban now checks whether the user is excempted.
+
+1.1.9  Module no longer considered beta. (Not a single bug reported since release of 1.1.8)
+       Now also supporting windows.
+       Removed a few unnecessary strdup()'s and saved on free()'s
+       When ircdcap->tsmode is supported we now give the time along in do_cmode()
+
+1.1.8  Fixed a  Segmentation fault bug in load_config when debug is enabled
+       Fixed a bug in the parsing of the ListExcempNick directive, hadn't changed GOListExcempNick on 1 place.
+
+1.1.7  Fixed a compile error in do_core_fantasy
+
+1.1.6  Split the module up in different files
+       Added !admins trigger which lists all online admins.
+       Changed GOListExcempNick directive in config to ListExcempNick
+       Added wildcard matching when comparing nicks to ListExcempNick
+       Fixed bug when setting EnOperCmds
+
+1.1.5  Applied Trystan's patch to the anope's fantasy core commands.
+       Changed !append to !appendtopic to prevent conflicts with the ZBot Module
+       Fixed missing !help all
+       Fixed crash on null !mode
+       Removed easter egg and fixed typo
+       Fixed a various memory leaks (Thx Rob and Trystan)
+
+1.1.4  Fixed several crashbugs in the help system.
+       !topic now works for every1 with OPDEOPME level when topiclock is turned off
+
+1.1.3  Added support for multi-user commands (!op user1 user2) for up to 5 nicks
+       Added the botserv set options to the set trigger
+       Added the botserv kick options with a 'bkick" trigger
+       Made the module ready for Windows Support (Will be added when Anope-1.7.15 is released)
+
+1.1.2  Rewrote the help and commandlist system
+       Fixed bug in xop system as fixed in Anope 1.7.14 (1059)
+
+1.1.1  Used svsmode when svsmode_ucmode is set to clear channel modes.
+       Added the ability to disable fantasy commands before compiling the module.
+
+1.1.0  Added oper fantasy commands with a configuration directive to enable them (Requested)
+       Added the ability to allow services admins access to the channel fantasy commands. (settable in conf)
+       Changed !version and !info to !sversion and !minfo (old triggers were too common)
+       Added info
+
+1.0.7  Fixed an occasional crashbug when muting a services bot (Reported by TRAiNER4)
+
+1.0.6  Several bugfixes invlolving mute, unmute and clear
+
+1.0.5  Added unmute & version
+
+1.0.4  Rewrote !mute... hoping this will fix a bug reported by owine
+
+1.0.3  Streamlined the code processing !down (was real ugly) - Thx to GD for this one
+
+1.0.2  Should work with gcc2 now
+
+1.0.1  Fixed crashbug in !mute on unrealircd (Reported by TRAiNER4)
+       Fixed A LOT of memleaks...
+
+1.0    Initial Beta Release
+
+0.1-0.17 Alfa Versions (Different stages of adding commands and fixing early bugs)
