@@ -601,3 +601,34 @@ int log_away(char *source, int argc, char **argv)
 	return MOD_CONT; 
 }
 
+void alog(const char *fmt, ...)
+{
+    va_list args;
+    char *buf;
+    int errno_save = errno;
+    char str[BUFSIZE];
+
+    checkday();
+
+    if (!fmt) {
+        return;
+    }
+
+    va_start(args, fmt);
+    vsnprintf(str, sizeof(str), fmt, args);
+    va_end(args);
+
+    buf = log_gettimestamp();
+
+    if (logfile) {
+        fprintf(logfile, "%s %s\n", buf, str);
+    }
+    if (nofork) {
+        fprintf(stderr, "%s %s\n", buf, str);
+    }
+    if (LogChannel && logchan && !debug && findchan(LogChannel)) {
+        privmsg(s_GlobalNoticer, LogChannel, "%s", str);
+    }
+    errno = errno_save;
+}
+
