@@ -7,6 +7,7 @@ Key:  [ ] To-do (Agreed To-Do)
 -------------------------------------------------------
  
 [X] NickServ: GROUP => ADDNICK, GLIST => MYNICKS (DigitalMan)
+[+] AdminServ: Add AdminServ, Successfully connect with services
 [ ] ChanServ: Create flags system (TheKing)
 [ ] OperServ: Add regex tracing (TheKing)
 [ ] IRCd: Add ShadowIRCd protocol (TheKing)
@@ -14,7 +15,7 @@ Key:  [ ] To-do (Agreed To-Do)
 [ ] HelpServ: Remove HelpServ's existance (DigitalMan)
 [ ] Rename all Anope-named methods, functions, etc (ALL)
 [~] Remove all MySQL support
-[ ] Add the following file header format to each file. (See XHEADER in main dir)
+[+] Add the following file header format to each file. (See XHEADER in main dir)
     Note: You MUST change some of the code to legally remove the Anope Copyright.
           Please also make sure Anope, Epona, and IRC Services (Andy C.) get credit for
           appropriate files. (This may be removed from the TODO once everyone has read it.)
