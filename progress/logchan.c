@@ -1,4 +1,5 @@
 #include "module.h"
+#include "logchan.h"
 
 #define AUTHOR "Liber"
 #define VERSION "1.0"
@@ -21,41 +22,6 @@
 /* Global Variables */ 
 int EnableLogBot; // Should our LogBot be in the log channel? Disable it by default
 int LogBotStatus = 0; // Is our bot connected?
-
-/*
-***********************************************************************************************
-***********************************************************************************************
-***********************************************************************************************
-*/
-
-/* JOINS PARTS KICKS RELOAD RESTART SHUTDOWN AWAY RELOAD*/
-int log_joins(int argc, char **argv); // EVENT_JOIN 
-int log_parts(int argc, char **argv); // EVENT_PART
-int log_kicks(int argc, char **argv); // EVENT_KICK 
-int log_topic(int argc, char **argv); // EVENT_TOPIC_UPDATED
-int log_restart(int argc, char **argv); // EVENT_RESTART
-int log_shutdown(int argc, char **argv); // EVENT_SHUTDOWN
-int log_away(char *source, int argc, char **argv); // EVENT_AWAY
-int handle_reload(int argc, char **argv); // EVENT_RELOAD
-
-/* BOTSERV */
-int log_botadd(int argc, char **argv); // EVENT_BOT_CREATE
-int log_botdel(int argc, char **argv); // EVENT_BOT_DEL 
-int log_botAssign(int argc, char **argv); // EVENT_BOT_ASSIGN
-int log_botUnassign(int argc, char **argv); // EVENT_BOT_UNASSIGN 
-int log_botBan(int argc, char **argv); // EVENT_BOT_BAN
-
-/* UMODE Logging */
-int logchan_umode(char *source, int ac, char **av); 
-void my_set_umode(User * user, int ac, char **av); 
-
-/* Miscellaneous */ 
-void LogChanInit(void); // Enable LogChannel
-void LoadConfig(void); // Load our configuration directive(s)
-
-int AddBot(void); // Add the services client
-int DelBot(const char *reason, ...); // Remove the Services Client
-int BindEvents(void); // Bind to all events
 
 /*
 ***********************************************************************************************
@@ -599,5 +565,36 @@ int log_away(char *source, int argc, char **argv)
 		if (argv[0]) { alog("\002Away\002: %s (%s@%s) is now marked as away", u->nick, u->vident, u->vhost); } 
 		else { alog("\002Away\002: %s (%s@%s) is no longer marked as away", u->nick, u->vident, u->vhost); }
 	return MOD_CONT; 
+}
+
+void alog(const char *fmt, ...)
+{
+    va_list args;
+    char *buf;
+    int errno_save = errno;
+    char str[BUFSIZE];
+
+    checkday();
+
+    if (!fmt) {
+        return;
+    }
+
+    va_start(args, fmt);
+    vsnprintf(str, sizeof(str), fmt, args);
+    va_end(args);
+
+    buf = log_gettimestamp();
+
+    if (logfile) {
+        fprintf(logfile, "%s %s\n", buf, str);
+    }
+    if (nofork) {
+        fprintf(stderr, "%s %s\n", buf, str);
+    }
+    if (LogChannel && logchan && !debug && findchan(LogChannel)) {
+        privmsg(s_GlobalNoticer, LogChannel, "%s", str);
+    }
+    errno = errno_save;
 }
 
