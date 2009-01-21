@@ -32,7 +32,7 @@ int AnopeInit(int argc, char **argv)
     moduleAddVersion("$Id: os_umode.c 1265 2007-08-26 15:33:06Z geniusdex $");
     moduleSetType(CORE);
 
-    c = createCommand("UMODE", do_operumodes, is_services_admin,
+    c = createCommand("UMODE", do_operumodes, is_services_root,
                       OPER_HELP_UMODE, -1, -1, -1, -1);
     moduleAddCommand(OPERSERV, c, MOD_UNIQUE);
 
@@ -59,7 +59,7 @@ void AnopeFini(void)
  **/
 void myOperServHelp(User * u)
 {
-    if (is_services_admin(u) && u->isSuperAdmin) {
+    if (is_services_root(u)) {
         notice_lang(s_OperServ, u, OPER_HELP_CMD_UMODE);
     }
 }
@@ -80,8 +80,8 @@ int do_operumodes(User * u)
     User *u2;
 
     /* Only allow this if SuperAdmin is enabled */
-    if (!u->isSuperAdmin) {
-        notice_lang(s_OperServ, u, OPER_SUPER_ADMIN_ONLY);
+    if (!u->is_services_root) {
+        notice_user(s_OperServ, u, You are not authorized to use this command. Required Services Access: Services Root Administrator);
         return MOD_CONT;
     }
 
