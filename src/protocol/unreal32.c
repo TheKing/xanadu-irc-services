@@ -19,24 +19,24 @@
 
 IRCDVar myIrcd[] = {
     {"UnrealIRCd 3.2.x",        /* ircd name */
-     "+oS",                     /* nickserv mode */
-     "+oS",                     /* chanserv mode */
-     "+oS",                     /* memoserv mode */
-     "+oS",                     /* hostserv mode */
-     "+ioS",                    /* operserv mode */
-     "+oS",                     /* botserv mode  */
-     "+oS",                     /* helpserv mode */
-     "+iS",                     /* Dev/Null mode */
-     "+ioS",                    /* Global mode   */
-     "+oS",                     /* nickserv alias mode */
-     "+oS",                     /* chanserv alias mode */
-     "+oS",                     /* memoserv alias mode */
-     "+ioS",                    /* hostserv alias mode */
-     "+ioS",                    /* operserv alias mode */
-     "+oS",                     /* botserv alias mode  */
-     "+oS",                     /* helpserv alias mode */
-     "+iS",                     /* Dev/Null alias mode */
-     "+ioS",                    /* Global alias mode   */
+     "+oSq",                     /* nickserv mode */
+     "+oSq",                     /* chanserv mode */
+     "+oSq",                     /* memoserv mode */
+     "+oSq",                     /* hostserv mode */
+     "+ioqS",                    /* operserv mode */
+     "+oSq",                     /* botserv mode  */
+     "+oSq",                     /* helpserv mode */
+     "+iSq",                     /* Dev/Null mode */
+     "+ioqS",                    /* Global mode   */
+     "+oSq",                     /* nickserv alias mode */
+     "+oSq",                     /* chanserv alias mode */
+     "+oSq",                     /* memoserv alias mode */
+     "+ioqS",                    /* hostserv alias mode */
+     "+ioqS",                    /* operserv alias mode */
+     "+oSq",                     /* botserv alias mode  */
+     "+oSq",                     /* helpserv alias mode */
+     "+iSq",                     /* Dev/Null alias mode */
+     "+ioqS",                    /* Global alias mode   */
      "+qS",                     /* Used by BotServ Bots */
      5,                         /* Chan Max Symbols     */
      "-cilmnpstuzACGHKMNOQRSTV",        /* Modes to Remove */
