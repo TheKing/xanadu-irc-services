@@ -202,12 +202,11 @@ void delete_user(User * user)
     if (LogUsers) {
         realname = normalizeBuffer(user->realname);
         if (ircd->vhost) {
-            alog("LOGUSERS: %s (%s@%s => %s) (%s) left the network (%s).",
-                 user->nick, user->username, user->host,
-                 (user->vhost ? user->vhost : "(none)"),
+            alog("\002Disconnect\002: %s (%s@%s => %s@%s) (%s) left the network (%s).",
+                 user->nick, user->username, user->host, user->username, (user->vhost ? user->vhost : "(none)"),
                  realname, user->server->name);
         } else {
-            alog("LOGUSERS: %s (%s@%s) (%s) left the network (%s).",
+            alog("\002Disconnect\002: %s (%s@%s) (%s) left the network (%s).",
                  user->nick, user->username, user->host,
                  realname, user->server->name);
         }
@@ -540,15 +539,17 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
 
             if (ircd->nickvhost) {
                 if (ircd->nickip) {
-                    alog("LOGUSERS: %s (%s@%s => %s) (%s) [%s] connected to the network (%s).", nick, username, host, (vhost ? vhost : "none"), logrealname, ipbuf, server);
+                    alog("\002Connect\002: %s (%s@%s => %s@%s) (%s) [%s] connected to the network (%s).", 
+				nick, username, host, username, (vhost ? vhost : "none"), logrealname, ipbuf, server);
                 } else {
-                    alog("LOGUSERS: %s (%s@%s => %s) (%s) connected to the network (%s).", nick, username, host, (vhost ? vhost : "none"), logrealname, server);
+                    alog("\002Connect\002: %s (%s@%s => %s@%s) (%s) connected to the network (%s).", 
+				nick, username, host, username, (vhost ? vhost : "none"), logrealname, server);
                 }
             } else {
                 if (ircd->nickip) {
-                    alog("LOGUSERS: %s (%s@%s) (%s) [%s] connected to the network (%s).", nick, username, host, logrealname, ipbuf, server);
+                    alog("\002Connect\002: %s (%s@%s) (%s) [%s] connected to the network (%s).", nick, username, host, logrealname, ipbuf, server);
                 } else {
-                    alog("LOGUSERS: %s (%s@%s) (%s) connected to the network (%s).", nick, username, host, logrealname, server);
+                    alog("\002Connect\002: %s (%s@%s) (%s) connected to the network (%s).", nick, username, host, logrealname, server);
                 }
             }
             Anope_Free(logrealname);
@@ -680,9 +681,10 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
         if (LogUsers) {
             logrealname = normalizeBuffer(user->realname);
             if (ircd->vhost) {
-                alog("LOGUSERS: %s (%s@%s => %s) (%s) changed nick to %s (%s).", user->nick, user->username, user->host, (user->vhost ? user->vhost : "(none)"), logrealname, nick, user->server->name);
+                alog("\002Nick\002: %s (%s@%s => %s@%s) (%s) changed nick to %s (%s).", 
+			user->nick, user->username, user->host, user->username, (user->vhost ? user->vhost : "(none)"), logrealname, nick, user->server->name);
             } else {
-                alog("LOGUSERS: %s (%s@%s) (%s) changed nick to %s (%s).",
+                alog("\002Nick\002: %s (%s@%s) (%s) changed nick to %s (%s).",
                      user->nick, user->username, user->host, logrealname,
                      nick, user->server->name);
             }
