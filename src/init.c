@@ -1,15 +1,12 @@
-/* Initalization and related routines.
+/* init (Core)
  *
- * (C) 2003-2007 Anope Team
- * Contact us at info@anope.org
+ * (C) 2009 Xanadu IRC Services Team
  *
- * Please read COPYING and README for further details.
- *
+ * Based on the original code of Anope by the Anope Team.
  * Based on the original code of Epona by Lara.
- * Based on the original code of Services by Andy Church. 
- * 
- * $Id: init.c 1322 2007-12-28 19:12:02Z geniusdex $ 
+ * Based on the original code of Services by Andy Church.
  *
+ * $Id: init.c 1.0 01-20-2009 $
  */
 
 #include "services.h"
@@ -19,12 +16,9 @@ int servernum = 0;
 extern void moduleAddMsgs(void);
 extern void moduleAddIRCDMsgs(void);
 
-/*************************************************************************/
-
 void introduce_user(const char *user)
 {
 
-    /* Watch out for infinite loops... */
 #define LTSIZE 20
     static int lasttimes[LTSIZE];
     if (lasttimes[0] >= time(NULL) - 3)
@@ -33,15 +27,18 @@ void introduce_user(const char *user)
     lasttimes[LTSIZE - 1] = time(NULL);
 #undef LTSIZE
 
-    /* NickServ */
+    if (!user || stricmp(user, s_AdminServ) == 0) {
+        anope_cmd_nick(s_AdminServ, desc_AdminServ, ircd->adminservmode);
+    }
+
     if (!user || stricmp(user, s_NickServ) == 0) {
         anope_cmd_nick(s_NickServ, desc_NickServ, ircd->nickservmode);
     }
 
-    /* ChanServ */
     if (!user || stricmp(user, s_ChanServ) == 0) {
         anope_cmd_nick(s_ChanServ, desc_ChanServ, ircd->chanservmode);
     }
+
     if (s_HostServ && ircd->vhost
         && (!user || stricmp(user, s_HostServ) == 0)) {
         anope_cmd_nick(s_HostServ, desc_HostServ, ircd->hostservmode);
@@ -72,7 +69,13 @@ void introduce_user(const char *user)
                        ircd->globalmode);
     }
 
-    /* We make aliases go online */
+    /* Aliases */
+
+    if (s_AdminServAlias && (!user || stricmp(user, s_AdminServAlias) == 0)) {
+        anope_cmd_nick(s_AdminServAlias, desc_AdminServAlias,
+                       ircd->adminservaliasmode);
+    }
+
     if (s_NickServAlias && (!user || stricmp(user, s_NickServAlias) == 0)) {
         anope_cmd_nick(s_NickServAlias, desc_NickServAlias,
                        ircd->nickservaliasmode);
@@ -610,6 +613,7 @@ int init_secondary(int ac, char **av)
 
 
     /* Initialize subservices */
+    as_init();
     ns_init();
     cs_init();
     ms_init();
