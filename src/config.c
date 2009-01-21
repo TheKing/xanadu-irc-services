@@ -79,6 +79,7 @@ char *s_OperServAlias;
 char *s_GlobalNoticerAlias;
 char *s_DevNullAlias;
 char *s_HostServAlias;
+char *desc_AdminServAlias;
 char *desc_NickServAlias;
 char *desc_ChanServAlias;
 char *desc_MemoServAlias;
