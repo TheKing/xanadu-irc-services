@@ -1,5 +1,5 @@
-BINDEST="/home/zach/services"
-DATDEST="/home/zach/services"
+BINDEST="/home/theking/services"
+DATDEST="/home/theking/services"
 RUNGROUP=""
 UMASK=077
 IRCTYPE="no default"

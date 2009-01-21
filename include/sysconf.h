@@ -95,7 +95,7 @@
 /* #undef HAVE_VA_LIST_AS_ARRAY */
 
 /* "Module dir" */
-#define MODULE_PATH "/home/zach/services/modules/"
+#define MODULE_PATH "/home/theking/services/modules/"
 
 /* "Has mysql/mysql.h" */
 /* #undef MYSQL_HEADER_PREFIX */
@@ -119,10 +119,10 @@
 /* #undef RUNGROUP */
 
 /* "Binary Dir" */
-#define SERVICES_BIN "/home/zach/services/services"
+#define SERVICES_BIN "/home/theking/services/services"
 
 /* "services bin dir" */
-#define SERVICES_DIR "/home/zach/services"
+#define SERVICES_DIR "/home/theking/services"
 
 /* The size of a `int', as computed by sizeof. */
 #define SIZEOF_INT 4
