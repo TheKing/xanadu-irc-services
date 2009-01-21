@@ -79,7 +79,7 @@ int do_operumodes(User * u)
 
     User *u2;
 
-    /* Only allow this if SuperAdmin is enabled */
+    /* Only allow this if you are SRA */
     if (!u->is_services_root) {
         notice_user(s_OperServ, u, You are not authorized to use this command. Required Services Access: Services Root Administrator);
         return MOD_CONT;
