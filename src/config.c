@@ -46,6 +46,7 @@ char *LogChannel;
 char *NetworkName;
 int NickLen;
 
+char *s_AdminServ;
 char *s_NickServ;
 char *s_ChanServ;
 char *s_MemoServ;
@@ -54,6 +55,7 @@ char *s_HelpServ;
 char *s_OperServ;
 char *s_GlobalNoticer;
 char *s_DevNull;
+char *desc_AdminServ;
 char *desc_NickServ;
 char *desc_ChanServ;
 char *desc_MemoServ;
@@ -67,6 +69,7 @@ char *HostDBName;               /* Name of HostServ DB File */
 char *s_HostServ;               /* HostServ Name */
 char *desc_HostServ;            /* HostServ Description */
 
+char *s_AdminServAlias;
 char *s_NickServAlias;
 char *s_ChanServAlias;
 char *s_MemoServAlias;
@@ -360,6 +363,10 @@ int UseTS6;
 /*************************************************************************/
 
 Directive directives[] = {
+    {"AdminServName", {{PARAM_STRING, 0, &s_AdminServ},
+                     {PARAM_STRING, 0, &desc_AdminServ}}},
+    {"AdminAlias", {{PARAM_STRING, 0, &s_AdminServAlias},
+                      {PARAM_STRING, 0, &desc_AdminServAlias}}},
     {"AkillOnAdd", {{PARAM_SET, PARAM_RELOAD, &AkillOnAdd}}},
     {"AutokillDB", {{PARAM_STRING, PARAM_RELOAD, &AutokillDBName}}},
     {"AutokillExpiry", {{PARAM_TIME, PARAM_RELOAD, &AutokillExpiry}}},
