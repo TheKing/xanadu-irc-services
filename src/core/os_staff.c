@@ -77,14 +77,14 @@ int do_staff(User * u)
     int i;
 
     notice_lang(s_OperServ, u, OPER_STAFF_LIST_HEADER);
-    slist_enum(&servopers, NULL, &opers_list_callback, u, "OPER");
-    slist_enum(&servadmins, NULL, &opers_list_callback, u, "ADMN");
+    slist_enum(&servopers, NULL, &opers_list_callback, u, "SOPER");
+    slist_enum(&servadmins, NULL, &opers_list_callback, u, "SADMIN");
 
     for (idx = 0; idx < RootNumber; idx++) {
         found = 0;
         if ((au = finduser(ServicesRoots[idx]))) {      /* see if user is online */
             found = 1;
-            notice_lang(s_OperServ, u, OPER_STAFF_FORMAT, '*', "ROOT",
+            notice_lang(s_OperServ, u, OPER_STAFF_FORMAT, '*', "SRA",
                         ServicesRoots[idx]);
         } else if ((nc = findcore(ServicesRoots[idx]))) {
             for (i = 0; i < nc->aliases.count; i++) {   /* check all aliases */
@@ -92,13 +92,13 @@ int do_staff(User * u)
                 if ((au = finduser(na->nick))) {        /* see if user is online */
                     found = 1;
                     notice_lang(s_OperServ, u, OPER_STAFF_AFORMAT,
-                                '*', "ROOT", ServicesRoots[idx], na->nick);
+                                '*', "SRA", ServicesRoots[idx], na->nick);
                 }
             }
         }
 
         if (!found)
-            notice_lang(s_OperServ, u, OPER_STAFF_FORMAT, ' ', "ROOT",
+            notice_lang(s_OperServ, u, OPER_STAFF_FORMAT, ' ', "SRA",
                         ServicesRoots[idx]);
 
     }
