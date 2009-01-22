@@ -17,6 +17,7 @@
 
 IRCDVar myIrcd[] = {
     {"PTlink 6.15.*+",          /* ircd name */
+     "+io",		           /* adminserv mode */
      "+o",                      /* nickserv mode */
      "+o",                      /* chanserv mode */
      "+o",                      /* memoserv mode */

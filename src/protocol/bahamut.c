@@ -19,6 +19,7 @@
 
 IRCDVar myIrcd[] = {
     {"BahamutIRCd 1.4.*/1.8.*", /* ircd name */
+     "+io",                     /* adminserv mode */
      "+o",                      /* nickserv mode */
      "+o",                      /* chanserv mode */
      "+o",                      /* memoserv mode */

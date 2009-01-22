@@ -17,6 +17,7 @@
 
 IRCDVar myIrcd[] = {
     {"DreamForge 4.6.7",        /* ircd name */
+     "+io",                     /* adminserv mode */
      "+o",                      /* nickserv mode */
      "+o",                      /* chanserv mode */
      "+o",                      /* memoserv mode */

@@ -16,6 +16,7 @@
 
 IRCDVar myIrcd[] = {
     {"Charybdis 1.0+",           /* ircd name */
+     "+oaiS",                    /* adminserv mode */
      "+oiS",                     /* nickserv mode */
      "+oiS",                     /* chanserv mode */
      "+oiS",                     /* memoserv mode */

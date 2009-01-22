@@ -17,6 +17,7 @@
 
 IRCDVar myIrcd[] = {
     {"HybridIRCd 7.*",          /* ircd name */
+     "+io",                     /* adminserv mode */
      "+o",                      /* nickserv mode */
      "+o",                      /* chanserv mode */
      "+o",                      /* memoserv mode */

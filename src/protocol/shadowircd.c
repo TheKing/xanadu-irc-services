@@ -18,6 +18,7 @@
 
 IRCDVar myIrcd[] = {
     {"ShadowIRCd 4.0+",         /* ircd name */
+     "+oiqSK",                  /* adminserv mode */
      "+oiqSK",                  /* nickserv mode */
      "+oiqSK",                  /* chanserv mode */
      "+oiqSK",                  /* memoserv mode */

@@ -17,6 +17,7 @@
 
 IRCDVar myIrcd[] = {
     {"Ratbox 2.0+",             /* ircd name */
+     "+oai",                    /* adminserv mode */
      "+oi",                     /* nickserv mode */
      "+oi",                     /* chanserv mode */
      "+oi",                     /* memoserv mode */

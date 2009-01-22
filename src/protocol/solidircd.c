@@ -19,6 +19,7 @@
 
 IRCDVar myIrcd[] = {
     {"Solid-IRCd 3.4.*",        /* ircd name */
+     "+io",                     /* adminserv mode */
      "+o",                      /* nickserv mode */
      "+o",                      /* chanserv mode */
      "+o",                      /* memoserv mode */
