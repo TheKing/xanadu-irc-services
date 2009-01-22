@@ -203,7 +203,7 @@ void delete_user(User * user)
         realname = normalizeBuffer(user->realname);
         if (ircd->vhost) {
             alog("\002Disconnect\002: %s (%s@%s => %s@%s) (%s) left the network (%s).",
-                 user->nick, user->username, user->host, user->username, (user->vhost ? user->vhost : "(none)"),
+                 user->nick, user->username, user->host, user->vident, (user->vhost ? user->vhost : "(none)"),
                  realname, user->server->name);
         } else {
             alog("\002Disconnect\002: %s (%s@%s) (%s) left the network (%s).",
@@ -487,7 +487,7 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
               char *server, char *realname, time_t ts, uint32 svid,
               uint32 ip, char *vhost, char *uid)
 {
-    User *user = NULL;
+    User *user = NULL; /* unused user struct? */
 
     char *tmp = NULL;
     NickAlias *old_na;          /* Old nick rec */
@@ -569,7 +569,7 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
          * comes in from the ircd.
          **/
         if (check_akill(nick, username, host, vhost, ipbuf)) {
-/*            return NULL; */
+        /* return NULL; */
         }
 
 /**
@@ -759,7 +759,7 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
                      (unsigned long int) user->timestamp);
             anope_cmd_svid_umode2(user, tsbuf);
 
-            alog("%s: %s!%s@%s automatically identified for nick %s",
+            alog("\002%s\002: %s!%s@%s automatically identified for nick %s",
                  s_NickServ, user->nick, user->username,
                  user->host, user->nick);
         }

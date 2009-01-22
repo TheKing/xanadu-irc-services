@@ -366,7 +366,7 @@ int UseTS6;
 Directive directives[] = {
     {"AdminServName", {{PARAM_STRING, 0, &s_AdminServ},
                      {PARAM_STRING, 0, &desc_AdminServ}}},
-    {"AdminAlias", {{PARAM_STRING, 0, &s_AdminServAlias},
+    {"AdminServAlias", {{PARAM_STRING, 0, &s_AdminServAlias},
                       {PARAM_STRING, 0, &desc_AdminServAlias}}},
     {"AkillOnAdd", {{PARAM_SET, PARAM_RELOAD, &AkillOnAdd}}},
     {"AutokillDB", {{PARAM_STRING, PARAM_RELOAD, &AutokillDBName}}},
