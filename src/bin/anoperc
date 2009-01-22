@@ -15,9 +15,9 @@
 
 
 
-ANOPEPID="/home/zach/services/services.pid"
-ANOPROG="/home/zach/services/services"
-LOG="/home/zach/services/logs/"
+ANOPEPID="/home/theking/services/services.pid"
+ANOPROG="/home/theking/services/services"
+LOG="/home/theking/services/logs/"
 ARCVERSION="1.2"
 
 isAnopeRunning () {

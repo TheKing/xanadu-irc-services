@@ -161,8 +161,7 @@ int myDoSet(User * u)
         }
         addHostCore(nick, vIdent, hostmask, u->nick, tmp_time);
         if (vIdent) {
-            notice_lang(s_HostServ, u, HOST_IDENT_SET, nick, vIdent,
-                        hostmask);
+            notice_lang(s_HostServ, u, HOST_IDENT_SET, nick, vIdent,hostmask);
         } else {
             notice_lang(s_HostServ, u, HOST_SET, nick, hostmask);
         }
