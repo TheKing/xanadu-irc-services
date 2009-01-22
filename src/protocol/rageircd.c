@@ -17,6 +17,7 @@
 
 IRCDVar myIrcd[] = {
     {"RageIRCd 2.0.*",          /* ircd name */
+     "+di",                     /* adminserv mode */
      "+d",                      /* nickserv mode */
      "+d",                      /* chanserv mode */
      "+d",                      /* memoserv mode */

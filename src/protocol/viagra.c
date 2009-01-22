@@ -18,6 +18,7 @@
 
 IRCDVar myIrcd[] = {
     {"ViagraIRCd 1.3.*",        /* ircd name */
+     "+ioS",                    /* adminserv mode */
      "+oS",                     /* nickserv mode */
      "+oS",                     /* chanserv mode */
      "+oS",                     /* memoserv mode */

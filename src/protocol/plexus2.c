@@ -15,6 +15,7 @@
 
 IRCDVar myIrcd[] = {
   {"PleXusIRCd 2.0+",		/* ircd name */
+   "+oaiSR",                 /* adminserv mode */
    "+oiSR",			/* nickserv mode */
    "+oiSR",			/* chanserv mode */
    "+oiSR",			/* memoserv mode */

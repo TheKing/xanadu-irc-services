@@ -36,6 +36,7 @@ int inet_aton(const char *name, struct in_addr *addr)
 
 IRCDVar myIrcd[] = {
     {"InspIRCd 1.1",            /* ircd name */
+     "+ioI",                    /* adminserv mode */
      "+oI",                     /* nickserv mode */
      "+oI",                     /* chanserv mode */
      "+oI",                     /* memoserv mode */

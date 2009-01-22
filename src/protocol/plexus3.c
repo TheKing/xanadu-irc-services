@@ -15,6 +15,7 @@
 
 IRCDVar myIrcd[] = {
   {"hybrid-7.2.1+plexus-3.0.0+",/* ircd name */
+   "+oai",			/* adminserv mode */
    "+i",			/* nickserv mode */
    "+i",			/* chanserv mode */
    "+i",			/* memoserv mode */

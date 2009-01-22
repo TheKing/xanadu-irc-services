@@ -19,6 +19,7 @@
 
 IRCDVar myIrcd[] = {
     {"UnrealIRCd 3.1.x",        /* ircd name */
+     "+ioS",                    /* adminserv mode */
      "+oS",                     /* nickserv mode */
      "+oS",                     /* chanserv mode */
      "+oS",                     /* memoserv mode */
