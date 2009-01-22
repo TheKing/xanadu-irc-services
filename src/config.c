@@ -982,6 +982,7 @@ int read_config(int reload)
     CHECK(NetworkName);
     if (!reload) {
         CHEK2(temp_userhost, ServiceUser);
+	 CHEK2(s_AdminServ, AdminServName);
         CHEK2(s_NickServ, NickServName);
         CHEK2(s_ChanServ, ChanServName);
         CHEK2(s_MemoServ, MemoServName);
@@ -989,6 +990,14 @@ int read_config(int reload)
         CHEK2(s_OperServ, OperServName);
         CHEK2(s_GlobalNoticer, GlobalName);
         CHEK2(PIDFilename, PIDFile);
+    }
+
+        if (s_AdminServAlias) {
+        if (!stricmp(s_AdminServ, s_AdminServAlias)) {
+            printf
+                ("\n*** AdminServ and AdminServ Alias are the same, this will cause errors\n");
+            retval = 0;
+        }
     }
 
     if (s_ChanServAlias) {
