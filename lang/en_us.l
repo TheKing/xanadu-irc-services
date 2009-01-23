@@ -17,6 +17,9 @@
 LANG_NAME
 	English
 
+OS_MUST_BE_ROOT
+	You must have root access to perform that command.
+
 # Original Notes from Anope:
 # When translating this file to another language, keep in mind that the
 # order of parameters for sprintf() is fixed in the source code, so your

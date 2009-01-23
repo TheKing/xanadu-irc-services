@@ -80,7 +80,7 @@ int do_svsnick(User * u)
 
     /* Only allow this if services root is enabled */
     if (!is_services_root(u)) {
-        notice_user(s_OperServ, "You are not authorized to perform this operation. Required Services Access: Services Root Administrator.");
+        notice_lang(s_OperServ, u, OS_ERR_MUSTBEROOT);
         return MOD_CONT;
     }
 
