@@ -1,5 +1,5 @@
-BINDEST="/home/theking/services"
-DATDEST="/home/theking/services"
+BINDEST="/home/ziber/xanadu"
+DATDEST="/home/ziber/xanadu"
 RUNGROUP=""
 UMASK=077
 IRCTYPE="no default"

@@ -15,9 +15,9 @@
 
 
 
-ANOPEPID="/home/theking/services/services.pid"
-ANOPROG="/home/theking/services/services"
-LOG="/home/theking/services/logs/"
+ANOPEPID="/home/ziber/xanadu/services.pid"
+ANOPROG="/home/ziber/xanadu/services"
+LOG="/home/ziber/xanadu/logs/"
 ARCVERSION="1.2"
 
 isAnopeRunning () {
