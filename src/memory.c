@@ -109,7 +109,7 @@ char *sstrdup(const char *src)
     if (src) {
 #ifdef __STRICT_ANSI__
         if ((ret = (char *) malloc(strlen(src) + 1))) {;
-            strlcpy(ret, src, sizeof(buf));
+            strlcpy(ret, src, sizeof(ret));
         }
 #else
         ret = strdup(src);
