@@ -268,6 +268,7 @@ typedef struct ircdcapab_ IRCDCAPAB;
 
 struct ircdvars_ {
 	char *name;				/* Name of the ChanServ command */
+	char *adminservmode;			/* Mode used by AdminServ	*/
 	char *nickservmode;			/* Mode used by NickServ	*/
 	char *chanservmode;			/* Mode used by ChanServ	*/
 	char *memoservmode;			/* Mode used by MemoServ	*/
@@ -277,6 +278,7 @@ struct ircdvars_ {
 	char *helpservmode;			/* Mode used by HelpServ	*/
 	char *devnullmode;			/* Mode used by Dev/Null	*/
 	char *globalmode;			/* Mode used by Global		*/
+	char *adminservaliasmode;		/* Mode used by AdminServ Alias	*/
 	char *nickservaliasmode;		/* Mode used by NickServ Alias	*/
 	char *chanservaliasmode;		/* Mode used by ChanServ Alias	*/
 	char *memoservaliasmode;		/* Mode used by MemoServ Alias	*/

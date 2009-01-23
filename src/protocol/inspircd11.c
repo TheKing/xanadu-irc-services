@@ -46,6 +46,7 @@ IRCDVar myIrcd[] = {
      "+oI",                     /* helpserv mode */
      "+iI",                     /* Dev/Null mode */
      "+ioI",                    /* Global mode   */
+     "+ioI",                    /* adminserv alias mode */
      "+oI",                     /* nickserv alias mode */
      "+oI",                     /* chanserv alias mode */
      "+oI",                     /* memoserv alias mode */
