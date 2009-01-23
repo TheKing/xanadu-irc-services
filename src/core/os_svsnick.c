@@ -79,8 +79,8 @@ int do_svsnick(User * u)
     char *c;
 
     /* Only allow this if SuperAdmin is enabled */
-    if (!u->is_services_root) {
-        notice_user(s_OperServ, You are not authorized to perform this operation. Required Services Access: Services Root Administrator. );
+    if (!is_services_root(u)) {
+        notice_user(s_OperServ, "You are not authorized to perform this operation. Required Services Access: Services Root Administrator.");
         return MOD_CONT;
     }
 

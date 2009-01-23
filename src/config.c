@@ -982,7 +982,7 @@ int read_config(int reload)
     CHECK(NetworkName);
     if (!reload) {
         CHEK2(temp_userhost, ServiceUser);
-	 CHEK2(s_AdminServ, AdminServName);
+	CHEK2(s_AdminServ, AdminServName);
         CHEK2(s_NickServ, NickServName);
         CHEK2(s_ChanServ, ChanServName);
         CHEK2(s_MemoServ, MemoServName);
