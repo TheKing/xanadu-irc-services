@@ -19,7 +19,7 @@ Key:  [ ] To-do (Agreed To-Do)
     Note: You MUST change some of the code to legally remove the Anope Copyright.
           Please also make sure Anope, Epona, and IRC Services (Andy C.) get credit for
           appropriate files. (This may be removed from the TODO once everyone has read it.)
-[ ] !BUG! (#0001) os_svsnick.c http://xanadu.pastebin.com/m5cff91f4
+[x] !BUG! (#0001) os_svsnick.c http://xanadu.pastebin.com/m5cff91f4 - Liber
 
 
 Releases
