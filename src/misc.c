@@ -875,7 +875,9 @@ int nickIsServices(char *tempnick, int bot)
         }
     }
 
-    if (s_NickServ && (stricmp(nick, s_NickServ) == 0))
+    if (s_AdminServ && (stricmp(nick, s_AdminServ) == 0))
+        found++;
+    else if (s_NickServ && (stricmp(nick, s_NickServ) == 0))
         found++;
     else if (s_ChanServ && (stricmp(nick, s_ChanServ) == 0))
         found++;
