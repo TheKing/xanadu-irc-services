@@ -17,8 +17,15 @@
 LANG_NAME
 	English
 
-OS_MUST_BE_ROOT
+OS_ERR_MUSTBEROOT
 	You must have root access to perform that command.
+
+### AdminServ ###
+### BotServ ###
+### ChanServ ###
+### MemoServ ###
+### NickServ ###
+### OperServ ###
 
 # Original Notes from Anope:
 # When translating this file to another language, keep in mind that the
