@@ -613,7 +613,7 @@ int init_secondary(int ac, char **av)
 
 
     /* Initialize subservices */
-    as_init();
+ /* as_init(); */
     ns_init();
     cs_init();
     ms_init();
