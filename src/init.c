@@ -52,10 +52,6 @@ void introduce_user(const char *user)
         anope_cmd_nick(s_BotServ, desc_BotServ, ircd->botservmode);
     }
 
-    if (!user || stricmp(user, s_HelpServ) == 0) {
-        anope_cmd_nick(s_HelpServ, desc_HelpServ, ircd->helpservmode);
-    }
-
     if (!user || stricmp(user, s_OperServ) == 0) {
         anope_cmd_nick(s_OperServ, desc_OperServ, ircd->operservmode);
     }
@@ -620,7 +616,6 @@ int init_secondary(int ac, char **av)
     bs_init();
     os_init();
     hostserv_init();
-    helpserv_init();
 
 #ifdef USE_RDB
     if (!rdb_init()) {

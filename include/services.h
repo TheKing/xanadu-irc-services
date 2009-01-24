@@ -275,7 +275,6 @@ struct ircdvars_ {
 	char *hostservmode;			/* Mode used by HostServ	*/
 	char *operservmode;			/* Mode used by OperServ	*/
 	char *botservmode;			/* Mode used by BotServ		*/
-	char *helpservmode;			/* Mode used by HelpServ	*/
 	char *devnullmode;			/* Mode used by Dev/Null	*/
 	char *globalmode;			/* Mode used by Global		*/
 	char *adminservaliasmode;		/* Mode used by AdminServ Alias	*/
@@ -285,7 +284,6 @@ struct ircdvars_ {
 	char *hostservaliasmode;		/* Mode used by HostServ Alias	*/
 	char *operservaliasmode;		/* Mode used by OperServ Alias	*/
 	char *botservaliasmode;			/* Mode used by BotServ	 Alias	*/
-	char *helpservaliasmode;		/* Mode used by HelpServ Alias	*/
 	char *devnullvaliasmode;		/* Mode used by Dev/Null Alias	*/
 	char *globalaliasmode;			/* Mode used by Global	 Alias	*/
 	char *botserv_bot_mode;			/* Mode used by BotServ Bots	*/
