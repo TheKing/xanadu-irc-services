@@ -14,7 +14,6 @@ int log_topic(int argc, char **argv); // EVENT_TOPIC_UPDATED
 int log_restart(int argc, char **argv); // EVENT_RESTART
 int log_shutdown(int argc, char **argv); // EVENT_SHUTDOWN
 int log_away(char *source, int argc, char **argv); // EVENT_AWAY
-int handle_reload(int argc, char **argv); // EVENT_RELOAD
 
 /* BOTSERV */
 int log_botadd(int argc, char **argv); // EVENT_BOT_CREATE
@@ -29,10 +28,6 @@ void my_set_umode(User * user, int ac, char **av);
 
 /* Miscellaneous */
 void LogChanInit(void); // Enable LogChannel
-void LoadConfig(void); // Load our configuration directive(s)
-
-int AddBot(void); // Add the services client
-int DelBot(const char *reason, ...); // Remove the Services Client
 int BindEvents(void); // Bind to all events
 
 /*

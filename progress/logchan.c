@@ -19,10 +19,6 @@
  * Thanks to Rob, for helping me debug my code *
 */ 
 
-/* Global Variables */ 
-int EnableLogBot; // Should our LogBot be in the log channel? Disable it by default
-int LogBotStatus = 0; // Is our bot connected?
-
 /*
 ***********************************************************************************************
 ***********************************************************************************************
@@ -35,7 +31,6 @@ int AnopeInit(int argc, char **argv)
 
     LogChanInit(); //turn on log channel
     BindEvents(); // bind to our events
-    LoadConfig(); // check services.conf for the "LogChanBot" directive
     
     /* give info to module */
     moduleAddAuthor(AUTHOR);       /* Add the author information  */
@@ -48,42 +43,8 @@ int AnopeInit(int argc, char **argv)
 /* Run on unload */ 
 void AnopeFini(void) 
 {
-	if (EnableLogBot) 
-	{
-		anope_cmd_quit("LogBot","Quit: LogChan Module Unloaded");
-	}
-	alog("[LogChan] Unloaded");
-}
 
-/* Load our configuration directives, and create our services client if asked for */ 
-void LoadConfig(void)
-{
-    Directive my_directive[] = { {"LogChanBot", {{PARAM_SET, PARAM_RELOAD, &EnableLogBot}}}  };     
-    
-    moduleGetConfigDirective(my_directive); 
- 
-    if (EnableLogBot && LogBotStatus == 0) 
-    {
-    	AddBot(); // add the services client 
-    }
-    
-    else if (!EnableLogBot && LogBotStatus == 1)
-    {
-    	//anope_cmd_quit("LogBot", "[LogChan] Services Pseudo-Client Removed"); // remove services client 
-    	DelBot("[LogChan] Services Pseudo-Client Removed"); 
-    }
-    
-    if (EnableLogBot == 1)
-    	EnableLogBot = 0; 
 }
-
-int handle_reload (int argc, char **argv)
-{
-	alog("[logchan] Reloading configuration directives...");
-    LoadConfig();
-    return MOD_CONT;
-}
-        
 
 /*
 ***********************************************************************************************
@@ -206,14 +167,6 @@ int BindEvents(void)
 		{
 			alog("Error binding to event: EVENT_RESTART [%d]", status);
 			return MOD_STOP;
-		}
-	/* RELOAD */
-	hook = createEventHook(EVENT_RELOAD, handle_reload); 
-	status = moduleAddEventHook(hook); 
-		if (status != MOD_ERR_OK) 
-		{
-			alog("Error binding to event: EVENT_RELOAD [%d]", status); 
-			return MOD_STOP; 
 		}
 	return MOD_CONT; 
 }
@@ -389,44 +342,6 @@ int log_restart(int argc, char **argv)
 	return MOD_CONT; 
 }
 
-int AddBot(void)
-{
-		if (LogBotStatus == 1) 
-		{
-			return MOD_CONT; 
-		}
-		
-	    if(!LogChannel)
-	    {
-	    	alog("[LogChan] No LogChannel was found.");
-			return MOD_CONT;
-	    }
-	    
-	    if (EnableLogBot == 1) 
-	    {
-	    	anope_cmd_nick("LogBot", "LogBot", "+gS");
-	    	anope_cmd_join("LogBot", LogChannel, time(NULL));
-	    	anope_cmd_mode("LogBot", LogChannel, "+h LogBot");
-	    	alog("[logchan]: Created pseudo-client for services channel");
-	    	LogBotStatus = 1; 
-	    }
-	    return MOD_CONT;
-}
-
-int DelBot(const char *reason, ...) 
-{
-	if (LogBotStatus != 1) 
-	{
-		return MOD_CONT; 
-	}
-	else 
-	{
-		anope_cmd_quit("LogBot", reason);
-		LogBotStatus = 0; 
-	}
-	return MOD_CONT; 
-} 
-
 /*********************************************************************************************/
 /*********************************************************************************************/
 /*********************************************************************************************/
@@ -565,36 +480,5 @@ int log_away(char *source, int argc, char **argv)
 		if (argv[0]) { alog("\002Away\002: %s (%s@%s) is now marked as away", u->nick, u->vident, u->vhost); } 
 		else { alog("\002Away\002: %s (%s@%s) is no longer marked as away", u->nick, u->vident, u->vhost); }
 	return MOD_CONT; 
-}
-
-void alog(const char *fmt, ...)
-{
-    va_list args;
-    char *buf;
-    int errno_save = errno;
-    char str[BUFSIZE];
-
-    checkday();
-
-    if (!fmt) {
-        return;
-    }
-
-    va_start(args, fmt);
-    vsnprintf(str, sizeof(str), fmt, args);
-    va_end(args);
-
-    buf = log_gettimestamp();
-
-    if (logfile) {
-        fprintf(logfile, "%s %s\n", buf, str);
-    }
-    if (nofork) {
-        fprintf(stderr, "%s %s\n", buf, str);
-    }
-    if (LogChannel && logchan && !debug && findchan(LogChannel)) {
-        privmsg(s_GlobalNoticer, LogChannel, "%s", str);
-    }
-    errno = errno_save;
 }
 

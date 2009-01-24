@@ -95,7 +95,7 @@
 /* #undef HAVE_VA_LIST_AS_ARRAY */
 
 /* "Module dir" */
-#define MODULE_PATH "/home/ziber/xanadu/modules/"
+#define MODULE_PATH "/home/ziber/xanadu/xanadu//modules/"
 
 /* "Has mysql/mysql.h" */
 /* #undef MYSQL_HEADER_PREFIX */
@@ -119,10 +119,10 @@
 /* #undef RUNGROUP */
 
 /* "Binary Dir" */
-#define SERVICES_BIN "/home/ziber/xanadu/services"
+#define SERVICES_BIN "/home/ziber/xanadu/xanadu//services"
 
 /* "services bin dir" */
-#define SERVICES_DIR "/home/ziber/xanadu"
+#define SERVICES_DIR "/home/ziber/xanadu/xanadu/"
 
 /* The size of a `int', as computed by sizeof. */
 #define SIZEOF_INT 4

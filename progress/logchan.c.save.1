@@ -1,0 +1,250 @@
+#include "module.h"
+/* NOTES */
+/*
+ * So far, log_* works, except for *_botKick, which should trigger, at least i think, on !kick, and is not 
+ * bind* works, although *BotKick might not. *checks*
+ */
+
+/* **************************************************** */
+/* FUNCTIONS */
+/* ------------------------------------ */
+
+/*
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+*/
+
+
+/* JOINS PARTS KICKS */
+int log_joins(int argc, char **argv); //log for EVENT_JOIN - works
+int log_parts(int argc, char **argv); //log for EVENT_PART - works 
+int log_kicks(int argc, char **argv); //log for EVENT_KICK - works
+
+/* BOTSERV */
+int log_botAssign(int argc, char **argv); //log for EVENT_BOT_ASSIGN - works
+int log_botUnassign(int argc, char **argv); //log for EVENT_BOT_UNASSIGN - works
+
+
+/* LOGCHAN */
+void LogChanInit(void); // init log channel - works
+
+/* BIND TO EVENTS */
+int bindJoinEvent(void); //bind to EVENT_JOIN - works
+int bindPartEvent(void); //bind to EVENT_PART - works
+int bindKickEvent(void); //bind to EVENT_CHAN_KICK - works
+int bindBotAssign(void); //bind to EVENT_BOT_ASSIGN - works 
+int bindBotUnassign(void); //bind to EVENT_BOT_UNASSIGN - works
+
+/*
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+*/
+
+
+
+#define AUTHOR "Liber"
+#define VERSION "1.0"
+
+/* AnopeInit, run on load */
+int AnopeInit(int argc, char **argv)
+{
+
+    LogChanInit(); //turn on log channel
+    bindJoinEvent(); //bind to join event
+    bindPartEvent(); //bind to part event
+    bindKickEvent(); //bind to kick event
+    bindBotAssign(); //bind to /botserv assign
+    bindBotUnassign(); //bind to /botserv unassign
+    
+    moduleAddAuthor(AUTHOR);       /* Add the author information  */
+    moduleAddVersion(VERSION);     /* Add the version information */
+    moduleSetType(THIRD);          /* Flag as Third party module  */
+                                    
+    alog("[logchan] Loaded Successfully");
+    return MOD_CONT;
+}                                
+
+/* LogChanInit, enable the log channel (#services) */
+void LogChanInit(void) 
+{
+	logchan = 1;
+}
+
+/* log_botUnassign, log /bs unassign with nick, channel, etc */
+int log_botUnassign(int argc, char **argv)
+{
+	BotInfo *bi; // bot struct
+	Channel *ci; // channel struct
+	
+	if (!(bi = findbot(argv[1])) | !(ci = findchan(argv[0])))
+	{
+		return MOD_CONT;
+	}
+	alog("Botserv: %s (%s@%s \"%s\") has been unassigned from %s", bi->nick, bi->user, bi->host, bi->real, ci->name);
+	return MOD_CONT;
+}
+
+/* bindBotUnassign, bind to EVENT_BOT_UNASSIGn */
+/* log_botUnassign(int argc, char **argv) */
+int bindBotUnassign(void)
+{
+	EvtHook *hook;
+	int status; // check status of binding to event
+	hook = createEventHook(EVENT_BOT_UNASSIGN, log_botUnassign);
+	status = moduleAddEventHook(hook);
+ 		if (status != MOD_ERR_OK)
+ 		{
+ 			alog("Error binding to event: EVENT_BOT_UNASSIGN [%d]", status);
+ 			return MOD_STOP;
+ 		}
+ 	return MOD_CONT;
+}
+
+/* bindKickEvent, bind to EVENT_CHAN_KICK */
+/* log_kicks(int argc, char **argv) */
+int bindKickEvent(void)
+{
+	EvtHook *hook;
+	int status; // check status of binding to event
+	hook = createEventHook(EVENT_CHAN_KICK, log_kicks);
+	status = moduleAddEventHook(hook);
+		if (status != MOD_ERR_OK)
+		{
+			alog("Error binding to event: EVENT_CHAN_KICK [%d]", status);
+			return MOD_STOP;
+		}
+	return MOD_CONT;
+}
+
+
+/* log_botAssign, log for /bs assign */
+int log_botAssign(int argc, char **argv)
+{
+	BotInfo *bi; //bot struct
+	Channel *ci; //channel struct
+	
+		if (!(bi = findbot(argv[1])) | !(ci = findchan(argv[0]))) 
+		{
+			return MOD_CONT;
+		}
+	alog("Botserv: %s (%s@%s \"%s\") has been assigned to %s", bi->nick, bi->user, bi->host, bi->real, ci->name);
+	return MOD_CONT;
+}		
+
+
+/* bindBotAssign, bind to EVENT_BOT_ASSIGN */
+
+int bindBotAssign(void)
+{
+	EvtHook *hook;
+	int status; //check the status of binding to the event;
+	hook = createEventHook(EVENT_BOT_ASSIGN, log_botAssign);
+	status = moduleAddEventHook(hook);
+		if (status != MOD_ERR_OK)
+		{
+			alog("Error binding to event: EVENT_BOT_ASSIGN [%d]", status);
+			return MOD_STOP;
+		}
+	return MOD_CONT;
+}
+
+/* bind to EVENT_JOIN_CHANNEL */
+/* log_joins(int argc, char **argv) */
+int bindJoinEvent(void)
+{
+	//bind to join event 
+	EvtHook *hook;
+	int status; //check the status of binding to the event;
+	hook = createEventHook(EVENT_JOIN_CHANNEL, log_joins);
+	status = moduleAddEventHook(hook); 
+		if (status != MOD_ERR_OK) 
+		{
+			alog("Error binding to event: EVENT_JOIN_CHANNEL [%d]", status);
+			return MOD_STOP;
+		}
+	return MOD_CONT;
+	
+}
+
+/* bindParEvent, bind to EVENT_PART_CHANNEL */
+/* log_parts(int argc, char **argv) */
+int bindPartEvent(void)
+{
+	//bind to part event
+	EvtHook *hook;
+	int status; //check status of binding to event
+	hook = createEventHook(EVENT_PART_CHANNEL, log_parts);
+	status = moduleAddEventHook(hook);
+		if (status != MOD_ERR_OK)
+		{
+			alog("Error binding to event: EVENT_PART_CHANNEL [%d}", status);
+			return MOD_STOP;
+		}
+	return MOD_CONT;
+}	                                                                                                                                      
+
+/* log joins, from EVENT_JOIN_CHANNEL */
+int log_joins(int argc, char **argv) 
+{
+	User *u;
+
+	u = finduser(argv[1]);
+
+
+	if (!argv[1] || !argv[2]) 
+	{
+		return MOD_CONT;
+	}
+
+	if(stricmp(argv[0], EVENT_STOP) == 0) 
+	{
+		alog("\002Join\002: %s (%s@%s => %s@%s) joins %s", argv[1], u->username, u->hostip, u->vident, u->vhost, argv[2]);
+	}
+	
+	return MOD_CONT;
+}
+
+/* log parts, from EVENT_PART_CHANNEL */
+int log_parts(int argc, char **argv) 
+{
+	User *u;
+	u = finduser(argv[1]);
+	
+	int checkPart = 0; 
+
+    if (!argv[1] || !argv[2]) 
+    {
+    	return MOD_CONT;
+    }
+    
+    if (argc == 4) 
+    {
+    	checkPart = 1;
+    }
+
+    if (stricmp(argv[0], EVENT_STOP) == 0) 
+    {
+    	alog("\002Part\002: %s (%s@%s => %s@%s) parts %s (%s)", argv[1], u->username, u->hostip, u->vident, u->vhost, argv[2], (checkPart == 1 ? argv[3] : ""));   
+    }
+    
+	return MOD_CONT;
+}
+
+/* log kicks, EVENT_CHAN_KICK */
+int log_kicks(int argc, char **argv)
+{
+	User *u; //user struct
+	Channel *ci; //channel struct
+		
+		if (!(u = finduser(argv[0])) | !(ci = findchan(argv[1])))
+		{
+			return MOD_CONT;
+		}
+		
+		alog("\002Kick\002: %s (%s@%s => %s@%s) was kicked from %s", u->nick, u->username, u->hostip, u->vident, u->vhost, ci->name); 
+	return MOD_CONT;
+}
+
+                                              
