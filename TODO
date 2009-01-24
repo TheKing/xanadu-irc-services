@@ -7,7 +7,7 @@ Key:  [ ] To-do (Agreed To-Do)
 -------------------------------------------------------
  
 [X] NickServ: GROUP => ADDNICK, GLIST => MYNICKS (DigitalMan)
-[+] AdminServ: Add AdminServ, Successfully connect with services
+[x] AdminServ: Add AdminServ, Successfully connect with services
 [ ] ChanServ: Create flags system (TheKing)
 [ ] OperServ: Add regex tracing (TheKing)
 [+] IRCd: Add ShadowIRCd protocol (TheKing)
