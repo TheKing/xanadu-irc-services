@@ -12,8 +12,8 @@ Key:  [ ] To-do (Agreed To-Do)
 [ ] OperServ: Add regex tracing (TheKing)
 [+] IRCd: Add ShadowIRCd5/6.x.x protocol (TheKing)
 [ ] ChanServ: Add access logging (Liber)
-[ ] HelpServ: Remove HelpServ's existance (DigitalMan)
-[ ] Rename all Anope-named methods, functions, etc (ALL)
+[X] HelpServ: Remove HelpServ's existance (DigitalMan)
+[~] Rename all Anope-named methods, functions, etc (ALL)
 [~] Remove all MySQL support
 [+] Add the following file header format to each file. (See XHEADER in main dir)
     Note: You MUST change some of the code to legally remove the Anope Copyright.
@@ -22,6 +22,7 @@ Key:  [ ] To-do (Agreed To-Do)
 [X] !BUG! (#0001) os_svsnick.c http://xanadu.pastebin.com/m5cff91f4 - Liber
 [ ] AdminServ: Transfer RESTART, QUIT, SHUTDOWN, & RELOAD from OperServ (DigitalMan)
 [ ] AdminServ: Transfer DEFCON from OperServ (DigitalMan)
+[~] NickServ: Create flags system (DigitalMan & TheKing)
 
 Releases
 ======================
