@@ -14,6 +14,8 @@ Key:  [ ] To-do (Agreed To-Do)
 [ ] ChanServ: Add access logging (Liber)
 [ ] HelpServ: Remove HelpServ's existance (DigitalMan)
 [ ] Rename all Anope-named methods, functions, etc (ALL)
+[ ] Logchan (Liber) 
+	[ ] Add join/part to src/users.c (this should be rather easy) 
 [~] Remove all MySQL support
 [+] Add the following file header format to each file. (See XHEADER in main dir)
     Note: You MUST change some of the code to legally remove the Anope Copyright.
