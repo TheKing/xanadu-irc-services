@@ -17,15 +17,19 @@
 LANG_NAME
 	English
 
-OS_ERR_MUSTBEROOT
-	You must have root access to perform that command.
-
 ### AdminServ ###
 ### BotServ ###
 ### ChanServ ###
 ### MemoServ ###
 ### NickServ ###
 ### OperServ ###
+
+OS_ERR_MUSTBEROOT
+	You must have root access to perform that command.
+
+
+
+########################################################
 
 # Original Notes from Anope:
 # When translating this file to another language, keep in mind that the
