@@ -1,17 +1,13 @@
-/* OperServ core functions
+/* NickServ : SVSNICK (Core)
  *
- * (C) 2003-2007 Anope Team
- * Contact us at info@anope.org
+ * (C) 2009 Xanadu IRC Services Team
  *
- * Please read COPYING and README for further details.
- *
+ * Based on the original code of Anope by the Anope Team.
  * Based on the original code of Epona by Lara.
- * Based on the original code of Services by Andy Church. 
- * 
- * $Id: os_svsnick.c 1265 2007-08-26 15:33:06Z geniusdex $
+ * Based on the original code of Services by Andy Church.
  *
+ * $Id: ns_addnick.c 01-23-2009 theking $
  */
-/*************************************************************************/
 
 #include "module.h"
 
