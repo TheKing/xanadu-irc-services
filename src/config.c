@@ -51,7 +51,6 @@ char *s_NickServ;
 char *s_ChanServ;
 char *s_MemoServ;
 char *s_BotServ;
-char *s_HelpServ;
 char *s_OperServ;
 char *s_GlobalNoticer;
 char *s_DevNull;
@@ -60,7 +59,6 @@ char *desc_NickServ;
 char *desc_ChanServ;
 char *desc_MemoServ;
 char *desc_BotServ;
-char *desc_HelpServ;
 char *desc_OperServ;
 char *desc_GlobalNoticer;
 char *desc_DevNull;
@@ -74,7 +72,6 @@ char *s_NickServAlias;
 char *s_ChanServAlias;
 char *s_MemoServAlias;
 char *s_BotServAlias;
-char *s_HelpServAlias;
 char *s_OperServAlias;
 char *s_GlobalNoticerAlias;
 char *s_DevNullAlias;
@@ -84,7 +81,6 @@ char *desc_NickServAlias;
 char *desc_ChanServAlias;
 char *desc_MemoServAlias;
 char *desc_BotServAlias;
-char *desc_HelpServAlias;
 char *desc_OperServAlias;
 char *desc_GlobalNoticerAlias;
 char *desc_DevNullAlias;
@@ -291,10 +287,6 @@ char *MemoCoreModules;
 char **MemoServCoreModules;
 int MemoServCoreNumber;
 
-char *HelpCoreModules;
-char **HelpServCoreModules;
-int HelpServCoreNumber;
-
 char *BotCoreModules;
 char **BotServCoreModules;
 int BotServCoreNumber;
@@ -462,7 +454,6 @@ Directive directives[] = {
                     {PARAM_STRING, 0, &desc_GlobalNoticer}}},
     {"GlobalAlias", {{PARAM_STRING, 0, &s_GlobalNoticerAlias},
                      {PARAM_STRING, 0, &desc_GlobalNoticerAlias}}},
-    {"HelpCoreModules", {{PARAM_STRING, PARAM_RELOAD, &HelpCoreModules}}},
     {"HelpChannel", {{PARAM_STRING, PARAM_RELOAD, &HelpChannel}}},
     {"HostCoreModules", {{PARAM_STRING, PARAM_RELOAD, &HostCoreModules}}},
     {"HostServAlias", {{PARAM_STRING, 0, &s_HostServAlias},
@@ -471,10 +462,6 @@ Directive directives[] = {
     {"IRCDModule", {{PARAM_STRING, 0, &IRCDModule}}},
     {"LogChannel", {{PARAM_STRING, PARAM_RELOAD, &LogChannel}}},
     {"LogBot", {{PARAM_SET, PARAM_RELOAD, &LogBot}}},
-    {"HelpServName", {{PARAM_STRING, 0, &s_HelpServ},
-                      {PARAM_STRING, 0, &desc_HelpServ}}},
-    {"HelpServAlias", {{PARAM_STRING, 0, &s_HelpServAlias},
-                       {PARAM_STRING, 0, &desc_HelpServAlias}}},
     {"KeepBackups", {{PARAM_INT, PARAM_RELOAD, &KeepBackups}}},
     {"KeepLogs", {{PARAM_INT, PARAM_RELOAD, &KeepLogs}}},
     {"KillonSGline", {{PARAM_SET, PARAM_RELOAD, &KillonSGline}}},

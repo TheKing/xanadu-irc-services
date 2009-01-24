@@ -17,15 +17,30 @@
 LANG_NAME
 	English
 
-OS_ERR_MUSTBEROOT
-	You must have root access to perform that command.
-
 ### AdminServ ###
+
+AS_HELP_HEADER
+	                  -AdminServ Command Reference-
+AS_HELP_DIV
+	==================================================================
+AS_HELP_CMD_ABOUT
+	   ABOUT          A description of the purpose of AdminServ.
+AS_HELP_CMD_HELP
+	   HELP           Displays a reference to all AdminServ commands.
+AS_HELP_FOOTER
+	Please be advised that all commands sent to AdminServ are logged.
 ### BotServ ###
 ### ChanServ ###
 ### MemoServ ###
 ### NickServ ###
 ### OperServ ###
+
+OS_ERR_MUSTBEROOT
+	You must have root access to perform that command.
+
+
+
+########################################################
 
 # Original Notes from Anope:
 # When translating this file to another language, keep in mind that the

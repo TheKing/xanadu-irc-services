@@ -7,22 +7,29 @@ Key:  [ ] To-do (Agreed To-Do)
 -------------------------------------------------------
  
 [X] NickServ: GROUP => ADDNICK, GLIST => MYNICKS (DigitalMan)
-[x] AdminServ: Add AdminServ, Successfully connect with services
-[ ] ChanServ: Create flags system (TheKing)
+[X] AdminServ: Add AdminServ, Successfully connect with services
+[+] ChanServ: Create flags system (TheKing)
 [ ] OperServ: Add regex tracing (TheKing)
 [+] IRCd: Add ShadowIRCd5/6.x.x protocol (TheKing)
 [ ] ChanServ: Add access logging (Liber)
+<<<<<<< HEAD:TODO
 [ ] HelpServ: Remove HelpServ's existance (DigitalMan)
 [ ] Rename all Anope-named methods, functions, etc (ALL)
 [ ] Logchan (Liber) 
 	[ ] Add join/part to src/users.c (this should be rather easy) 
+=======
+[X] HelpServ: Remove HelpServ's existance (DigitalMan)
+[~] Rename all Anope-named methods, functions, etc (ALL)
+>>>>>>> 551e91ba4670f4cefc829ed9c35109db473e268f:TODO
 [~] Remove all MySQL support
 [+] Add the following file header format to each file. (See XHEADER in main dir)
     Note: You MUST change some of the code to legally remove the Anope Copyright.
           Please also make sure Anope, Epona, and IRC Services (Andy C.) get credit for
           appropriate files. (This may be removed from the TODO once everyone has read it.)
-[x] !BUG! (#0001) os_svsnick.c http://xanadu.pastebin.com/m5cff91f4 - Liber
-
+[X] !BUG! (#0001) os_svsnick.c http://xanadu.pastebin.com/m5cff91f4 - Liber
+[ ] AdminServ: Transfer RESTART, QUIT, SHUTDOWN, & RELOAD from OperServ (DigitalMan)
+[ ] AdminServ: Transfer DEFCON from OperServ (DigitalMan)
+[~] NickServ: Create flags system (DigitalMan & TheKing)
 
 Releases
 ======================
