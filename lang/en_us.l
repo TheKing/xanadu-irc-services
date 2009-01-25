@@ -31,6 +31,15 @@ AS_HELP_FOOTER
 	Please be advised that all commands sent to AdminServ are logged.
 ### BotServ ###
 ### ChanServ ###
+
+CS_HELP_CMD_FLAGS
+	   FLAGS          Add/Remove flags set on a specified channel.
+
+CS_HELP_FLAGS
+	Command Syntax: FLAGS #channel <+/->flags
+	
+	 The %S flag system allows channels to be marked with specific settings
+	 that alters how %S and users interact with your channel.
 ### MemoServ ###
 ### NickServ ###
 ### OperServ ###
