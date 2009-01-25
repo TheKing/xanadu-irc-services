@@ -13,7 +13,7 @@ Key:  [ ] To-do (Agreed To-Do)
 [+] IRCd: Add ShadowIRCd5/6.x.x protocol (TheKing)
 [ ] ChanServ: Add access logging (Liber)
 [ ] HelpServ: Remove HelpServ's existance (DigitalMan)
-[ ] Rename all Anope-named methods, functions, etc (ALL)
+[X] Rename all Anope-named methods, functions, etc (ALL)
 [ ] Logchan (Liber) 
 	[ ] Add join/part to src/users.c (this should be rather easy) 
 	[ ] Add "AdvancedLogging" conf param
