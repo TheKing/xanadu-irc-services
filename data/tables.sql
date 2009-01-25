@@ -5,11 +5,11 @@
 -- USE anope;
 
 -- 
--- Table structure for table 'anope_bs_core'
+-- Table structure for table 'xanadu_bs_core'
 -- 
 
-DROP TABLE IF EXISTS anope_bs_core;
-CREATE TABLE anope_bs_core (
+DROP TABLE IF EXISTS xanadu_bs_core;
+CREATE TABLE xanadu_bs_core (
   bs_id int(11) NOT NULL auto_increment,
   nick varchar(255) NOT NULL default '',
   `user` text NOT NULL,
@@ -26,11 +26,11 @@ CREATE TABLE anope_bs_core (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_cs_access'
+-- Table structure for table 'xanadu_cs_access'
 -- 
 
-DROP TABLE IF EXISTS anope_cs_access;
-CREATE TABLE anope_cs_access (
+DROP TABLE IF EXISTS xanadu_cs_access;
+CREATE TABLE xanadu_cs_access (
   ca_id int(11) NOT NULL auto_increment,
   in_use int(11) NOT NULL default '0',
   `level` int(11) NOT NULL default '0',
@@ -45,11 +45,11 @@ CREATE TABLE anope_cs_access (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_cs_akicks'
+-- Table structure for table 'xanadu_cs_akicks'
 -- 
 
-DROP TABLE IF EXISTS anope_cs_akicks;
-CREATE TABLE anope_cs_akicks (
+DROP TABLE IF EXISTS xanadu_cs_akicks;
+CREATE TABLE xanadu_cs_akicks (
   ck_id int(11) NOT NULL auto_increment,
   channel varchar(255) NOT NULL default '',
   flags int(11) NOT NULL default '0',
@@ -65,11 +65,11 @@ CREATE TABLE anope_cs_akicks (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_cs_badwords'
+-- Table structure for table 'xanadu_cs_badwords'
 -- 
 
-DROP TABLE IF EXISTS anope_cs_badwords;
-CREATE TABLE anope_cs_badwords (
+DROP TABLE IF EXISTS xanadu_cs_badwords;
+CREATE TABLE xanadu_cs_badwords (
   cw_id int(11) NOT NULL auto_increment,
   channel varchar(255) NOT NULL default '',
   word varchar(255) NOT NULL,
@@ -82,11 +82,11 @@ CREATE TABLE anope_cs_badwords (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_cs_info'
+-- Table structure for table 'xanadu_cs_info'
 -- 
 
-DROP TABLE IF EXISTS anope_cs_info;
-CREATE TABLE anope_cs_info (
+DROP TABLE IF EXISTS xanadu_cs_info;
+CREATE TABLE xanadu_cs_info (
   ci_id int(11) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL default '',
   founder text NOT NULL,
@@ -130,11 +130,11 @@ CREATE TABLE anope_cs_info (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_cs_levels'
+-- Table structure for table 'xanadu_cs_levels'
 -- 
 
-DROP TABLE IF EXISTS anope_cs_levels;
-CREATE TABLE anope_cs_levels (
+DROP TABLE IF EXISTS xanadu_cs_levels;
+CREATE TABLE xanadu_cs_levels (
   cl_id int(11) NOT NULL auto_increment,
   channel varchar(255) NOT NULL default '',
   position int(11) NOT NULL default '0',
@@ -147,11 +147,11 @@ CREATE TABLE anope_cs_levels (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_cs_ttb'
+-- Table structure for table 'xanadu_cs_ttb'
 -- 
 
-DROP TABLE IF EXISTS anope_cs_ttb;
-CREATE TABLE anope_cs_ttb (
+DROP TABLE IF EXISTS xanadu_cs_ttb;
+CREATE TABLE xanadu_cs_ttb (
   ct_id int(11) NOT NULL auto_increment,
   channel varchar(255) NOT NULL default '',
   ttb_id int(11) NOT NULL default '0',
@@ -164,11 +164,11 @@ CREATE TABLE anope_cs_ttb (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_hs_core'
+-- Table structure for table 'xanadu_hs_core'
 -- 
 
-DROP TABLE IF EXISTS anope_hs_core;
-CREATE TABLE anope_hs_core (
+DROP TABLE IF EXISTS xanadu_hs_core;
+CREATE TABLE xanadu_hs_core (
   bs_id int(11) NOT NULL auto_increment,
   nick varchar(255) NOT NULL default '',
   vident text NOT NULL,
@@ -183,11 +183,11 @@ CREATE TABLE anope_hs_core (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_info'
+-- Table structure for table 'xanadu_info'
 -- 
 
-DROP TABLE IF EXISTS anope_info;
-CREATE TABLE anope_info (
+DROP TABLE IF EXISTS xanadu_info;
+CREATE TABLE xanadu_info (
   version int(11) default NULL,
   `date` datetime default NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -195,11 +195,11 @@ CREATE TABLE anope_info (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_ms_info'
+-- Table structure for table 'xanadu_ms_info'
 -- 
 
-DROP TABLE IF EXISTS anope_ms_info;
-CREATE TABLE anope_ms_info (
+DROP TABLE IF EXISTS xanadu_ms_info;
+CREATE TABLE xanadu_ms_info (
   nm_id int(11) NOT NULL auto_increment,
   receiver varchar(255) NOT NULL,
   number int(11) NOT NULL default '0',
@@ -217,11 +217,11 @@ CREATE TABLE anope_ms_info (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_ns_access'
+-- Table structure for table 'xanadu_ns_access'
 -- 
 
-DROP TABLE IF EXISTS anope_ns_access;
-CREATE TABLE anope_ns_access (
+DROP TABLE IF EXISTS xanadu_ns_access;
+CREATE TABLE xanadu_ns_access (
   na_id int(11) NOT NULL auto_increment,
   display varchar(255) NOT NULL default '',
   access text NOT NULL,
@@ -233,11 +233,11 @@ CREATE TABLE anope_ns_access (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_ns_alias'
+-- Table structure for table 'xanadu_ns_alias'
 -- 
 
-DROP TABLE IF EXISTS anope_ns_alias;
-CREATE TABLE anope_ns_alias (
+DROP TABLE IF EXISTS xanadu_ns_alias;
+CREATE TABLE xanadu_ns_alias (
   na_id int(11) NOT NULL auto_increment,
   display varchar(255) NOT NULL default '',
   nick varchar(255) NOT NULL default '',
@@ -255,11 +255,11 @@ CREATE TABLE anope_ns_alias (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_ns_core'
+-- Table structure for table 'xanadu_ns_core'
 -- 
 
-DROP TABLE IF EXISTS anope_ns_core;
-CREATE TABLE anope_ns_core (
+DROP TABLE IF EXISTS xanadu_ns_core;
+CREATE TABLE xanadu_ns_core (
   nc_id int(11) NOT NULL auto_increment,
   display varchar(255) NOT NULL default '',
   pass tinyblob NOT NULL,
@@ -282,11 +282,11 @@ CREATE TABLE anope_ns_core (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_ns_request'
+-- Table structure for table 'xanadu_ns_request'
 -- 
 
-DROP TABLE IF EXISTS anope_ns_request;
-CREATE TABLE anope_ns_request (
+DROP TABLE IF EXISTS xanadu_ns_request;
+CREATE TABLE xanadu_ns_request (
   nr_id int(11) NOT NULL auto_increment,
   nick varchar(255) NOT NULL default '',
   passcode text NOT NULL,
@@ -301,11 +301,11 @@ CREATE TABLE anope_ns_request (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_os_akills'
+-- Table structure for table 'xanadu_os_akills'
 -- 
 
-DROP TABLE IF EXISTS anope_os_akills;
-CREATE TABLE anope_os_akills (
+DROP TABLE IF EXISTS xanadu_os_akills;
+CREATE TABLE xanadu_os_akills (
   ok_id int(11) NOT NULL auto_increment,
   `user` varchar(255) NOT NULL,
   host varchar(255) NOT NULL,
@@ -321,11 +321,11 @@ CREATE TABLE anope_os_akills (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_os_core'
+-- Table structure for table 'xanadu_os_core'
 -- 
 
-DROP TABLE IF EXISTS anope_os_core;
-CREATE TABLE anope_os_core (
+DROP TABLE IF EXISTS xanadu_os_core;
+CREATE TABLE xanadu_os_core (
   oc_id int(11) NOT NULL auto_increment,
   maxusercnt int(11) NOT NULL default '0',
   maxusertime int(11) NOT NULL default '0',
@@ -339,11 +339,11 @@ CREATE TABLE anope_os_core (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_os_exceptions'
+-- Table structure for table 'xanadu_os_exceptions'
 -- 
 
-DROP TABLE IF EXISTS anope_os_exceptions;
-CREATE TABLE anope_os_exceptions (
+DROP TABLE IF EXISTS xanadu_os_exceptions;
+CREATE TABLE xanadu_os_exceptions (
   oe_id int(11) NOT NULL auto_increment,
   mask varchar(255) NOT NULL,
   lim int(11) NOT NULL default '0',
@@ -359,11 +359,11 @@ CREATE TABLE anope_os_exceptions (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_os_news'
+-- Table structure for table 'xanadu_os_news'
 -- 
 
-DROP TABLE IF EXISTS anope_os_news;
-CREATE TABLE anope_os_news (
+DROP TABLE IF EXISTS xanadu_os_news;
+CREATE TABLE xanadu_os_news (
   on_id int(11) NOT NULL auto_increment,
   `type` int(11) NOT NULL default '0',
   num int(11) NOT NULL default '0',
@@ -378,11 +378,11 @@ CREATE TABLE anope_os_news (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_os_sglines'
+-- Table structure for table 'xanadu_os_sglines'
 -- 
 
-DROP TABLE IF EXISTS anope_os_sglines;
-CREATE TABLE anope_os_sglines (
+DROP TABLE IF EXISTS xanadu_os_sglines;
+CREATE TABLE xanadu_os_sglines (
   og_id int(11) NOT NULL auto_increment,
   mask varchar(255) NOT NULL,
   xby text NOT NULL,
@@ -397,11 +397,11 @@ CREATE TABLE anope_os_sglines (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_os_sqlines'
+-- Table structure for table 'xanadu_os_sqlines'
 -- 
 
-DROP TABLE IF EXISTS anope_os_sqlines;
-CREATE TABLE anope_os_sqlines (
+DROP TABLE IF EXISTS xanadu_os_sqlines;
+CREATE TABLE xanadu_os_sqlines (
   og_id int(11) NOT NULL auto_increment,
   mask varchar(255) NOT NULL,
   xby text NOT NULL,
@@ -416,11 +416,11 @@ CREATE TABLE anope_os_sqlines (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'anope_os_szlines'
+-- Table structure for table 'xanadu_os_szlines'
 -- 
 
-DROP TABLE IF EXISTS anope_os_szlines;
-CREATE TABLE anope_os_szlines (
+DROP TABLE IF EXISTS xanadu_os_szlines;
+CREATE TABLE xanadu_os_szlines (
   og_id int(11) NOT NULL auto_increment,
   mask varchar(255) NOT NULL,
   xby text NOT NULL,

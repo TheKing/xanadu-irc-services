@@ -113,9 +113,9 @@ int do_svsnick(User * u)
         notice_lang(s_NickServ, u, NICK_X_FORBIDDEN, newnick);
     } else {
         notice_lang(s_OperServ, u, OPER_SVSNICK_NEWNICK, nick, newnick);
-        anope_cmd_global(s_OperServ, "%s used SVSNICK to change %s to %s",
+        xanadu_cmd_global(s_OperServ, "%s used SVSNICK to change %s to %s",
                          u->nick, nick, newnick);
-        anope_cmd_svsnick(nick, newnick, time(NULL));
+        xanadu_cmd_svsnick(nick, newnick, time(NULL));
     }
     return MOD_CONT;
 }

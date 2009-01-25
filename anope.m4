@@ -1,8 +1,8 @@
-dnl Macro: anope_CHECK_TYPE_SIZES
+dnl Macro: xanadu_CHECK_TYPE_SIZES
 dnl
 dnl Check the size of several types and define a valid int16_t and int32_t.
 dnl
-AC_DEFUN(anope_CHECK_TYPE_SIZES,
+AC_DEFUN(xanadu_CHECK_TYPE_SIZES,
 [dnl Check type sizes
 AC_CHECK_SIZEOF(short)
 AC_CHECK_SIZEOF(int)

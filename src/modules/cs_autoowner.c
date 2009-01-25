@@ -159,7 +159,7 @@ int do_on_join(int argc, char **argv) {
 	if ((get_access_level(c->ci, u->na) >= AutoOwnerLevel) && (!is_founder(u,c->ci))) {
 		if (!(status & CUS_OWNER)) {
 			tmp = stripModePrefix(ircd->ownerset);
-			anope_cmd_mode(whosends(c->ci), c->name, "+%s %s", tmp, u->nick);
+			xanadu_cmd_mode(whosends(c->ci), c->name, "+%s %s", tmp, u->nick);
 			if (tmp) free(tmp);
 			chan_set_user_status(c, u, CUS_OWNER);
 		}
@@ -208,7 +208,7 @@ int do_set_modes(User *u) {
 			if ((get_access_level(c->ci, u->na) >= AutoOwnerLevel) && !is_founder(u, c->ci)) {
 				if (!(uc->status & CUS_OWNER)) {
 					tmp = stripModePrefix(ircd->ownerset);
-					anope_cmd_mode(whosends(c->ci), c->name, "+%s %s", tmp, u->nick);
+					xanadu_cmd_mode(whosends(c->ci), c->name, "+%s %s", tmp, u->nick);
 					if (tmp) free(tmp);
 					chan_set_user_status(c, u, CUS_OWNER);
 				}

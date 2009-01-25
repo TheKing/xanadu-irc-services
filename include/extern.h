@@ -682,13 +682,13 @@ E void pmodule_private_cmode(int mode);
 E void pmodule_key_mode(int mode);
 E void pmodule_limit_mode(int mode);
 
-E int anope_get_secret_mode();
-E int anope_get_invite_mode();
-E int anope_get_key_mode();
-E int anope_get_limit_mode();
-E int anope_get_private_mode();
-E int anope_get_invis_mode();
-E int anope_get_oper_mode();
+E int xanadu_get_secret_mode();
+E int xanadu_get_invite_mode();
+E int xanadu_get_key_mode();
+E int xanadu_get_limit_mode();
+E int xanadu_get_private_mode();
+E int xanadu_get_invis_mode();
+E int xanadu_get_oper_mode();
 
 /**** language.c ****/
 
@@ -1026,7 +1026,7 @@ E Server *findserver(Server *s, const char *name);
 E void do_server(const char *source, char *servername, char *hops, char *descript, char *numeric);
 E void do_squit(const char *source, int ac, char **av);
 E void capab_parse(int ac, char **av);
-E int anope_check_sync(const char *name);
+E int xanadu_check_sync(const char *name);
 
 E void finish_sync(Server *serv, int sync_links);
 
@@ -1181,170 +1181,170 @@ E void notice(char *source, char *dest, const char *fmt, ...);
 
 /******************************************************************************/
 
-E int anope_set_mod_current_buffer(int ac, char **av);
+E int xanadu_set_mod_current_buffer(int ac, char **av);
 
-E void anope_cmd_211(const char *fmt, ...);                          	  		  /* 211 */
-E void anope_cmd_219(char *source, char *who); 			  	  		  /* 219 */
-E void anope_cmd_242(const char *fmt, ...);                          	  		  /* 242 */
-E void anope_cmd_243(const char *fmt, ...);                          	  		  /* 243 */
-E void anope_cmd_250(const char *fmt, ...);			  	  		  /* 250 */
-E void anope_cmd_307(const char *fmt, ...);			    	  		  /* 307 */
-E void anope_cmd_311(const char *fmt, ...);                          	  		  /* 311 */
-E void anope_cmd_312(const char *fmt, ...);                          	  		  /* 312 */
-E void anope_cmd_317(const char *fmt, ...);                          	  		  /* 317 */
-E void anope_cmd_318(char *source, char *who);           		  	  		  /* 318 */
-E void anope_cmd_351(char *source);				  	  		  /* 351 */
-E void anope_cmd_372(char *source, char *msg);			 	  		  /* 372 */
-E void anope_cmd_372_error(char *source);				  	  		  /* 372 */
-E void anope_cmd_375(char *source);				 	  		  /* 375 */
-E void anope_cmd_376(char *source);				 	  		  /* 376 */
-E void anope_cmd_391(char *source, char *timestr);                             		  /* 391 */
-E void anope_cmd_401(char *source, char *who);			  	  		  /* 401 */
-E void anope_cmd_akill(char *user, char *host, char *who, time_t when, time_t expires, char *reason); /* AKILL */
-E void anope_cmd_capab();						  	  		  /* CAPAB */
-E void anope_cmd_chghost(char *nick, char *vhost);                   			  /* CHGHOST */
-E void anope_cmd_chgident(char *nick, char *vIdent);                 			  /* CHGIDENT */
-E void anope_cmd_vhost_on(char *nick, char *vIdent, char *vhost);    			  /* CHGHOST + CHGIDENT */
-E void anope_cmd_vhost_off(User *u);
-E void anope_cmd_connect(int servernum);                             	           	  /* Connect */
-E void anope_cmd_ea();									  /* EA      */
-E void anope_cmd_global(char *source, const char *fmt, ...);         	  		  /* GLOBOPS */
-E void anope_cmd_invite(char *source, char *chan, char *nick);       	  		  /* INVITE */
-E void anope_cmd_join(char *user, char *channel, time_t chantime);   	  		  /* JOIN */
-E void anope_cmd_kick(char *source, char *chan, char *user, const char *fmt, ...);		  /* KICK */
-E void anope_cmd_mode(char *source, char *dest, const char *fmt, ...);   	  		  /* MODE */
-E void anope_cmd_tmode(char *source, char *dest, const char *fmt, ...);				  /* TMODE */
-E void anope_cmd_unban(char *name, char *nick);				  		  			      /* MODE -b */
-E void anope_cmd_bot_chan_mode(char *nick, char *chan);			  		  /* MODE BotServ */
-E void anope_cmd_netinfo(int ac, char **av);						  /* NETINFO */
-E void anope_cmd_nick(char *nick, char *name, char *mode);			  		  /* NICK */
-E void anope_cmd_chg_nick(char *oldnick, char *newnick);             	  		  /* NICK */
-E void anope_cmd_bot_nick(char *nick, char *user,char *host,char *real,char *modes);	  /* NICK */
-E void anope_cmd_guest_nick(char *nick, char *user,char *host,char *real,char *modes);	  /* NICK */
-E void anope_cmd_notice(char *source, char *dest, const char *fmt, ...);     		  /* NOTICE */
-E void anope_cmd_notice_ops(char *source, char *dest, const char *fmt, ...); 		  /* NOTICE */
-E void anope_cmd_notice2(char *source, char *dest, char *msg);		  		  /* NOTICE */
-E void anope_cmd_serv_notice(char *source, char *dest, char *msg);		  		  /* NOTICE */
-E void anope_cmd_part(char *nick, char *chan, const char *fmt, ...); 	  		  /* PART */
-E void anope_cmd_pass(char *pass);                                   	  		  /* PASS */
-E void anope_cmd_pong(char *servname, char *who);                    	  		  /* PONG */
-E void anope_cmd_privmsg(char *source, char *dest, const char *fmt, ...);    		  /* PRIVMSG */
-E void anope_cmd_action(char *source, char *dest, const char *fmt, ...);    		  /* PRIVMSG */
-E void anope_cmd_privmsg2(char *source, char *dest, char *msg);		  		  /* PRIVMSG */
-E void anope_cmd_serv_privmsg(char *source, char *dest, char *msg);	  		  /* PRIVMSG */
-E void anope_cmd_protoctl();                                         			  /* PROTOCTL */
-E void anope_cmd_quit(char *source, const char *fmt, ...);           	  		  /* QUIT */
-E void anope_cmd_remove_akill(char *user, char *host);			  		  /* RAKILL */
-E void anope_cmd_server(char *servname, int hop, char *descript);    	  		  /* SERVER */
-E void anope_cmd_sgline(char *mask, char *reason);			  	  		  /* SGLINE */
-E void anope_cmd_sqline(char *mask, char *reason);                   	  		  /* SQLINE */
-E void anope_cmd_szline(char *mask, char *reason, char *whom);				  /* SZLINE */
-E void anope_cmd_squit(char *servname, char *message);               	  		  /* SQUIT  */
-E void anope_cmd_svinfo();						  	  		  /* SVINFO */
-E void anope_cmd_svsadmin(char *server, int set);						  /* SVSADMIN */
-E void anope_cmd_svshold(char *nick);				  	  		  /* SVSHOLD */
-E void anope_cmd_release_svshold(char *nick);				  		  /* SVSHOLD */
-E void anope_cmd_svsinfo();								  /* SVSINFO */
-E void anope_cmd_svsjoin(char *source, char *nick,char *chan, char *param);          	  /* SVSJOIN */
-E void anope_cmd_svskill(char *source,char *user, const char *fmt, ...);     		  /* SVSKILL */
-E void anope_cmd_svsmode(User * u, int ac, char **av);   	        	  		  /* SVSMODE */
-E void anope_cmd_svsmode_chan(char *name, char *mode, char *nick);				  /* SVSMODE */
-E void anope_cmd_svsnick(char *nick,char *newnick, time_t when);     	  		  /* SVSNICK */
-E void anope_cmd_svsnoop(char *server, int set);			  	  		  /* SVSNOOP */
-E void anope_cmd_svso(char *source,char *nick, char *flag);          	  		  /* SVSO   */
-E void anope_cmd_svspart(char *source, char *nick,char *chan);          	  		  /* SVSPART   */
-E void anope_cmd_swhois(char *source, char *who, char *mask);	  	  		  /* SWHOIS */
-E void anope_cmd_topic(char *whosets, char *chan, char *whosetit, char *topic, time_t when); /* TOPIC */
-E void anope_cmd_unsgline(char *mask);				  	  		  /* UNSGLINE */
-E void anope_cmd_unsqline(char *user);                               	  		  /* UNSQLINE */
-E void anope_cmd_unszline(char *mask);				  	  		  /* UNSZLINE */
-E void anope_cmd_eob();									  /* EOB - end of burst */
-E void anope_cmd_burst();									  /* BURST  - use eob to send burst 0 */
-E void anope_cmd_svswatch(char *sender, char *nick, char *parm);
-E void anope_cmd_ctcp(char *source, char *dest, const char *fmt, ...);   	  		  /* CTCP */
+E void xanadu_cmd_211(const char *fmt, ...);                          	  		  /* 211 */
+E void xanadu_cmd_219(char *source, char *who); 			  	  		  /* 219 */
+E void xanadu_cmd_242(const char *fmt, ...);                          	  		  /* 242 */
+E void xanadu_cmd_243(const char *fmt, ...);                          	  		  /* 243 */
+E void xanadu_cmd_250(const char *fmt, ...);			  	  		  /* 250 */
+E void xanadu_cmd_307(const char *fmt, ...);			    	  		  /* 307 */
+E void xanadu_cmd_311(const char *fmt, ...);                          	  		  /* 311 */
+E void xanadu_cmd_312(const char *fmt, ...);                          	  		  /* 312 */
+E void xanadu_cmd_317(const char *fmt, ...);                          	  		  /* 317 */
+E void xanadu_cmd_318(char *source, char *who);           		  	  		  /* 318 */
+E void xanadu_cmd_351(char *source);				  	  		  /* 351 */
+E void xanadu_cmd_372(char *source, char *msg);			 	  		  /* 372 */
+E void xanadu_cmd_372_error(char *source);				  	  		  /* 372 */
+E void xanadu_cmd_375(char *source);				 	  		  /* 375 */
+E void xanadu_cmd_376(char *source);				 	  		  /* 376 */
+E void xanadu_cmd_391(char *source, char *timestr);                             		  /* 391 */
+E void xanadu_cmd_401(char *source, char *who);			  	  		  /* 401 */
+E void xanadu_cmd_akill(char *user, char *host, char *who, time_t when, time_t expires, char *reason); /* AKILL */
+E void xanadu_cmd_capab();						  	  		  /* CAPAB */
+E void xanadu_cmd_chghost(char *nick, char *vhost);                   			  /* CHGHOST */
+E void xanadu_cmd_chgident(char *nick, char *vIdent);                 			  /* CHGIDENT */
+E void xanadu_cmd_vhost_on(char *nick, char *vIdent, char *vhost);    			  /* CHGHOST + CHGIDENT */
+E void xanadu_cmd_vhost_off(User *u);
+E void xanadu_cmd_connect(int servernum);                             	           	  /* Connect */
+E void xanadu_cmd_ea();									  /* EA      */
+E void xanadu_cmd_global(char *source, const char *fmt, ...);         	  		  /* GLOBOPS */
+E void xanadu_cmd_invite(char *source, char *chan, char *nick);       	  		  /* INVITE */
+E void xanadu_cmd_join(char *user, char *channel, time_t chantime);   	  		  /* JOIN */
+E void xanadu_cmd_kick(char *source, char *chan, char *user, const char *fmt, ...);		  /* KICK */
+E void xanadu_cmd_mode(char *source, char *dest, const char *fmt, ...);   	  		  /* MODE */
+E void xanadu_cmd_tmode(char *source, char *dest, const char *fmt, ...);				  /* TMODE */
+E void xanadu_cmd_unban(char *name, char *nick);				  		  			      /* MODE -b */
+E void xanadu_cmd_bot_chan_mode(char *nick, char *chan);			  		  /* MODE BotServ */
+E void xanadu_cmd_netinfo(int ac, char **av);						  /* NETINFO */
+E void xanadu_cmd_nick(char *nick, char *name, char *mode);			  		  /* NICK */
+E void xanadu_cmd_chg_nick(char *oldnick, char *newnick);             	  		  /* NICK */
+E void xanadu_cmd_bot_nick(char *nick, char *user,char *host,char *real,char *modes);	  /* NICK */
+E void xanadu_cmd_guest_nick(char *nick, char *user,char *host,char *real,char *modes);	  /* NICK */
+E void xanadu_cmd_notice(char *source, char *dest, const char *fmt, ...);     		  /* NOTICE */
+E void xanadu_cmd_notice_ops(char *source, char *dest, const char *fmt, ...); 		  /* NOTICE */
+E void xanadu_cmd_notice2(char *source, char *dest, char *msg);		  		  /* NOTICE */
+E void xanadu_cmd_serv_notice(char *source, char *dest, char *msg);		  		  /* NOTICE */
+E void xanadu_cmd_part(char *nick, char *chan, const char *fmt, ...); 	  		  /* PART */
+E void xanadu_cmd_pass(char *pass);                                   	  		  /* PASS */
+E void xanadu_cmd_pong(char *servname, char *who);                    	  		  /* PONG */
+E void xanadu_cmd_privmsg(char *source, char *dest, const char *fmt, ...);    		  /* PRIVMSG */
+E void xanadu_cmd_action(char *source, char *dest, const char *fmt, ...);    		  /* PRIVMSG */
+E void xanadu_cmd_privmsg2(char *source, char *dest, char *msg);		  		  /* PRIVMSG */
+E void xanadu_cmd_serv_privmsg(char *source, char *dest, char *msg);	  		  /* PRIVMSG */
+E void xanadu_cmd_protoctl();                                         			  /* PROTOCTL */
+E void xanadu_cmd_quit(char *source, const char *fmt, ...);           	  		  /* QUIT */
+E void xanadu_cmd_remove_akill(char *user, char *host);			  		  /* RAKILL */
+E void xanadu_cmd_server(char *servname, int hop, char *descript);    	  		  /* SERVER */
+E void xanadu_cmd_sgline(char *mask, char *reason);			  	  		  /* SGLINE */
+E void xanadu_cmd_sqline(char *mask, char *reason);                   	  		  /* SQLINE */
+E void xanadu_cmd_szline(char *mask, char *reason, char *whom);				  /* SZLINE */
+E void xanadu_cmd_squit(char *servname, char *message);               	  		  /* SQUIT  */
+E void xanadu_cmd_svinfo();						  	  		  /* SVINFO */
+E void xanadu_cmd_svsadmin(char *server, int set);						  /* SVSADMIN */
+E void xanadu_cmd_svshold(char *nick);				  	  		  /* SVSHOLD */
+E void xanadu_cmd_release_svshold(char *nick);				  		  /* SVSHOLD */
+E void xanadu_cmd_svsinfo();								  /* SVSINFO */
+E void xanadu_cmd_svsjoin(char *source, char *nick,char *chan, char *param);          	  /* SVSJOIN */
+E void xanadu_cmd_svskill(char *source,char *user, const char *fmt, ...);     		  /* SVSKILL */
+E void xanadu_cmd_svsmode(User * u, int ac, char **av);   	        	  		  /* SVSMODE */
+E void xanadu_cmd_svsmode_chan(char *name, char *mode, char *nick);				  /* SVSMODE */
+E void xanadu_cmd_svsnick(char *nick,char *newnick, time_t when);     	  		  /* SVSNICK */
+E void xanadu_cmd_svsnoop(char *server, int set);			  	  		  /* SVSNOOP */
+E void xanadu_cmd_svso(char *source,char *nick, char *flag);          	  		  /* SVSO   */
+E void xanadu_cmd_svspart(char *source, char *nick,char *chan);          	  		  /* SVSPART   */
+E void xanadu_cmd_swhois(char *source, char *who, char *mask);	  	  		  /* SWHOIS */
+E void xanadu_cmd_topic(char *whosets, char *chan, char *whosetit, char *topic, time_t when); /* TOPIC */
+E void xanadu_cmd_unsgline(char *mask);				  	  		  /* UNSGLINE */
+E void xanadu_cmd_unsqline(char *user);                               	  		  /* UNSQLINE */
+E void xanadu_cmd_unszline(char *mask);				  	  		  /* UNSZLINE */
+E void xanadu_cmd_eob();									  /* EOB - end of burst */
+E void xanadu_cmd_burst();									  /* BURST  - use eob to send burst 0 */
+E void xanadu_cmd_svswatch(char *sender, char *nick, char *parm);
+E void xanadu_cmd_ctcp(char *source, char *dest, const char *fmt, ...);   	  		  /* CTCP */
 
-EI int anope_event_482(char *source, int ac, char **av);
-EI int anope_event_436(char *source, int ac, char **av);
-EI int anope_event_away(char *source, int ac, char **av);
-EI int anope_event_ping(char *source, int ac, char **av);
-EI int anope_event_motd(char *source, int ac, char **av);
-EI int anope_event_join(char *source, int ac, char **av);
-EI int anope_event_kick(char *source, int ac, char **av);
-EI int anope_event_kill(char *source, int ac, char **av);
-EI int anope_event_mode(char *source, int ac, char **av);
-EI int anope_event_tmode(char *source, int ac, char **av);
-EI int anope_event_quit(char *source, int ac, char **av);
-EI int anope_event_squit(char *source, int ac, char **av);
-EI int anope_event_topic(char *source, int ac, char **av);
-EI int anope_event_whois(char *source, int ac, char **av);
-EI int anope_event_part(char *source, int ac, char **av);
-EI int anope_event_server(char *source, int ac, char **av);
-EI int anope_event_sid(char *source, int ac, char **av);
-EI int anope_event_nick(char *source, int ac, char **av);
-EI int anope_event_bmask(char *source, int ac, char **av);
-EI int anope_event_gnotice(char *source, int ac, char **av);
-EI int anope_event_privmsg(char *source, int ac, char **av);
-EI int anope_event_capab(char *source, int ac, char **av);
-EI int anope_event_sjoin(char *source, int ac, char **av);
-EI int anope_event_cs(char *source, int ac, char **av);
-EI int anope_event_hs(char *source, int ac, char **av);
-EI int anope_event_ms(char *source, int ac, char **av);
-EI int anope_event_ns(char *source, int ac, char **av);
-EI int anope_event_os(char *source, int ac, char **av);
-EI int anope_event_vs(char *source, int ac, char **av);
-EI int anope_event_svinfo(char *source, int ac, char **av);
-EI int anope_event_chghost(char *source, int ac, char **av);
-EI int anope_event_sethost(char *source, int ac, char **av);
-EI int anope_event_chgident(char *source, int ac, char **av);
-EI int anope_event_setident(char *source, int ac, char **av);
-EI int anope_event_chgname(char *source, int ac, char **av);
-EI int anope_event_setname(char *source, int ac, char **av);
-EI int anope_event_svsinfo(char *source, int ac, char **av);
-EI int anope_event_snick(char *source, int ac, char **av);
-EI int anope_event_vhost(char *source, int ac, char **av);
-EI int anope_event_tkl(char *source, int ac, char **av);
-EI int anope_event_eos(char *source, int ac, char **av);
-EI int anope_event_eob(char *source, int ac, char **av);
-EI int anope_event_pass(char *source, int ac, char **av);
-EI int anope_event_netinfo(char *source, int ac, char **av);
-EI int anope_event_error(char *source, int ac, char **av);
-EI int anope_event_eb(char *source, int ac, char **av);
-EI int anope_event_netctrl(char *source, int ac, char **av);
-EI int anope_event_notice(char *source, int ac, char **av);
-EI int anope_event_snotice(char *source, int ac, char **av);
-EI int anope_event_sqline(char *source, int ac, char **av);
-EI int anope_event_smo(char *source, int ac, char **av);
-EI int anope_event_myid(char *source, int ac, char **av);
-EI int anope_event_vctrl(char *source, int ac, char **av);
-EI int anope_event_tctrl(char *source, int ac, char **av);
-EI int anope_event_snetinfo(char *source, int ac, char **av);
-EI int anope_event_umode2(char *source, int ac, char **av);
-EI int anope_event_globops(char *source, int ac, char **av);
-EI int anope_event_swhois(char *source, int ac, char **av);
-EI int anope_event_burst(char *source, int ac, char **av);
-EI int anope_event_luserslock(char *source, int ac, char **av);
-EI int anope_event_admin(char *source, int ac, char **av);
-EI int anope_event_credits(char *source, int ac, char **av);
-EI int anope_event_rehash(char *source, int ac, char **av);
-EI int anope_event_sdesc(char *source, int ac, char **av);
-EI int anope_event_netglobal(char *source, int ac, char **av);
-EI int anope_event_invite(char *source, int ac, char **av);
-E int anope_event_null(char *source, int ac, char **av);
+EI int xanadu_event_482(char *source, int ac, char **av);
+EI int xanadu_event_436(char *source, int ac, char **av);
+EI int xanadu_event_away(char *source, int ac, char **av);
+EI int xanadu_event_ping(char *source, int ac, char **av);
+EI int xanadu_event_motd(char *source, int ac, char **av);
+EI int xanadu_event_join(char *source, int ac, char **av);
+EI int xanadu_event_kick(char *source, int ac, char **av);
+EI int xanadu_event_kill(char *source, int ac, char **av);
+EI int xanadu_event_mode(char *source, int ac, char **av);
+EI int xanadu_event_tmode(char *source, int ac, char **av);
+EI int xanadu_event_quit(char *source, int ac, char **av);
+EI int xanadu_event_squit(char *source, int ac, char **av);
+EI int xanadu_event_topic(char *source, int ac, char **av);
+EI int xanadu_event_whois(char *source, int ac, char **av);
+EI int xanadu_event_part(char *source, int ac, char **av);
+EI int xanadu_event_server(char *source, int ac, char **av);
+EI int xanadu_event_sid(char *source, int ac, char **av);
+EI int xanadu_event_nick(char *source, int ac, char **av);
+EI int xanadu_event_bmask(char *source, int ac, char **av);
+EI int xanadu_event_gnotice(char *source, int ac, char **av);
+EI int xanadu_event_privmsg(char *source, int ac, char **av);
+EI int xanadu_event_capab(char *source, int ac, char **av);
+EI int xanadu_event_sjoin(char *source, int ac, char **av);
+EI int xanadu_event_cs(char *source, int ac, char **av);
+EI int xanadu_event_hs(char *source, int ac, char **av);
+EI int xanadu_event_ms(char *source, int ac, char **av);
+EI int xanadu_event_ns(char *source, int ac, char **av);
+EI int xanadu_event_os(char *source, int ac, char **av);
+EI int xanadu_event_vs(char *source, int ac, char **av);
+EI int xanadu_event_svinfo(char *source, int ac, char **av);
+EI int xanadu_event_chghost(char *source, int ac, char **av);
+EI int xanadu_event_sethost(char *source, int ac, char **av);
+EI int xanadu_event_chgident(char *source, int ac, char **av);
+EI int xanadu_event_setident(char *source, int ac, char **av);
+EI int xanadu_event_chgname(char *source, int ac, char **av);
+EI int xanadu_event_setname(char *source, int ac, char **av);
+EI int xanadu_event_svsinfo(char *source, int ac, char **av);
+EI int xanadu_event_snick(char *source, int ac, char **av);
+EI int xanadu_event_vhost(char *source, int ac, char **av);
+EI int xanadu_event_tkl(char *source, int ac, char **av);
+EI int xanadu_event_eos(char *source, int ac, char **av);
+EI int xanadu_event_eob(char *source, int ac, char **av);
+EI int xanadu_event_pass(char *source, int ac, char **av);
+EI int xanadu_event_netinfo(char *source, int ac, char **av);
+EI int xanadu_event_error(char *source, int ac, char **av);
+EI int xanadu_event_eb(char *source, int ac, char **av);
+EI int xanadu_event_netctrl(char *source, int ac, char **av);
+EI int xanadu_event_notice(char *source, int ac, char **av);
+EI int xanadu_event_snotice(char *source, int ac, char **av);
+EI int xanadu_event_sqline(char *source, int ac, char **av);
+EI int xanadu_event_smo(char *source, int ac, char **av);
+EI int xanadu_event_myid(char *source, int ac, char **av);
+EI int xanadu_event_vctrl(char *source, int ac, char **av);
+EI int xanadu_event_tctrl(char *source, int ac, char **av);
+EI int xanadu_event_snetinfo(char *source, int ac, char **av);
+EI int xanadu_event_umode2(char *source, int ac, char **av);
+EI int xanadu_event_globops(char *source, int ac, char **av);
+EI int xanadu_event_swhois(char *source, int ac, char **av);
+EI int xanadu_event_burst(char *source, int ac, char **av);
+EI int xanadu_event_luserslock(char *source, int ac, char **av);
+EI int xanadu_event_admin(char *source, int ac, char **av);
+EI int xanadu_event_credits(char *source, int ac, char **av);
+EI int xanadu_event_rehash(char *source, int ac, char **av);
+EI int xanadu_event_sdesc(char *source, int ac, char **av);
+EI int xanadu_event_netglobal(char *source, int ac, char **av);
+EI int xanadu_event_invite(char *source, int ac, char **av);
+E int xanadu_event_null(char *source, int ac, char **av);
 
-E void anope_set_umode(User * user, int ac, char **av);
-E void anope_cmd_svid_umode(char *nick, time_t ts);
-E void anope_cmd_svid_umode2(User *u, char *ts);
-E void anope_cmd_svid_umode3(User *u, char *ts);
-E void anope_cmd_nc_change(User *u);
-E int anope_flood_mode_check(char *value);
+E void xanadu_set_umode(User * user, int ac, char **av);
+E void xanadu_cmd_svid_umode(char *nick, time_t ts);
+E void xanadu_cmd_svid_umode2(User *u, char *ts);
+E void xanadu_cmd_svid_umode3(User *u, char *ts);
+E void xanadu_cmd_nc_change(User *u);
+E int xanadu_flood_mode_check(char *value);
 
-E void anope_cmd_jupe(char *jserver, char *who, char *reason);
+E void xanadu_cmd_jupe(char *jserver, char *who, char *reason);
 
-E void anope_cmd_global_legacy(char *source, char *fmt);
+E void xanadu_cmd_global_legacy(char *source, char *fmt);
 E void wallops(char *source, const char *fmt, ...);
 
-E int anope_valid_nick(char *nick);
-E int anope_valid_chan(char *chan);
+E int xanadu_valid_nick(char *nick);
+E int xanadu_valid_chan(char *chan);
 
 E char *common_get_vident(User *u);
 E char *common_get_vhost(User *u);

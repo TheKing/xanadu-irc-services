@@ -141,7 +141,7 @@ int do_forceid(User *u)
 					} else {
 						notice(s_HostServ, u2->nick, "Your vHost of \2%s\2 is now activated.", vHost);
 					}
-					anope_cmd_vhost_on(nick, vIdent, vHost);
+					xanadu_cmd_vhost_on(nick, vIdent, vHost);
 				}
 			}
 		}

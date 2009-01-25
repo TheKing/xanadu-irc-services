@@ -655,7 +655,7 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
             /* Resets the svid because it doesn't match */
             user->svid = 1;
 
-            anope_cmd_svid_umode(user->nick, user->timestamp);
+            xanadu_cmd_svid_umode(user->nick, user->timestamp);
 
         } else {
             user->svid = 1;
@@ -721,7 +721,7 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
             if (!nc_changed && (user->na))
                 user->na->status |= status;
             else {
-                anope_cmd_nc_change(user);
+                xanadu_cmd_nc_change(user);
             }
         }
 
@@ -757,7 +757,7 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
 
             snprintf(tsbuf, sizeof(tsbuf), "%lu",
                      (unsigned long int) user->timestamp);
-            anope_cmd_svid_umode2(user, tsbuf);
+            xanadu_cmd_svid_umode2(user, tsbuf);
 
             alog("\002%s\002: %s!%s@%s automatically identified for nick %s",
                  s_NickServ, user->nick, user->username,
@@ -771,7 +771,7 @@ User *do_nick(const char *source, char *nick, char *username, char *host,
             char tsbuf[16];
             snprintf(tsbuf, sizeof(tsbuf), "%lu",
                      (unsigned long int) user->timestamp);
-            anope_cmd_svid_umode3(user, tsbuf);
+            xanadu_cmd_svid_umode3(user, tsbuf);
         }
     }
 
@@ -796,7 +796,7 @@ void do_umode(const char *source, int ac, char **av)
         return;
     }
 
-    anope_set_umode(user, ac - 1, &av[1]);
+    xanadu_set_umode(user, ac - 1, &av[1]);
 }
 
 /* Handle a UMODE2 command for a user.
@@ -814,7 +814,7 @@ void do_umode2(const char *source, int ac, char **av)
         return;
     }
 
-    anope_set_umode(user, ac, &av[0]);
+    xanadu_set_umode(user, ac, &av[0]);
 }
 
 /*************************************************************************/
@@ -909,7 +909,7 @@ int is_protected(User * user)
 int is_oper(User * user)
 {
     if (user) {
-        return (user->mode & anope_get_oper_mode());
+        return (user->mode & xanadu_get_oper_mode());
     } else {
         return 0;
     }

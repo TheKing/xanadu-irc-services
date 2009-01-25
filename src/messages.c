@@ -77,7 +77,7 @@ int m_time(char *source, int ac, char **av)
     time(&t);
     tm = localtime(&t);
     strftime(buf, sizeof(buf), "%a %b %d %H:%M:%S %Y %Z", tm);
-    anope_cmd_391(source, buf);
+    xanadu_cmd_391(source, buf);
     return MOD_CONT;
 }
 
@@ -94,15 +94,15 @@ int m_motd(char *source)
 
     f = fopen(MOTDFilename, "r");
     if (f) {
-        anope_cmd_375(source);
+        xanadu_cmd_375(source);
         while (fgets(buf, sizeof(buf), f)) {
             buf[strlen(buf) - 1] = 0;
-            anope_cmd_372(source, buf);
+            xanadu_cmd_372(source, buf);
         }
         fclose(f);
-        anope_cmd_376(source);
+        xanadu_cmd_376(source);
     } else {
-        anope_cmd_372_error(source);
+        xanadu_cmd_372_error(source);
     }
     return MOD_CONT;
 }
@@ -126,7 +126,7 @@ int m_privmsg(char *source, char *receiver, char *msg)
 
     if (!u) {
         alog("%s: user record for %s not found", msg, source);
-        anope_cmd_notice(receiver, source,
+        xanadu_cmd_notice(receiver, source,
                          getstring(NULL, USER_RECORD_NOT_FOUND));
         return MOD_CONT;
     }
@@ -172,7 +172,7 @@ int m_privmsg(char *source, char *receiver, char *msg)
             if (!is_oper(u) && OSOpersOnly) {
                 notice_lang(s_OperServ, u, ACCESS_DENIED);
                 if (WallBadOS)
-                    anope_cmd_global(s_OperServ,
+                    xanadu_cmd_global(s_OperServ,
                                      "Denied access to %s from %s!%s@%s (non-oper)",
                                      s_OperServ, u->nick, u->username,
                                      u->host);
@@ -243,71 +243,71 @@ int m_stats(char *source, int ac, char **av)
         if (u && is_oper(u)) {
 
             if (servernum == 1) {
-                anope_cmd_211
+                xanadu_cmd_211
                     ("%s Server SendBuf SentBytes SentMsgs RecvBuf "
                      "RecvBytes RecvMsgs ConnTime", source);
-                anope_cmd_211("%s %s %d %d %d %d %d %d %ld", source,
+                xanadu_cmd_211("%s %s %d %d %d %d %d %d %ld", source,
                               RemoteServer, write_buffer_len(),
                               total_written, -1, read_buffer_len(),
                               total_read, -1, time(NULL) - start_time);
             } else if (servernum == 2) {
-                anope_cmd_211
+                xanadu_cmd_211
                     ("%s Server SendBuf SentBytes SentMsgs RecvBuf "
                      "RecvBytes RecvMsgs ConnTime", source);
-                anope_cmd_211("%s %s %d %d %d %d %d %d %ld", source,
+                xanadu_cmd_211("%s %s %d %d %d %d %d %d %ld", source,
                               RemoteServer2, write_buffer_len(),
                               total_written, -1, read_buffer_len(),
                               total_read, -1, time(NULL) - start_time);
             } else if (servernum == 3) {
-                anope_cmd_211
+                xanadu_cmd_211
                     ("%s Server SendBuf SentBytes SentMsgs RecvBuf "
                      "RecvBytes RecvMsgs ConnTime", source);
-                anope_cmd_211("%s %s %d %d %d %d %d %d %ld", source,
+                xanadu_cmd_211("%s %s %d %d %d %d %d %d %ld", source,
                               RemoteServer3, write_buffer_len(),
                               total_written, -1, read_buffer_len(),
                               total_read, -1, time(NULL) - start_time);
             }
         }
 
-        anope_cmd_219(source, av[0]);
+        xanadu_cmd_219(source, av[0]);
         break;
     case 'o':
     case 'O':
 /* Check whether the user is an operator */
         u = finduser(source);
         if (u && !is_oper(u) && HideStatsO) {
-            anope_cmd_219(source, av[0]);
+            xanadu_cmd_219(source, av[0]);
         } else {
             for (i = 0; i < RootNumber; i++)
-                anope_cmd_243("%s O * * %s Root 0", source,
+                xanadu_cmd_243("%s O * * %s Root 0", source,
                               ServicesRoots[i]);
             for (i = 0; i < servadmins.count && (nc = servadmins.list[i]);
                  i++)
-                anope_cmd_243("%s O * * %s Admin 0", source, nc->display);
+                xanadu_cmd_243("%s O * * %s Admin 0", source, nc->display);
             for (i = 0; i < servopers.count && (nc = servopers.list[i]);
                  i++)
-                anope_cmd_243("%s O * * %s Oper 0", source, nc->display);
+                xanadu_cmd_243("%s O * * %s Oper 0", source, nc->display);
 
-            anope_cmd_219(source, av[0]);
+            xanadu_cmd_219(source, av[0]);
         }
 
         break;
 
     case 'u':{
             int uptime = time(NULL) - start_time;
-            anope_cmd_242("%s :Services up %d day%s, %02d:%02d:%02d",
+            xanadu_cmd_242("%s :Services up %d day%s, %02d:%02d:%02d",
                           source, uptime / 86400,
                           (uptime / 86400 == 1) ? "" : "s",
                           (uptime / 3600) % 24, (uptime / 60) % 60,
                           uptime % 60);
-            anope_cmd_250("%s :Current users: %d (%d ops); maximum %d",
+            xanadu_cmd_250("%s :Current users: %d (%d ops); maximum %d",
                           source, usercnt, opcnt, maxusercnt);
-            anope_cmd_219(source, av[0]);
+            xanadu_cmd_219(source, av[0]);
             break;
         }                       /* case 'u' */
 
     default:
-        anope_cmd_219(source, av[0]);
+        xanadu_cmd_219(source, av[0]);
         break;
     }
     return MOD_CONT;
@@ -318,7 +318,7 @@ int m_stats(char *source, int ac, char **av)
 int m_version(char *source, int ac, char **av)
 {
     if (source) {
-        anope_cmd_351(source);
+        xanadu_cmd_351(source);
     }
     return MOD_CONT;
 }
@@ -353,15 +353,15 @@ int m_whois(char *source, char *who)
             clientdesc = desc_DevNull;
         else if (s_BotServ && (bi = findbot(who))) {
             /* Bots are handled separately */
-            anope_cmd_311("%s %s %s %s * :%s", source, bi->nick,
+            xanadu_cmd_311("%s %s %s %s * :%s", source, bi->nick,
                           bi->user, bi->host, bi->real);
-            anope_cmd_307("%s %s :is a registered nick", source, bi->nick);
-            anope_cmd_312("%s %s %s :%s", source, bi->nick, ServerName,
+            xanadu_cmd_307("%s %s :is a registered nick", source, bi->nick);
+            xanadu_cmd_312("%s %s %s :%s", source, bi->nick, ServerName,
                           ServerDesc);
-            anope_cmd_317("%s %s %ld %ld :seconds idle, signon time",
+            xanadu_cmd_317("%s %s %ld %ld :seconds idle, signon time",
                           source, bi->nick, time(NULL) - bi->lastmsg,
                           start_time);
-            anope_cmd_318(source, bi->nick);
+            xanadu_cmd_318(source, bi->nick);
             return MOD_CONT;
         } else if (!(ircd->svshold && UseSVSHOLD) && (na = findnick(who))
                    && (na->status & NS_KILL_HELD)) {
@@ -369,28 +369,28 @@ int m_whois(char *source, char *who)
              * We can't just say it doesn't exist here, even tho it does for
              * other servers :) -GD
              */
-            anope_cmd_311("%s %s %s %s * :Services Enforcer", source,
+            xanadu_cmd_311("%s %s %s %s * :Services Enforcer", source,
                           na->nick, NSEnforcerUser, NSEnforcerHost);
-            anope_cmd_312("%s %s %s :%s", source, na->nick, ServerName,
+            xanadu_cmd_312("%s %s %s :%s", source, na->nick, ServerName,
                           ServerDesc);
-            anope_cmd_318(source, na->nick);
+            xanadu_cmd_318(source, na->nick);
             return MOD_CONT;
         } else {
-            anope_cmd_401(source, who);
+            xanadu_cmd_401(source, who);
             return MOD_CONT;
         }
-        anope_cmd_311("%s %s %s %s * :%s", source, who,
+        xanadu_cmd_311("%s %s %s %s * :%s", source, who,
                       ServiceUser, ServiceHost, clientdesc);
-        anope_cmd_312("%s %s %s :%s", source, who, ServerName, ServerDesc);
-        anope_cmd_317("%s %s %ld %ld :seconds idle, signon time", source,
+        xanadu_cmd_312("%s %s %s :%s", source, who, ServerName, ServerDesc);
+        xanadu_cmd_317("%s %s %ld %ld :seconds idle, signon time", source,
                       who, time(NULL) - start_time, start_time);
-        anope_cmd_318(source, who);
+        xanadu_cmd_318(source, who);
     }
     return MOD_CONT;
 }
 
 /* NULL route messages */
-int anope_event_null(char *source, int ac, char **av)
+int xanadu_event_null(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }

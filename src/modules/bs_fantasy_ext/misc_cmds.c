@@ -51,7 +51,7 @@ int set_topic(User * u, Channel *c, char *topic) {
 			alog("%s: %s!%s@%s changed topic of %s as services admin.",
 				ci->bi->nick, u->nick, u->username, u->host, c->name);
 
-		anope_cmd_topic(ci->bi->nick, c->name, u->nick, topic ? topic : "", c->topic_time);
+		xanadu_cmd_topic(ci->bi->nick, c->name, u->nick, topic ? topic : "", c->topic_time);
 	}
 	return MOD_CONT;
 }
@@ -102,7 +102,7 @@ int append_to_topic(User * u, Channel *c, char *newtopic) {
 			c->topic_time = ci->last_topic_time;
 		}
 
-		anope_cmd_topic(ci->bi->nick, c->name, u->nick, topic, c->topic_time);
+		xanadu_cmd_topic(ci->bi->nick, c->name, u->nick, topic, c->topic_time);
     }
 	return MOD_CONT;
 }
@@ -123,7 +123,7 @@ int do_invite(User * u, Channel *c, char *nick) {
 			if ((u2 = finduser(nick))) {
 				if (stricmp(u2->nick, u->nick) != 0) {
 					if (!is_on_chan(c, u2)) {
-						anope_cmd_invite(ci->bi->nick, ci->name, u2->nick);
+						xanadu_cmd_invite(ci->bi->nick, ci->name, u2->nick);
 						notice(ci->bi->nick, ci->name, "%s was invited to the channel.", u2->nick);
 					} else
 						moduleNoticeLang(ci->bi->nick, u, LANG_INVITE_IS_ON);
@@ -228,7 +228,7 @@ int do_core_kickban(User * u, Channel *c, char *target, char *reason) {
 				av[0] = sstrdup("+b");
 				av[1] = sstrdup(target);
 
-				anope_cmd_mode(ci->bi->nick, c->name, "+b %s", av[1]);
+				xanadu_cmd_mode(ci->bi->nick, c->name, "+b %s", av[1]);
 				chan_set_modes(ci->bi->nick, c, 2, av, 1);
 
 				if (av[0]) free(av[0]);

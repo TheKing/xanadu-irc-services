@@ -21,24 +21,24 @@
 #define GetHost(x) common_get_vhost(x)
 
 #define NEWNICK(nick,user,host,real,modes,qline) \
-   anope_cmd_bot_nick(nick,user,host,real,modes)
+   xanadu_cmd_bot_nick(nick,user,host,real,modes)
 
 #define s_akill(user, host, who, when, expires, reason) \
-  anope_cmd_akill(user, host, who, when, expires, reason)
+  xanadu_cmd_akill(user, host, who, when, expires, reason)
 
-#define set_umode(user, ac, av) anope_set_umode(user, ac, av)
+#define set_umode(user, ac, av) xanadu_set_umode(user, ac, av)
 
-#define s_svsnoop(server, set) anope_cmd_svsnoop(server, set)
+#define s_svsnoop(server, set) xanadu_cmd_svsnoop(server, set)
 
-#define s_sqline(mask, reason) anope_cmd_sqline(mask, reason)
+#define s_sqline(mask, reason) xanadu_cmd_sqline(mask, reason)
 
-#define s_sgline(mask, reason) anope_cmd_sgline(mask, reason)
-#define s_szline(mask, reason) anope_cmd_szline(mask, reason)
-#define s_unsgline(mask) anope_cmd_unsgline(mask)
-#define s_unsqline(mask) anope_cmd_unsqline(mask)
-#define s_unszline(mask) anope_cmd_unszline(mask)
+#define s_sgline(mask, reason) xanadu_cmd_sgline(mask, reason)
+#define s_szline(mask, reason) xanadu_cmd_szline(mask, reason)
+#define s_unsgline(mask) xanadu_cmd_unsgline(mask)
+#define s_unsqline(mask) xanadu_cmd_unsqline(mask)
+#define s_unszline(mask) xanadu_cmd_unszline(mask)
 
-#define s_rakill(user, host) anope_cmd_remove_akill(user, host)
+#define s_rakill(user, host) xanadu_cmd_remove_akill(user, host)
 
 
 # define NICKSERV_MODE ircd->nickservmode

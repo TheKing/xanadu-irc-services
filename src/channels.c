@@ -49,7 +49,7 @@ void chan_deluser(User * user, Channel * c)
     c->usercount--;
 
     if (s_BotServ && c->ci && c->ci->bi && c->usercount == BSMinUsers - 1) {
-        anope_cmd_part(c->ci->bi->nick, c->name, NULL);
+        xanadu_cmd_part(c->ci->bi->nick, c->name, NULL);
     }
 
     if (!c->users)
@@ -205,7 +205,7 @@ void chan_set_modes(const char *source, Channel * chan, int ac, char **av,
             if ((cum->flags & CUF_PROTECT_BOTSERV) && !add) {
                 if ((bi = findbot(*av))) {
                     if (!botmode || botmode != mode) {
-                        anope_cmd_mode(bi->nick, chan->name, "+%c %s",
+                        xanadu_cmd_mode(bi->nick, chan->name, "+%c %s",
                                        mode, bi->nick);
                         botmode = mode;
                         continue;
@@ -766,7 +766,7 @@ void do_sjoin(const char *source, int ac, char **av)
             }
             if (c->ci && c->ci->bi) {
                 /* This is ugly, but it always works */
-                anope_cmd_part(c->ci->bi->nick, c->name, "TS reop");
+                xanadu_cmd_part(c->ci->bi->nick, c->name, "TS reop");
                 bot_join(c->ci);
             }
             /* XXX simple modes and bans */
@@ -848,7 +848,7 @@ void do_sjoin(const char *source, int ac, char **av)
             }
 
             if (is_sqlined && !is_oper(user)) {
-                anope_cmd_kick(s_OperServ, av[1], s, "Q-Lined");
+                xanadu_cmd_kick(s_OperServ, av[1], s, "Q-Lined");
             } else {
                 if (!check_kick(user, av[1], ts)) {
                     send_event(EVENT_JOIN_CHANNEL, 3, EVENT_START,
@@ -933,7 +933,7 @@ void do_sjoin(const char *source, int ac, char **av)
             }
 
             if (is_sqlined && !is_oper(user)) {
-                anope_cmd_kick(s_OperServ, av[1], s, "Q-Lined");
+                xanadu_cmd_kick(s_OperServ, av[1], s, "Q-Lined");
             } else {
                 if (!check_kick(user, av[1], ts)) {
                     send_event(EVENT_JOIN_CHANNEL, 3, EVENT_START,
@@ -1008,7 +1008,7 @@ void do_sjoin(const char *source, int ac, char **av)
             }
 
             if (is_sqlined && !is_oper(user)) {
-                anope_cmd_kick(s_OperServ, av[1], s, "Q-Lined");
+                xanadu_cmd_kick(s_OperServ, av[1], s, "Q-Lined");
             } else {
                 if (!check_kick(user, av[1], ts)) {
                     send_event(EVENT_JOIN_CHANNEL, 3, EVENT_START,
@@ -1069,7 +1069,7 @@ void do_sjoin(const char *source, int ac, char **av)
         }
 
         if (is_sqlined && !is_oper(user)) {
-            anope_cmd_kick(s_OperServ, av[1], user->nick, "Q-Lined");
+            xanadu_cmd_kick(s_OperServ, av[1], user->nick, "Q-Lined");
         } else {
             send_event(EVENT_JOIN_CHANNEL, 3, EVENT_START, user->nick,
                        av[1]);
@@ -1252,7 +1252,7 @@ void add_ban(Channel * chan, char *mask)
         snprintf(botmask, sizeof(botmask), "%s!%s@%s", bi->nick, bi->user,
                  bi->host);
         if (match_wild_nocase(mask, botmask)) {
-            anope_cmd_mode(bi->nick, chan->name, "-b %s", mask);
+            xanadu_cmd_mode(bi->nick, chan->name, "-b %s", mask);
             return;
         }
     }
@@ -1470,7 +1470,7 @@ void chan_set_correct_modes(User * user, Channel * c, int give_modes)
     if (!add_modes && !rem_modes)
         return;
 
-    anope_cmd_mode(whosends(ci), c->name, "%s%s", modebuf, userbuf);
+    xanadu_cmd_mode(whosends(ci), c->name, "%s%s", modebuf, userbuf);
     if (add_modes > 0)
         chan_set_user_status(c, user, add_modes);
     if (rem_modes > 0)
@@ -1531,7 +1531,7 @@ void chan_adduser2(User * user, Channel * c)
              * recovers from a netsplit. -GD
              */
             if (is_sync(user->server)) {
-                anope_cmd_privmsg(c->ci->bi->nick, c->name, "[%s] %s",
+                xanadu_cmd_privmsg(c->ci->bi->nick, c->name, "[%s] %s",
                                   user->na->nick, user->na->nc->greet);
                 c->ci->bi->lastmsg = time(NULL);
             }
@@ -1880,7 +1880,7 @@ void do_mass_mode(char *modes)
                 free(myModes);
                 return;
             } else {
-                anope_cmd_mode(s_OperServ, c->name, "%s", modes);
+                xanadu_cmd_mode(s_OperServ, c->name, "%s", modes);
                 chan_set_modes(s_OperServ, c, ac, av, 1);
             }
         }

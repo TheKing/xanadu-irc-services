@@ -113,14 +113,14 @@ int do_mode(User * u, Channel *c, char *modes) {
 		notice_lang(ci->bi->nick, u, PERMISSION_DENIED);
 		return MOD_CONT;
 	} else {
-		anope_cmd_mode(s_OperServ, c->name, "%s", modes);
+		xanadu_cmd_mode(s_OperServ, c->name, "%s", modes);
 
 		ac = split_buf(modes, &av, 1);
 		chan_set_modes(s_OperServ, c, ac, av, -1);
 		free(av);
 
 		if (WallOSMode)
-			anope_cmd_global(ci->bi->nick, "%s used !MODE %s on %s", u->nick, modes, c->name);
+			xanadu_cmd_global(ci->bi->nick, "%s used !MODE %s on %s", u->nick, modes, c->name);
 
 		alog("[bs_fantasy_ext] %s used !MODE to set %s on channel %s", u->nick, modes, c->name);
 	}

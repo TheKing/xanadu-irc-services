@@ -101,7 +101,7 @@ int do_operumodes(User * u)
     if (!(u2 = finduser(nick))) {
         notice_lang(s_OperServ, u, NICK_X_NOT_IN_USE, nick);
     } else {
-        anope_cmd_mode(s_OperServ, nick, "%s", modes);
+        xanadu_cmd_mode(s_OperServ, nick, "%s", modes);
 
         common_svsmode(u2, modes, NULL);
 
@@ -109,7 +109,7 @@ int do_operumodes(User * u)
         notice_lang(s_OperServ, u2, OPER_UMODE_CHANGED, u->nick);
 
         if (WallOSMode)
-            anope_cmd_global(s_OperServ, "\2%s\2 used UMODE on %s",
+            xanadu_cmd_global(s_OperServ, "\2%s\2 used UMODE on %s",
                              u->nick, nick);
     }
     return MOD_CONT;

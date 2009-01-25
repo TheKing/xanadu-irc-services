@@ -65,7 +65,7 @@ void kill_user(char *source, char *user, char *reason)
 
     snprintf(buf, sizeof(buf), "%s (%s)", source, reason);
 
-    anope_cmd_svskill(source, user, buf);
+    xanadu_cmd_svskill(source, user, buf);
 
     if (!ircd->quitonkill && finduser(user)) {
         do_kill(user, buf);
@@ -89,7 +89,7 @@ void sqline(char *mask, char *reason)
 
     if (ircd->chansqline) {
         if (*mask == '#') {
-            anope_cmd_sqline(mask, reason);
+            xanadu_cmd_sqline(mask, reason);
 
             for (i = 0; i < 1024; i++) {
                 for (c = chanlist[i]; c; c = next) {
@@ -106,17 +106,17 @@ void sqline(char *mask, char *reason)
                         av[0] = c->name;
                         av[1] = cu->user->nick;
                         av[2] = reason;
-                        anope_cmd_kick(s_OperServ, av[0], av[1],
+                        xanadu_cmd_kick(s_OperServ, av[0], av[1],
                                        "Q-Lined: %s", av[2]);
                         do_kick(s_ChanServ, 3, av);
                     }
                 }
             }
         } else {
-            anope_cmd_sqline(mask, reason);
+            xanadu_cmd_sqline(mask, reason);
         }
     } else {
-        anope_cmd_sqline(mask, reason);
+        xanadu_cmd_sqline(mask, reason);
     }
 }
 
@@ -156,7 +156,7 @@ void common_unban(ChannelInfo * ci, char *nick)
     }
 
     if (ircd->svsmode_unban) {
-        anope_cmd_unban(ci->name, nick);
+        xanadu_cmd_unban(ci->name, nick);
     } else {
         av[0] = ci->name;
         av[1] = sstrdup("-b");
@@ -165,7 +165,7 @@ void common_unban(ChannelInfo * ci, char *nick)
         memcpy(bans, ci->c->bans, sizeof(char *) * count);
         for (i = 0; i < count; i++) {
             if (match_usermask(bans[i], u)) {
-                anope_cmd_mode(whosends(ci), ci->name, "-b %s", bans[i]);
+                xanadu_cmd_mode(whosends(ci), ci->name, "-b %s", bans[i]);
                 av[2] = bans[i];
                 do_cmode(whosends(ci), 3, av);
                 matchfound++;
@@ -180,7 +180,7 @@ void common_unban(ChannelInfo * ci, char *nick)
                  */
                 if (!matchfound) {
                     if (match_userip(bans[i], u, host)) {
-                        anope_cmd_mode(whosends(ci), ci->name, "-b %s",
+                        xanadu_cmd_mode(whosends(ci), ci->name, "-b %s",
                                        bans[i]);
                         av[2] = bans[i];
                         do_cmode(whosends(ci), 3, av);
@@ -218,8 +218,8 @@ void common_svsmode(User * u, char *modes, char *arg)
         ac++;
     }
 
-    anope_cmd_svsmode(u, ac, av);
-    anope_set_umode(u, ac, av);
+    xanadu_cmd_svsmode(u, ac, av);
+    xanadu_set_umode(u, ac, av);
 }
 
 /*************************************************************************/

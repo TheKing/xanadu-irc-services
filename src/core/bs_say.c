@@ -84,10 +84,10 @@ int do_say(User * u)
         notice_lang(s_BotServ, u, ACCESS_DENIED);
     else {
         if (text[0] != '\001') {
-            anope_cmd_privmsg(ci->bi->nick, ci->name, "%s", text);
+            xanadu_cmd_privmsg(ci->bi->nick, ci->name, "%s", text);
             ci->bi->lastmsg = time(NULL);
             if (logchan && LogBot)
-                anope_cmd_privmsg(ci->bi->nick, LogChannel,
+                xanadu_cmd_privmsg(ci->bi->nick, LogChannel,
                                   "SAY %s %s %s", u->nick, ci->name, text);
         } else {
             syntax_error(s_BotServ, u, "SAY", BOT_SAY_SYNTAX);

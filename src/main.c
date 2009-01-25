@@ -189,41 +189,41 @@ void save_databases(void)
              * exists we're safe. -GD
              */
             if (serv_uplink)
-                anope_cmd_pong(ServerName, ServerName);
+                xanadu_cmd_pong(ServerName, ServerName);
             waiting = -12;
             save_cs_rdb_dbase();
             if (serv_uplink)
-                anope_cmd_pong(ServerName, ServerName);
+                xanadu_cmd_pong(ServerName, ServerName);
             if (PreNickDBName) {
                 save_ns_req_rdb_dbase();
                 if (serv_uplink)
-                    anope_cmd_pong(ServerName, ServerName);
+                    xanadu_cmd_pong(ServerName, ServerName);
                 waiting = -13;
             }
             if (s_BotServ) {
                 waiting = -14;
                 save_bs_rdb_dbase();
                 if (serv_uplink)
-                    anope_cmd_pong(ServerName, ServerName);
+                    xanadu_cmd_pong(ServerName, ServerName);
             }
             if (s_HostServ) {
                 waiting = -15;
                 save_hs_rdb_dbase();
                 if (serv_uplink)
-                    anope_cmd_pong(ServerName, ServerName);
+                    xanadu_cmd_pong(ServerName, ServerName);
             }
             waiting = -16;
             save_os_rdb_dbase();
             if (serv_uplink)
-                anope_cmd_pong(ServerName, ServerName);
+                xanadu_cmd_pong(ServerName, ServerName);
             waiting = -17;
             save_rdb_news();
             if (serv_uplink)
-                anope_cmd_pong(ServerName, ServerName);
+                xanadu_cmd_pong(ServerName, ServerName);
             waiting = -18;
             save_rdb_exceptions();
             if (serv_uplink)
-                anope_cmd_pong(ServerName, ServerName);
+                xanadu_cmd_pong(ServerName, ServerName);
 
         }
     }
@@ -242,7 +242,7 @@ static void services_restart(void)
     send_event(EVENT_RESTART, 1, EVENT_START);
     if (!quitmsg)
         quitmsg = "Restarting";
-    anope_cmd_squit(ServerName, quitmsg);
+    xanadu_cmd_squit(ServerName, quitmsg);
     disconn(servsock);
     close_log();
     /* First don't unload protocol module, then do so */
@@ -291,7 +291,7 @@ static void services_shutdown(void)
         quitmsg = "Terminating, reason unknown";
     alog("%s", quitmsg);
     if (started) {
-        anope_cmd_squit(ServerName, quitmsg);
+        xanadu_cmd_squit(ServerName, quitmsg);
         Anope_Free(uplink);
         Anope_Free(mod_current_buffer);
         if (ircd->chanmodes) {
@@ -619,7 +619,7 @@ int main(int ac, char **av, char **envp)
 
         if (!readonly && (save_data || t - last_update >= UpdateTimeout)) {
             if (delayed_quit)
-                anope_cmd_global(NULL,
+                xanadu_cmd_global(NULL,
                                  "Updating databases on shutdown, please wait.");
 
             save_databases();
@@ -680,7 +680,7 @@ int main(int ac, char **av, char **envp)
         alog("Restarting");
         if (!quitmsg)
             quitmsg = "Restarting";
-        anope_cmd_squit(ServerName, quitmsg);
+        xanadu_cmd_squit(ServerName, quitmsg);
         disconn(servsock);
         close_log();
 #ifdef _WIN32

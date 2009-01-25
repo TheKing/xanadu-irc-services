@@ -203,7 +203,7 @@ void load_news()
 	restore_db(f);						\
 	log_perror("Write error on %s", NewsDBName);		\
 	if (time(NULL) - lastwarn > WarningTimeout) {		\
-	    anope_cmd_global(NULL, "Write error on %s: %s", NewsDBName,	\
+	    xanadu_cmd_global(NULL, "Write error on %s: %s", NewsDBName,	\
 			strerror(errno));			\
 	    lastwarn = time(NULL);				\
 	}							\
@@ -241,8 +241,8 @@ void save_rdb_news()
     if (!rdb_open())
         return;
 
-    if (rdb_tag_table("anope_os_news") == 0) {
-        alog("Unable to tag table 'anope_os_news' - News RDB save failed.");
+    if (rdb_tag_table("xanadu_os_news") == 0) {
+        alog("Unable to tag table 'xanadu_os_news' - News RDB save failed.");
         return;
     }
 	
@@ -254,8 +254,8 @@ void save_rdb_news()
         }
     }
 	
-    if (rdb_clean_table("anope_os_news") == 0) {
-        alog("Unable to clean table 'anope_os_news' - News RDB save failed.");
+    if (rdb_clean_table("xanadu_os_news") == 0) {
+        alog("Unable to clean table 'xanadu_os_news' - News RDB save failed.");
         return;
     }
 	

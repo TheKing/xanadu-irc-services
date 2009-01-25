@@ -92,7 +92,7 @@ void botserv(User * u, char *buf)
         if (!(s = strtok(NULL, ""))) {
             s = "";
         }
-        anope_cmd_ctcp(s_BotServ, u->nick, "PING %s", s);
+        xanadu_cmd_ctcp(s_BotServ, u->nick, "PING %s", s);
     } else if (skeleton) {
         notice_lang(s_BotServ, u, SERVICE_OFFLINE, s_BotServ);
     } else {
@@ -117,7 +117,7 @@ void botmsgs(User * u, BotInfo * bi, char *buf)
         if (!(s = strtok(NULL, ""))) {
             s = "";
         }
-        anope_cmd_ctcp(bi->nick, u->nick, "PING %s", s);
+        xanadu_cmd_ctcp(bi->nick, u->nick, "PING %s", s);
     }
 }
 
@@ -141,7 +141,7 @@ void botchanmsgs(User * u, ChannelInfo * ci, char *buf)
 
     /* Answer to ping if needed, without breaking the buffer. */
     if (!strnicmp(buf, "\1PING", 5)) {
-        anope_cmd_ctcp(ci->bi->nick, u->nick, "PING %s", buf);
+        xanadu_cmd_ctcp(ci->bi->nick, u->nick, "PING %s", buf);
     }
 
     /* If it's a /me, cut the CTCP part at the beginning (not
@@ -487,7 +487,7 @@ void load_bs_dbase(void)
 	restore_db(f);						\
 	log_perror("Write error on %s", BotDBName);		\
 	if (time(NULL) - lastwarn > WarningTimeout) {		\
-	    anope_cmd_global(NULL, "Write error on %s: %s", BotDBName,	\
+	    xanadu_cmd_global(NULL, "Write error on %s: %s", BotDBName,	\
 			strerror(errno));			\
 	    lastwarn = time(NULL);				\
 	}							\
@@ -536,8 +536,8 @@ void save_bs_rdb_dbase(void)
     if (!rdb_open())
         return;
 
-    if (rdb_tag_table("anope_bs_core") == 0) {
-        alog("Unable to tag table 'anope_bs_core' - BotServ RDB save failed.");
+    if (rdb_tag_table("xanadu_bs_core") == 0) {
+        alog("Unable to tag table 'xanadu_bs_core' - BotServ RDB save failed.");
         return;
     }
 
@@ -550,8 +550,8 @@ void save_bs_rdb_dbase(void)
         }
     }
 
-    if (rdb_clean_table("anope_bs_core") == 0) {
-        alog("Unable to clean table 'anope_bs_core' - BotServ RDB save failed.");
+    if (rdb_clean_table("xanadu_bs_core") == 0) {
+        alog("Unable to clean table 'xanadu_bs_core' - BotServ RDB save failed.");
         return;
     }
 
@@ -646,7 +646,7 @@ void unassign(User * u, ChannelInfo * ci)
     send_event(EVENT_BOT_UNASSIGN, 2, ci->name, ci->bi->nick);
 
     if (ci->c && ci->c->usercount >= BSMinUsers) {
-        anope_cmd_part(ci->bi->nick, ci->name, "UNASSIGN from %s",
+        xanadu_cmd_part(ci->bi->nick, ci->name, "UNASSIGN from %s",
                        u->nick);
     }
     ci->bi->chancount--;
@@ -772,7 +772,7 @@ void bot_join(ChannelInfo * ci)
             av[1] = sstrdup("-b");
             for (i = 0; i < count; i++) {
                 if (match_wild_nocase(ci->c->bans[i], botmask)) {
-                    anope_cmd_mode(ci->bi->nick, ci->name, "-b %s",
+                    xanadu_cmd_mode(ci->bi->nick, ci->name, "-b %s",
                                    bans[i]);
                     av[2] = sstrdup(bans[i]);
                     do_cmode(ci->bi->nick, 3, av);
@@ -784,14 +784,14 @@ void bot_join(ChannelInfo * ci)
         }
 
         /* Should we be invited? */
-        if ((ci->c->mode & anope_get_invite_mode())
+        if ((ci->c->mode & xanadu_get_invite_mode())
             || (ci->c->limit && ci->c->usercount >= ci->c->limit))
-            anope_cmd_notice_ops(NULL, ci->c->name,
+            xanadu_cmd_notice_ops(NULL, ci->c->name,
                                  "%s invited %s into the channel.",
                                  ci->bi->nick, ci->bi->nick);
     }
-    anope_cmd_join(ci->bi->nick, ci->c->name, ci->c->creation_time);
-    anope_cmd_bot_chan_mode(ci->bi->nick, ci->c->name);
+    xanadu_cmd_join(ci->bi->nick, ci->c->name, ci->c->creation_time);
+    xanadu_cmd_bot_chan_mode(ci->bi->nick, ci->c->name);
     send_event(EVENT_BOT_JOIN, 2, ci->name, ci->bi->nick);
 }
 
@@ -835,7 +835,7 @@ static void check_ban(ChannelInfo * ci, User * u, int ttbtype)
         av[1] = sstrdup("+b");
         get_idealban(ci, u, mask, sizeof(mask));
         av[2] = mask;
-        anope_cmd_mode(ci->bi->nick, av[0], "+b %s", av[2]);
+        xanadu_cmd_mode(ci->bi->nick, av[0], "+b %s", av[2]);
         do_cmode(ci->bi->nick, 3, av);
         send_event(EVENT_BOT_BAN, 3, u->nick, ci->name, mask);
         free(av[1]);
@@ -866,7 +866,7 @@ static void bot_kick(ChannelInfo * ci, User * u, int message, ...)
     av[0] = ci->name;
     av[1] = u->nick;
     av[2] = buf;
-    anope_cmd_kick(ci->bi->nick, av[0], av[1], "%s", av[2]);
+    xanadu_cmd_kick(ci->bi->nick, av[0], av[1], "%s", av[2]);
     do_kick(ci->bi->nick, 3, av);
     send_event(EVENT_BOT_KICK, 3, u->nick, ci->name, buf);
 }
@@ -889,7 +889,7 @@ void bot_raw_ban(User * requester, ChannelInfo * ci, char *nick,
 
     if (ircd->protectedumode) {
         if (is_protected(u) && (requester != u)) {
-            anope_cmd_privmsg(ci->bi->nick, ci->name, "%s",
+            xanadu_cmd_privmsg(ci->bi->nick, ci->name, "%s",
                               getstring2(NULL, PERMISSION_DENIED));
             return;
         }
@@ -901,7 +901,7 @@ void bot_raw_ban(User * requester, ChannelInfo * ci, char *nick,
 
     if (ircd->except) {
         if (is_excepted(ci, u) == 1) {
-            anope_cmd_privmsg(ci->bi->nick, ci->name, "%s",
+            xanadu_cmd_privmsg(ci->bi->nick, ci->name, "%s",
                               getstring2(NULL, BOT_EXCEPT));
             return;
         }
@@ -923,7 +923,7 @@ void bot_raw_ban(User * requester, ChannelInfo * ci, char *nick,
         ac = 3;
     }
 
-    anope_cmd_mode(ci->bi->nick, ci->name, "+b %s", mask);
+    xanadu_cmd_mode(ci->bi->nick, ci->name, "+b %s", mask);
     do_cmode(ci->bi->nick, ac, av);
 
     /* We need to free our sstrdup'd "+b" -GD */
@@ -947,10 +947,10 @@ void bot_raw_ban(User * requester, ChannelInfo * ci, char *nick,
     if ((ci->flags & CI_SIGNKICK)
         || ((ci->flags & CI_SIGNKICK_LEVEL)
             && !check_access(requester, ci, CA_SIGNKICK)))
-        anope_cmd_kick(ci->bi->nick, av[0], av[1], "%s (%s)", av[2],
+        xanadu_cmd_kick(ci->bi->nick, av[0], av[1], "%s (%s)", av[2],
                        requester->nick);
     else
-        anope_cmd_kick(ci->bi->nick, av[0], av[1], "%s", av[2]);
+        xanadu_cmd_kick(ci->bi->nick, av[0], av[1], "%s", av[2]);
 
     do_kick(ci->bi->nick, 3, av);
 }
@@ -970,7 +970,7 @@ void bot_raw_kick(User * requester, ChannelInfo * ci, char *nick,
 
     if (ircd->protectedumode) {
         if (is_protected(u) && (requester != u)) {
-            anope_cmd_privmsg(ci->bi->nick, ci->name, "%s",
+            xanadu_cmd_privmsg(ci->bi->nick, ci->name, "%s",
                               getstring2(NULL, PERMISSION_DENIED));
             return;
         }
@@ -994,10 +994,10 @@ void bot_raw_kick(User * requester, ChannelInfo * ci, char *nick,
     if ((ci->flags & CI_SIGNKICK)
         || ((ci->flags & CI_SIGNKICK_LEVEL)
             && !check_access(requester, ci, CA_SIGNKICK)))
-        anope_cmd_kick(ci->bi->nick, av[0], av[1], "%s (%s)", av[2],
+        xanadu_cmd_kick(ci->bi->nick, av[0], av[1], "%s (%s)", av[2],
                        requester->nick);
     else
-        anope_cmd_kick(ci->bi->nick, av[0], av[1], "%s", av[2]);
+        xanadu_cmd_kick(ci->bi->nick, av[0], av[1], "%s", av[2]);
     do_kick(ci->bi->nick, 3, av);
 }
 
@@ -1023,7 +1023,7 @@ void bot_raw_mode(User * requester, ChannelInfo * ci, char *mode,
 
     if (ircd->protectedumode) {
         if (is_protected(u) && *mode == '-' && (requester != u)) {
-            anope_cmd_privmsg(ci->bi->nick, ci->name, "%s",
+            xanadu_cmd_privmsg(ci->bi->nick, ci->name, "%s",
                               getstring2(NULL, PERMISSION_DENIED));
             return;
         }
@@ -1040,13 +1040,13 @@ void bot_raw_mode(User * requester, ChannelInfo * ci, char *mode,
         av[2] = mode;
         av[3] = nick;
         ac = 4;
-        anope_cmd_mode(ci->bi->nick, av[0], "%s %s", av[2], av[3]);
+        xanadu_cmd_mode(ci->bi->nick, av[0], "%s %s", av[2], av[3]);
     } else {
         av[0] = ci->name;
         av[1] = mode;
         av[2] = nick;
         ac = 3;
-        anope_cmd_mode(ci->bi->nick, av[0], "%s %s", av[1], av[2]);
+        xanadu_cmd_mode(ci->bi->nick, av[0], "%s %s", av[1], av[2]);
     }
 
     do_cmode(ci->bi->nick, ac, av);

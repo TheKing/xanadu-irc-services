@@ -255,7 +255,7 @@ void process()
        that if the ac is greater then 1 copy av[1] else copy av[0] 
        I also changed from if statments, cause attempting to access a array member
        that is not set can lead to odd things - TSL (3/12/06) */
-    if (!anope_set_mod_current_buffer(ac, av)) {
+    if (!xanadu_set_mod_current_buffer(ac, av)) {
         if (ac >= 1) {
             if (nickIsServices(av[0], 1)) {
                 mod_current_buffer =

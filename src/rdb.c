@@ -182,62 +182,62 @@ int rdb_ns_set_display(char *newnick, char *oldnick)
     /* Change the display on NS_CORE */
     ret =
         db_mysql_try
-        ("UPDATE anope_ns_core SET display = '%s' WHERE display = '%s'",
+        ("UPDATE xanadu_ns_core SET display = '%s' WHERE display = '%s'",
          q_newnick, q_oldnick);
 
     /* Change the display on NS_ALIAS for all grouped nicks */
     if (ret)
         ret =
             db_mysql_try
-            ("UPDATE anope_ns_alias SET display='%s' WHERE display='%s'",
+            ("UPDATE xanadu_ns_alias SET display='%s' WHERE display='%s'",
              q_newnick, q_oldnick);
 
     /* Change the display on ChanServ ACCESS list */
     if (ret)
         ret =
             db_mysql_try
-            ("UPDATE anope_cs_access SET display='%s' WHERE display='%s'",
+            ("UPDATE xanadu_cs_access SET display='%s' WHERE display='%s'",
              q_newnick, q_oldnick);
 
     /* Change the display on ChanServ AKICK list */
     if (ret)
         ret =
             db_mysql_try
-            ("UPDATE anope_cs_akicks SET creator='%s' WHERE creator='%s'",
+            ("UPDATE xanadu_cs_akicks SET creator='%s' WHERE creator='%s'",
              q_newnick, q_oldnick);
 
     /* Change the display on MemoServ sent memos -- is it required? */
     if (ret)
         ret =
             db_mysql_try
-            ("UPDATE anope_ms_info SET sender='%s' WHERE sender='%s'",
+            ("UPDATE xanadu_ms_info SET sender='%s' WHERE sender='%s'",
              q_newnick, q_oldnick);
 
     /* Change the display on MemoServ received memos -- is it required? */
     if (ret)
         ret =
             db_mysql_try
-            ("UPDATE anope_ms_info SET receiver='%s' WHERE receiver='%s'",
+            ("UPDATE xanadu_ms_info SET receiver='%s' WHERE receiver='%s'",
              q_newnick, q_oldnick);
 
     /* Change the akills set on the person's nick */
     if (ret)
         ret =
             db_mysql_try
-            ("UPDATE anope_cs_akicks SET dmask='%s' WHERE dmask='%s' AND flags & %d",
+            ("UPDATE xanadu_cs_akicks SET dmask='%s' WHERE dmask='%s' AND flags & %d",
              q_newnick, q_oldnick, AK_ISNICK);
 
     /* Change the display on NickServ ACCESS list */
     if (ret)
         ret =
             db_mysql_try
-            ("UPDATE anope_ns_access SET display='%s' WHERE display='%s'",
+            ("UPDATE xanadu_ns_access SET display='%s' WHERE display='%s'",
              q_newnick, q_oldnick);
 
-    /* No need to update anope_cs_info here as it is updated when we
+    /* No need to update xanadu_cs_info here as it is updated when we
      * save the database.
      *
-     * anope_hs_core is per nick, not per display; a changed display
+     * xanadu_hs_core is per nick, not per display; a changed display
      * won't change anything there
      */
 

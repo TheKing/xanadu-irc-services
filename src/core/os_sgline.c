@@ -162,7 +162,7 @@ int do_sgline(User * u)
                              (wall_expiry == 1) ? "" : "s");
                 }
 
-                anope_cmd_global(s_OperServ,
+                xanadu_cmd_global(s_OperServ,
                                  "%s added an SGLINE for %s (%s)", u->nick,
                                  mask, buf);
             }

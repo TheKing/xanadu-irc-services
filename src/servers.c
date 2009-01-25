@@ -326,7 +326,7 @@ Server *findserver_uid(Server * s, const char *name)
  * @param name Server Name
  * @return Not Synced returns -1, Synced returns 1, Error returns 0
  */
-int anope_check_sync(const char *name)
+int xanadu_check_sync(const char *name)
 {
     Server *s;
     s = findserver(servlist, name);
@@ -408,7 +408,7 @@ void do_squit(const char *source, int ac, char **av)
     if (s->flags & SERVER_JUPED) {
         snprintf(buf, BUFSIZE, "Received SQUIT for juped server %s",
                  s->name);
-        anope_cmd_global(s_OperServ, buf);
+        xanadu_cmd_global(s_OperServ, buf);
     }
 
     snprintf(buf, sizeof(buf), "%s %s", s->name,
@@ -421,7 +421,7 @@ void do_squit(const char *source, int ac, char **av)
                 alog("debug: Sending UNCONNECT SQUIT for %s", s->name);
             }
             /* need to fix */
-            anope_cmd_squit(s->name, buf);
+            xanadu_cmd_squit(s->name, buf);
         }
     }
 

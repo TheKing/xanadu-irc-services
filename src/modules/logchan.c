@@ -84,7 +84,7 @@ void AnopeFini(void)
 {
 	if (EnableLogBot) 
 	{
-		anope_cmd_quit("LogBot","Quit: LogChan Module Unloaded");
+		xanadu_cmd_quit("LogBot","Quit: LogChan Module Unloaded");
 	}
 	alog("[LogChan] Unloaded");
 }
@@ -103,7 +103,7 @@ void LoadConfig(void)
     
     else if (!EnableLogBot && LogBotStatus == 1)
     {
-    	//anope_cmd_quit("LogBot", "[LogChan] Services Pseudo-Client Removed"); // remove services client 
+    	//xanadu_cmd_quit("LogBot", "[LogChan] Services Pseudo-Client Removed"); // remove services client 
     	DelBot("[LogChan] Services Pseudo-Client Removed"); 
     }
     
@@ -412,14 +412,14 @@ int log_topic(int argc, char **argv)
 int log_shutdown(int argc, char **argv)
 {
 	alog("\002[LogChan]\002: Services Shutting Down"); 
-    anope_cmd_quit("LogBot", "Quit: SHUTDOWN");
+    xanadu_cmd_quit("LogBot", "Quit: SHUTDOWN");
     return MOD_CONT; 
 }
 
 int log_restart(int argc, char **argv)
 {
 	alog("\002[LogChan]\002: Services Restarting"); 
-	anope_cmd_quit("LogBot", "Quit: RESTART"); 
+	xanadu_cmd_quit("LogBot", "Quit: RESTART"); 
 	return MOD_CONT; 
 }
 
@@ -438,9 +438,9 @@ int AddBot(void)
 	    
 	    if (EnableLogBot == 1) 
 	    {
-	    	anope_cmd_nick("LogBot", "LogBot", "+gS");
-	    	anope_cmd_join("LogBot", LogChannel, time(NULL));
-	    	anope_cmd_mode("LogBot", LogChannel, "+h LogBot");
+	    	xanadu_cmd_nick("LogBot", "LogBot", "+gS");
+	    	xanadu_cmd_join("LogBot", LogChannel, time(NULL));
+	    	xanadu_cmd_mode("LogBot", LogChannel, "+h LogBot");
 	    	alog("[logchan]: Created pseudo-client for services channel");
 	    	LogBotStatus = 1; 
 	    }
@@ -455,7 +455,7 @@ int DelBot(const char *reason, ...)
 	}
 	else 
 	{
-		anope_cmd_quit("LogBot", reason);
+		xanadu_cmd_quit("LogBot", reason);
 		LogBotStatus = 0; 
 	}
 	return MOD_CONT; 

@@ -297,7 +297,7 @@ static int do_set_mlock(User * u, ChannelInfo * ci, char *param) {
 
 	if (ircd->Lmode) {
 		/* We can't mlock +L if +l is not mlocked as well. */
-		if ((ci->mlock_on & ircd->chan_lmode) && !(ci->mlock_on & anope_get_limit_mode())) {
+		if ((ci->mlock_on & ircd->chan_lmode) && !(ci->mlock_on & xanadu_get_limit_mode())) {
 			ci->mlock_on &= ~ircd->chan_lmode;
 			free(ci->mlock_redirect);
 			notice_lang(ci->bi->nick, u, CHAN_SET_MLOCK_L_REQUIRED);
@@ -307,7 +307,7 @@ static int do_set_mlock(User * u, ChannelInfo * ci, char *param) {
 	/* Some ircd we can't set NOKNOCK without INVITE */
 	/* So check if we need there is a NOKNOCK MODE and that we need INVITEONLY */
 	if (ircd->noknock && ircd->knock_needs_i) {
-		if ((ci->mlock_on & ircd->noknock) && !(ci->mlock_on & anope_get_invite_mode())) {
+		if ((ci->mlock_on & ircd->noknock) && !(ci->mlock_on & xanadu_get_invite_mode())) {
 			ci->mlock_on &= ~ircd->noknock;
 			notice_lang(ci->bi->nick, u, CHAN_SET_MLOCK_K_REQUIRED);
 		}

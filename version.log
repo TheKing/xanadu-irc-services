@@ -127,7 +127,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.19 (1310)
 # BUGS  : 794
-# NOTES : Fixes the segfault in inspircd11.c / anope_event_capab() on missing required modules.
+# NOTES : Fixes the segfault in inspircd11.c / xanadu_event_capab() on missing required modules.
 #
 # BUILD : 1.7.19 (1309)
 # BUGS  : 793
@@ -1304,7 +1304,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.13 (1001)
 # BUGS  : 
-# NOTES : NickServ will now check anope_valid_nick()
+# NOTES : NickServ will now check xanadu_valid_nick()
 #
 # BUILD : 1.7.13 (1000)
 # BUGS  : 424
@@ -1488,7 +1488,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.11 (910)
 # BUGS  : 
-# NOTES : Fixed some stats not passing the correct letter to anope_cmd_219
+# NOTES : Fixed some stats not passing the correct letter to xanadu_cmd_219
 #
 # BUILD : 1.7.11 (909)
 # BUGS  : 
@@ -1656,7 +1656,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.10 (862)
 # BUGS  : 
-# NOTES : Fixed anope_cmd_part passing on "\0" instead of NULL when given NULL-arg
+# NOTES : Fixed xanadu_cmd_part passing on "\0" instead of NULL when given NULL-arg
 #
 # BUILD : 1.7.10 (858)
 # BUGS  : 
@@ -1994,7 +1994,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.8 (758)
 # BUGS  : 332
-# NOTES : FIXED: anope_event_away() doing dangerous things with ac/av, viagra had issues in notice_ops, anope_cmd_mode() used wrongly for dreamforge and ultimate2
+# NOTES : FIXED: xanadu_event_away() doing dangerous things with ac/av, viagra had issues in notice_ops, xanadu_cmd_mode() used wrongly for dreamforge and ultimate2
 #
 # BUILD : 1.7.8 (757)
 # BUGS  : 355 361
@@ -2397,7 +2397,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.8 (648)
 # BUGS  : 337
-# NOTES : Fixed the db query for anope_cs_akicks in display name change function.
+# NOTES : Fixed the db query for xanadu_cs_akicks in display name change function.
 #
 # BUILD : 1.7.8 (647)
 # BUGS  : 326
@@ -2473,7 +2473,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.8 (629)
 # BUGS  : 313
-# NOTES : Updated mydbgen and Changes.mysql to remove anope_os_cache
+# NOTES : Updated mydbgen and Changes.mysql to remove xanadu_os_cache
 #
 # BUILD : 1.7.8 (628)
 # BUGS  : none
@@ -2507,7 +2507,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.8 (621)
 # BUGS  : 314
-# NOTES : Fixed normalizeBuffer not being freed twice (anope_cmd_ctcp / delete_user)
+# NOTES : Fixed normalizeBuffer not being freed twice (xanadu_cmd_ctcp / delete_user)
 #
 # BUILD : 1.7.8 (620)
 # BUGS  : 313
@@ -3064,7 +3064,7 @@ VERSION_BUILD="1341"
 # NOTES : 1. CS CLEAR strips +q/+a
 # 2. CS CLEAR uses SVSMODE with Unreal to strip +q/a/o/h/v
 # 3. SVSMODE unban works again on Viagra
-# 4. Adds anope_cmd_svsmode_chan() to for SVSMODE on channels
+# 4. Adds xanadu_cmd_svsmode_chan() to for SVSMODE on channels
 # 5. OS CLEARMODES uses SVSMODE with Unreal to strip +q/a/o/h/v
 # 6. memory.c, servers.c, slist.c, sockutil.c, misc. is doxygen ready
 # 7. Unreal32 pseduo clients use SJOIN now to join the channels
@@ -3163,15 +3163,15 @@ VERSION_BUILD="1341"
 # BUILD : 1.7.6 (462)
 # BUGS  : 226
 # NOTES : 1. RageIRCD sends TSMODE which is part of their beta7
-# 2. RageIRCD protocol file now has anope_cmd_chghost()
+# 2. RageIRCD protocol file now has xanadu_cmd_chghost()
 # 3. RageIRCD SVINFO more in line with what we get
-# 4. Bahamut protocol file now has anope_cmd_chghost() to prevent undefined symbol messages
+# 4. Bahamut protocol file now has xanadu_cmd_chghost() to prevent undefined symbol messages
 # 5. Bahamut SZLINE and UNSZLINE dealt with per documentation, left the old commands behind
 #    for now, till we decide to move our base Bahamut version forward
 #
 # BUILD : 1.7.6 (461)
 # BUGS  : 230
-# NOTES : 1. Moving Services Operators to Services Admins and vice-versa (230), 2. PTlink anope_cmd_server() had a minor 
+# NOTES : 1. Moving Services Operators to Services Admins and vice-versa (230), 2. PTlink xanadu_cmd_server() had a minor 
 # issue thats now fixed
 #
 # BUILD : 1.7.6 (460)
@@ -3376,11 +3376,11 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.5 (403)
 # BUGS  : 186
-# NOTES : Fixed anope_cmd_server() in some protocol files it was broken
+# NOTES : Fixed xanadu_cmd_server() in some protocol files it was broken
 #
 # BUILD : 1.7.5 (403)
 # BUGS  : 186
-# NOTES : Fixed anope_cmd_server() on some protocol files it would not work correctly
+# NOTES : Fixed xanadu_cmd_server() on some protocol files it would not work correctly
 #
 # BUILD : 1.7.5 (402)
 # BUGS  : N/A
@@ -3507,7 +3507,7 @@ VERSION_BUILD="1341"
 #  - do_memocheck() globalized the time display
 #  - getmemoinfo() improved to return info about being forbidden
 #  - fixes svsnick on Unreal
-#  - anope_event_null to allow ircd devs to point events that go to no where some where
+#  - xanadu_event_null to allow ircd devs to point events that go to no where some where
 #  - fixed SQUIT
 #
 # BUILD : 1.7.5 (364)
@@ -3567,7 +3567,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.5 (345)
 # BUGS  : 
-# NOTES : Renamed anope_cmd_relase_svshold to anope_cmd_release_svshold
+# NOTES : Renamed xanadu_cmd_relase_svshold to xanadu_cmd_release_svshold
 #
 # BUILD : 1.7.5 (344)
 # BUGS  : 
@@ -4274,7 +4274,7 @@ VERSION_BUILD="1341"
 #
 # BUILD : 1.7.1 (58)
 # BUGS  : 
-# NOTES : anope_ns_req was being referenced should have been anope_ns_request (fixed) 
+# NOTES : xanadu_ns_req was being referenced should have been xanadu_ns_request (fixed) 
 #
 # BUILD : 1.7.1 (57)
 # BUGS  : 

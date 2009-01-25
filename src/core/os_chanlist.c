@@ -18,7 +18,7 @@
 int do_chanlist(User * u);
 void myOperServHelp(User * u);
 #ifdef _WIN32
-extern MDE int anope_get_private_mode();
+extern MDE int xanadu_get_private_mode();
 #endif
 
 /**
@@ -77,7 +77,7 @@ int do_chanlist(User * u)
     User *u2;
 
     if (opt && !stricmp(opt, "SECRET"))
-        modes |= (anope_get_secret_mode() | anope_get_private_mode());
+        modes |= (xanadu_get_secret_mode() | xanadu_get_private_mode());
 
     if (pattern && (u2 = finduser(pattern))) {
         struct u_chanlist *uc;

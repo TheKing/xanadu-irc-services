@@ -113,7 +113,7 @@ int do_akill(User * u, Channel *c, char *cmd, char *expiry, char *mask, char *re
 					snprintf(buf, sizeof(buf), "expires in %d %s%s", wall_expiry, s, (wall_expiry == 1) ? "" : "s");
 				}
 
-				anope_cmd_global(ci->bi->nick, "%s added an AKILL for %s (%s) (%s)", u->nick, mask, reason, buf);
+				xanadu_cmd_global(ci->bi->nick, "%s added an AKILL for %s (%s) (%s)", u->nick, mask, reason, buf);
 			}
 
 			if (readonly) {

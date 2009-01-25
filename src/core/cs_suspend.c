@@ -122,13 +122,13 @@ int do_suspend(User * u)
                 av[0] = c->name;
                 av[1] = cu->user->nick;
                 av[2] = reason ? reason : "CHAN_SUSPEND_REASON";
-                anope_cmd_kick(s_ChanServ, av[0], av[1], av[2]);
+                xanadu_cmd_kick(s_ChanServ, av[0], av[1], av[2]);
                 do_kick(s_ChanServ, 3, av);
             }
         }
 
         if (WallForbid)
-            anope_cmd_global(s_ChanServ,
+            xanadu_cmd_global(s_ChanServ,
                              "\2%s\2 used SUSPEND on channel \2%s\2",
                              u->nick, ci->name);
 
@@ -171,7 +171,7 @@ int do_unsuspend(User * u)
         ci->forbidby = NULL;
 
         if (WallForbid)
-            anope_cmd_global(s_ChanServ,
+            xanadu_cmd_global(s_ChanServ,
                              "\2%s\2 used UNSUSPEND on channel \2%s\2",
                              u->nick, ci->name);
 

@@ -98,9 +98,9 @@ void notice_server(char *source, Server * s, char *fmt, ...)
         }
 
         if (NSDefFlags & NI_MSG) {
-            anope_cmd_serv_privmsg(source, s->name, buf);
+            xanadu_cmd_serv_privmsg(source, s->name, buf);
         } else {
-            anope_cmd_serv_notice(source, s->name, buf);
+            xanadu_cmd_serv_notice(source, s->name, buf);
         }
         va_end(args);
     }
@@ -138,9 +138,9 @@ void notice_user(char *source, User * u, const char *fmt, ...)
          */
         if (UsePrivmsg && ((!u->na && (NSDefFlags & NI_MSG))
                            || (u->na && (u->na->nc->flags & NI_MSG)))) {
-            anope_cmd_privmsg2(source, u->nick, buf);
+            xanadu_cmd_privmsg2(source, u->nick, buf);
         } else {
-            anope_cmd_notice2(source, u->nick, buf);
+            xanadu_cmd_notice2(source, u->nick, buf);
         }
         va_end(args);
     }
@@ -163,9 +163,9 @@ void notice_list(char *source, char *dest, char **text)
          * with a single space.
          */
         if (**text) {
-            anope_cmd_notice2(source, dest, *text);
+            xanadu_cmd_notice2(source, dest, *text);
         } else {
-            anope_cmd_notice2(source, dest, " ");
+            xanadu_cmd_notice2(source, dest, " ");
         }
         text++;
     }
@@ -212,9 +212,9 @@ void notice_lang(char *source, User * dest, int message, ...)
         if (UsePrivmsg && ((!dest->na && (NSDefFlags & NI_MSG))
                            || (dest->na
                                && (dest->na->nc->flags & NI_MSG)))) {
-            anope_cmd_privmsg2(source, dest->nick, *t ? t : " ");
+            xanadu_cmd_privmsg2(source, dest->nick, *t ? t : " ");
         } else {
-            anope_cmd_notice2(source, dest->nick, *t ? t : " ");
+            xanadu_cmd_notice2(source, dest->nick, *t ? t : " ");
         }
     }
     va_end(args);
@@ -268,9 +268,9 @@ void notice_help(char *source, User * dest, int message, ...)
         if (UsePrivmsg && ((!dest->na && (NSDefFlags & NI_MSG))
                            || (dest->na
                                && (dest->na->nc->flags & NI_MSG)))) {
-            anope_cmd_privmsg2(source, dest->nick, *outbuf ? outbuf : " ");
+            xanadu_cmd_privmsg2(source, dest->nick, *outbuf ? outbuf : " ");
         } else {
-            anope_cmd_notice2(source, dest->nick, *outbuf ? outbuf : " ");
+            xanadu_cmd_notice2(source, dest->nick, *outbuf ? outbuf : " ");
         }
     }
     va_end(args);
@@ -302,9 +302,9 @@ void notice(char *source, char *dest, const char *fmt, ...)
         }
 
         if (NSDefFlags & NI_MSG) {
-            anope_cmd_privmsg2(source, dest, buf);
+            xanadu_cmd_privmsg2(source, dest, buf);
         } else {
-            anope_cmd_notice2(source, dest, buf);
+            xanadu_cmd_notice2(source, dest, buf);
         }
         va_end(args);
     }
@@ -335,7 +335,7 @@ void privmsg(char *source, char *dest, const char *fmt, ...)
     if (!buf) {
         return;
     }
-    anope_cmd_privmsg2(source, dest, buf);
+    xanadu_cmd_privmsg2(source, dest, buf);
 }
 
 /*************************************************************************/
@@ -362,5 +362,5 @@ void wallops(char *source, const char *fmt, ...)
         return;
     }
 
-    anope_cmd_global_legacy(source, buf);
+    xanadu_cmd_global_legacy(source, buf);
 }

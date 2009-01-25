@@ -139,7 +139,7 @@ int do_mute(User * u, Channel *c, char *params) {
 						av[1] = sstrdup(params);
 				}
 
-				anope_cmd_mode(ci->bi->nick,c ->name, "%s %s", av[0], av[1]);
+				xanadu_cmd_mode(ci->bi->nick,c ->name, "%s %s", av[0], av[1]);
 				chan_set_modes(ci->bi->nick, c, 2, av, 1);
 
 #if CPU_USAGE_REDUCTION < 5
@@ -216,7 +216,7 @@ int do_unmute(User * u, Channel *c, char *params) {
 				av[1] = sstrdup(params);
 		}
 
-		anope_cmd_mode(ci->bi->nick,c ->name, "%s %s", av[0], av[1]);
+		xanadu_cmd_mode(ci->bi->nick,c ->name, "%s %s", av[0], av[1]);
 		chan_set_modes(ci->bi->nick, c, 2, av, 1);
 
 

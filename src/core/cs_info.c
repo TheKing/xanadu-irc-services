@@ -123,10 +123,10 @@ int do_info(User * u)
         strftime_lang(buf, sizeof(buf), u, STRFTIME_DATE_TIME_FORMAT, tm);
         notice_lang(s_ChanServ, u, CHAN_INFO_LAST_USED, buf);
         if (ci->last_topic
-            && (show_all || (!(ci->mlock_on & anope_get_secret_mode())
+            && (show_all || (!(ci->mlock_on & xanadu_get_secret_mode())
                              && (!ci->c
                                  || !(ci->c->
-                                      mode & anope_get_secret_mode()))))) {
+                                      mode & xanadu_get_secret_mode()))))) {
             notice_lang(s_ChanServ, u, CHAN_INFO_LAST_TOPIC,
                         ci->last_topic);
             notice_lang(s_ChanServ, u, CHAN_INFO_TOPIC_SET_BY,

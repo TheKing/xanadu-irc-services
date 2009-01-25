@@ -102,7 +102,7 @@ void initIrcdProto()
 }
 
 /* Special function, returns 1 if executed, 0 if not */
-int anope_set_mod_current_buffer(int ac, char **av)
+int xanadu_set_mod_current_buffer(int ac, char **av)
 {
     if (ircdproto.ircd_set_mod_current_buffer) {
         ircdproto.ircd_set_mod_current_buffer(ac, av);
@@ -112,39 +112,39 @@ int anope_set_mod_current_buffer(int ac, char **av)
     return 0;
 }
 
-void anope_set_umode(User * user, int ac, char **av)
+void xanadu_set_umode(User * user, int ac, char **av)
 {
     ircdproto.ircd_set_umode(user, ac, av);
 }
 
-void anope_cmd_svsnoop(char *server, int set)
+void xanadu_cmd_svsnoop(char *server, int set)
 {
     ircdproto.ircd_cmd_svsnoop(server, set);
 }
 
-void anope_cmd_remove_akill(char *user, char *host)
+void xanadu_cmd_remove_akill(char *user, char *host)
 {
     ircdproto.ircd_cmd_remove_akill(user, host);
 }
 
-void anope_cmd_topic(char *whosets, char *chan, char *whosetit,
+void xanadu_cmd_topic(char *whosets, char *chan, char *whosetit,
                      char *topic, time_t when)
 {
     ircdproto.ircd_cmd_topic(whosets, chan, whosetit, topic, when);
 }
 
-void anope_cmd_vhost_off(User * u)
+void xanadu_cmd_vhost_off(User * u)
 {
     ircdproto.ircd_cmd_vhost_off(u);
 }
 
-void anope_cmd_akill(char *user, char *host, char *who, time_t when,
+void xanadu_cmd_akill(char *user, char *host, char *who, time_t when,
                      time_t expires, char *reason)
 {
     ircdproto.ircd_cmd_akill(user, host, who, when, expires, reason);
 }
 
-void anope_cmd_svskill(char *source, char *user, const char *fmt, ...)
+void xanadu_cmd_svskill(char *source, char *user, const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -157,43 +157,43 @@ void anope_cmd_svskill(char *source, char *user, const char *fmt, ...)
     ircdproto.ircd_cmd_svskill(source, user, buf);
 }
 
-void anope_cmd_svsmode(User * u, int ac, char **av)
+void xanadu_cmd_svsmode(User * u, int ac, char **av)
 {
     ircdproto.ircd_cmd_svsmode(u, ac, av);
 }
 
-void anope_cmd_372(char *source, char *msg)
+void xanadu_cmd_372(char *source, char *msg)
 {
     ircdproto.ircd_cmd_372(source, msg);
 }
 
-void anope_cmd_372_error(char *source)
+void xanadu_cmd_372_error(char *source)
 {
     ircdproto.ircd_cmd_372_error(source);
 }
 
-void anope_cmd_375(char *source)
+void xanadu_cmd_375(char *source)
 {
     ircdproto.ircd_cmd_375(source);
 }
 
-void anope_cmd_376(char *source)
+void xanadu_cmd_376(char *source)
 {
     ircdproto.ircd_cmd_376(source);
 }
 
-void anope_cmd_nick(char *nick, char *name, char *modes)
+void xanadu_cmd_nick(char *nick, char *name, char *modes)
 {
     ircdproto.ircd_cmd_nick(nick, name, modes);
 }
 
-void anope_cmd_guest_nick(char *nick, char *user, char *host, char *real,
+void xanadu_cmd_guest_nick(char *nick, char *user, char *host, char *real,
                           char *modes)
 {
     ircdproto.ircd_cmd_guest_nick(nick, user, host, real, modes);
 }
 
-void anope_cmd_mode(char *source, char *dest, const char *fmt, ...)
+void xanadu_cmd_mode(char *source, char *dest, const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -206,13 +206,13 @@ void anope_cmd_mode(char *source, char *dest, const char *fmt, ...)
     ircdproto.ircd_cmd_mode(source, dest, buf);
 }
 
-void anope_cmd_bot_nick(char *nick, char *user, char *host, char *real,
+void xanadu_cmd_bot_nick(char *nick, char *user, char *host, char *real,
                         char *modes)
 {
     ircdproto.ircd_cmd_bot_nick(nick, user, host, real, modes);
 }
 
-void anope_cmd_kick(char *source, char *chan, char *user, const char *fmt,
+void xanadu_cmd_kick(char *source, char *chan, char *user, const char *fmt,
                     ...)
 {
     va_list args;
@@ -226,7 +226,7 @@ void anope_cmd_kick(char *source, char *chan, char *user, const char *fmt,
     ircdproto.ircd_cmd_kick(source, chan, user, buf);
 }
 
-void anope_cmd_notice_ops(char *source, char *dest, const char *fmt, ...)
+void xanadu_cmd_notice_ops(char *source, char *dest, const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -239,7 +239,7 @@ void anope_cmd_notice_ops(char *source, char *dest, const char *fmt, ...)
     ircdproto.ircd_cmd_notice_ops(source, dest, buf);
 }
 
-void anope_cmd_notice(char *source, char *dest, const char *fmt, ...)
+void xanadu_cmd_notice(char *source, char *dest, const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -252,12 +252,12 @@ void anope_cmd_notice(char *source, char *dest, const char *fmt, ...)
     ircdproto.ircd_cmd_notice(source, dest, buf);
 }
 
-void anope_cmd_notice2(char *source, char *dest, char *msg)
+void xanadu_cmd_notice2(char *source, char *dest, char *msg)
 {
     ircdproto.ircd_cmd_notice2(source, dest, msg);
 }
 
-void anope_cmd_action(char *source, char *dest, const char *fmt, ...) 
+void xanadu_cmd_action(char *source, char *dest, const char *fmt, ...) 
 {
     va_list args;
     char buf[BUFSIZE];
@@ -277,7 +277,7 @@ void anope_cmd_action(char *source, char *dest, const char *fmt, ...)
     snprintf(actionbuf, BUFSIZE - 1, "%cACTION %s %c", 1, buf, 1);
     ircdproto.ircd_cmd_privmsg(source, dest, actionbuf);
 }
-void anope_cmd_privmsg(char *source, char *dest, const char *fmt, ...)
+void xanadu_cmd_privmsg(char *source, char *dest, const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -290,32 +290,32 @@ void anope_cmd_action(char *source, char *dest, const char *fmt, ...)
     ircdproto.ircd_cmd_privmsg(source, dest, buf);
 }
 
-void anope_cmd_privmsg2(char *source, char *dest, char *msg)
+void xanadu_cmd_privmsg2(char *source, char *dest, char *msg)
 {
     ircdproto.ircd_cmd_privmsg2(source, dest, msg);
 }
 
-void anope_cmd_serv_notice(char *source, char *dest, char *msg)
+void xanadu_cmd_serv_notice(char *source, char *dest, char *msg)
 {
     ircdproto.ircd_cmd_serv_notice(source, dest, msg);
 }
 
-void anope_cmd_serv_privmsg(char *source, char *dest, char *msg)
+void xanadu_cmd_serv_privmsg(char *source, char *dest, char *msg)
 {
     ircdproto.ircd_cmd_serv_privmsg(source, dest, msg);
 }
 
-void anope_cmd_bot_chan_mode(char *nick, char *chan)
+void xanadu_cmd_bot_chan_mode(char *nick, char *chan)
 {
     ircdproto.ircd_cmd_bot_chan_mode(nick, chan);
 }
 
-void anope_cmd_351(char *source)
+void xanadu_cmd_351(char *source)
 {
     ircdproto.ircd_cmd_351(source);
 }
 
-void anope_cmd_quit(char *source, const char *fmt, ...)
+void xanadu_cmd_quit(char *source, const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -328,27 +328,27 @@ void anope_cmd_quit(char *source, const char *fmt, ...)
     ircdproto.ircd_cmd_quit(source, buf);
 }
 
-void anope_cmd_pong(char *servname, char *who)
+void xanadu_cmd_pong(char *servname, char *who)
 {
     ircdproto.ircd_cmd_pong(servname, who);
 }
 
-void anope_cmd_join(char *user, char *channel, time_t chantime)
+void xanadu_cmd_join(char *user, char *channel, time_t chantime)
 {
     ircdproto.ircd_cmd_join(user, channel, chantime);
 }
 
-void anope_cmd_unsqline(char *user)
+void xanadu_cmd_unsqline(char *user)
 {
     ircdproto.ircd_cmd_unsqline(user);
 }
 
-void anope_cmd_invite(char *source, char *chan, char *nick)
+void xanadu_cmd_invite(char *source, char *chan, char *nick)
 {
     ircdproto.ircd_cmd_invite(source, chan, nick);
 }
 
-void anope_cmd_part(char *nick, char *chan, const char *fmt, ...)
+void xanadu_cmd_part(char *nick, char *chan, const char *fmt, ...)
 {
     if (fmt) {
         va_list args;
@@ -363,12 +363,12 @@ void anope_cmd_part(char *nick, char *chan, const char *fmt, ...)
     }
 }
 
-void anope_cmd_391(char *source, char *timestr)
+void xanadu_cmd_391(char *source, char *timestr)
 {
     ircdproto.ircd_cmd_391(source, timestr);
 }
 
-void anope_cmd_250(const char *fmt, ...)
+void xanadu_cmd_250(const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -381,7 +381,7 @@ void anope_cmd_250(const char *fmt, ...)
     ircdproto.ircd_cmd_250(buf);
 }
 
-void anope_cmd_307(const char *fmt, ...)
+void xanadu_cmd_307(const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -394,7 +394,7 @@ void anope_cmd_307(const char *fmt, ...)
     ircdproto.ircd_cmd_307(buf);
 }
 
-void anope_cmd_311(const char *fmt, ...)
+void xanadu_cmd_311(const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -407,7 +407,7 @@ void anope_cmd_311(const char *fmt, ...)
     ircdproto.ircd_cmd_311(buf);
 }
 
-void anope_cmd_312(const char *fmt, ...)
+void xanadu_cmd_312(const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -420,7 +420,7 @@ void anope_cmd_312(const char *fmt, ...)
     ircdproto.ircd_cmd_312(buf);
 }
 
-void anope_cmd_317(const char *fmt, ...)
+void xanadu_cmd_317(const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -433,22 +433,22 @@ void anope_cmd_317(const char *fmt, ...)
     ircdproto.ircd_cmd_317(buf);
 }
 
-void anope_cmd_219(char *source, char *letter)
+void xanadu_cmd_219(char *source, char *letter)
 {
     ircdproto.ircd_cmd_219(source, letter);
 }
 
-void anope_cmd_401(char *source, char *who)
+void xanadu_cmd_401(char *source, char *who)
 {
     ircdproto.ircd_cmd_401(source, who);
 }
 
-void anope_cmd_318(char *source, char *who)
+void xanadu_cmd_318(char *source, char *who)
 {
     ircdproto.ircd_cmd_318(source, who);
 }
 
-void anope_cmd_242(const char *fmt, ...)
+void xanadu_cmd_242(const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -461,7 +461,7 @@ void anope_cmd_242(const char *fmt, ...)
     ircdproto.ircd_cmd_242(buf);
 }
 
-void anope_cmd_243(const char *fmt, ...)
+void xanadu_cmd_243(const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -474,7 +474,7 @@ void anope_cmd_243(const char *fmt, ...)
     ircdproto.ircd_cmd_243(buf);
 }
 
-void anope_cmd_211(const char *fmt, ...)
+void xanadu_cmd_211(const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -487,7 +487,7 @@ void anope_cmd_211(const char *fmt, ...)
     ircdproto.ircd_cmd_211(buf);
 }
 
-void anope_cmd_global(char *source, const char *fmt, ...)
+void xanadu_cmd_global(char *source, const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -500,148 +500,148 @@ void anope_cmd_global(char *source, const char *fmt, ...)
     ircdproto.ircd_cmd_global(source, buf);
 }
 
-void anope_cmd_global_legacy(char *source, char *fmt)
+void xanadu_cmd_global_legacy(char *source, char *fmt)
 {
     ircdproto.ircd_cmd_global_legacy(source, fmt);
 }
 
-void anope_cmd_sqline(char *mask, char *reason)
+void xanadu_cmd_sqline(char *mask, char *reason)
 {
     ircdproto.ircd_cmd_sqline(mask, reason);
 }
 
-void anope_cmd_squit(char *servname, char *message)
+void xanadu_cmd_squit(char *servname, char *message)
 {
     ircdproto.ircd_cmd_squit(servname, message);
 }
 
-void anope_cmd_svso(char *source, char *nick, char *flag)
+void xanadu_cmd_svso(char *source, char *nick, char *flag)
 {
     ircdproto.ircd_cmd_svso(source, nick, flag);
 }
 
-void anope_cmd_chg_nick(char *oldnick, char *newnick)
+void xanadu_cmd_chg_nick(char *oldnick, char *newnick)
 {
     ircdproto.ircd_cmd_chg_nick(oldnick, newnick);
 }
 
-void anope_cmd_svsnick(char *source, char *guest, time_t when)
+void xanadu_cmd_svsnick(char *source, char *guest, time_t when)
 {
     ircdproto.ircd_cmd_svsnick(source, guest, when);
 }
 
-void anope_cmd_vhost_on(char *nick, char *vIdent, char *vhost)
+void xanadu_cmd_vhost_on(char *nick, char *vIdent, char *vhost)
 {
     ircdproto.ircd_cmd_vhost_on(nick, vIdent, vhost);
 }
 
-void anope_cmd_connect(int servernum)
+void xanadu_cmd_connect(int servernum)
 {
     ircdproto.ircd_cmd_connect(servernum);
 }
 
-void anope_cmd_svshold(char *nick)
+void xanadu_cmd_svshold(char *nick)
 {
     ircdproto.ircd_cmd_svshold(nick);
 }
 
-void anope_cmd_release_svshold(char *nick)
+void xanadu_cmd_release_svshold(char *nick)
 {
     ircdproto.ircd_cmd_release_svshold(nick);
 }
 
-void anope_cmd_unsgline(char *mask)
+void xanadu_cmd_unsgline(char *mask)
 {
     ircdproto.ircd_cmd_unsgline(mask);
 }
 
-void anope_cmd_unszline(char *mask)
+void xanadu_cmd_unszline(char *mask)
 {
     ircdproto.ircd_cmd_unszline(mask);
 }
 
-void anope_cmd_szline(char *mask, char *reason, char *whom)
+void xanadu_cmd_szline(char *mask, char *reason, char *whom)
 {
     ircdproto.ircd_cmd_szline(mask, reason, whom);
 }
 
-void anope_cmd_sgline(char *mask, char *reason)
+void xanadu_cmd_sgline(char *mask, char *reason)
 {
     ircdproto.ircd_cmd_sgline(mask, reason);
 }
 
-void anope_cmd_unban(char *name, char *nick)
+void xanadu_cmd_unban(char *name, char *nick)
 {
     ircdproto.ircd_cmd_unban(name, nick);
 }
 
-void anope_cmd_svsmode_chan(char *name, char *mode, char *nick)
+void xanadu_cmd_svsmode_chan(char *name, char *mode, char *nick)
 {
     ircdproto.ircd_cmd_svsmode_chan(name, mode, nick);
 }
 
-void anope_cmd_svid_umode(char *nick, time_t ts)
+void xanadu_cmd_svid_umode(char *nick, time_t ts)
 {
     ircdproto.ircd_cmd_svid_umode(nick, ts);
 }
 
-void anope_cmd_nc_change(User * u)
+void xanadu_cmd_nc_change(User * u)
 {
     ircdproto.ircd_cmd_nc_change(u);
 }
 
-void anope_cmd_svid_umode2(User * u, char *ts)
+void xanadu_cmd_svid_umode2(User * u, char *ts)
 {
     ircdproto.ircd_cmd_svid_umode2(u, ts);
 }
 
-void anope_cmd_svid_umode3(User * u, char *ts)
+void xanadu_cmd_svid_umode3(User * u, char *ts)
 {
     ircdproto.ircd_cmd_svid_umode3(u, ts);
 }
 
-void anope_cmd_svsjoin(char *source, char *nick, char *chan, char *param)
+void xanadu_cmd_svsjoin(char *source, char *nick, char *chan, char *param)
 {
     ircdproto.ircd_cmd_svsjoin(source, nick, chan, param);
 }
 
-void anope_cmd_svspart(char *source, char *nick, char *chan)
+void xanadu_cmd_svspart(char *source, char *nick, char *chan)
 {
     ircdproto.ircd_cmd_svspart(source, nick, chan);
 }
 
-void anope_cmd_swhois(char *source, char *who, char *mask)
+void xanadu_cmd_swhois(char *source, char *who, char *mask)
 {
     ircdproto.ircd_cmd_swhois(source, who, mask);
 }
 
-void anope_cmd_eob()
+void xanadu_cmd_eob()
 {
     ircdproto.ircd_cmd_eob();
 }
 
-int anope_flood_mode_check(char *value)
+int xanadu_flood_mode_check(char *value)
 {
     return ircdproto.ircd_flood_mode_check(value);
 }
 
-void anope_cmd_jupe(char *jserver, char *who, char *reason)
+void xanadu_cmd_jupe(char *jserver, char *who, char *reason)
 {
     ircdproto.ircd_cmd_jupe(jserver, who, reason);
 }
 
-int anope_valid_nick(char *nick)
+int xanadu_valid_nick(char *nick)
 {
     return ircdproto.ircd_valid_nick(nick);
 }
 
-int anope_valid_chan(char *chan)
+int xanadu_valid_chan(char *chan)
 {
     return ircdproto.ircd_valid_chan(chan);
 }
 
 
-void anope_cmd_ctcp(char *source, char *dest, const char *fmt, ...)
+void xanadu_cmd_ctcp(char *source, char *dest, const char *fmt, ...)
 {
     va_list args;
     char buf[BUFSIZE];
@@ -1165,37 +1165,37 @@ void pmodule_limit_mode(int mode)
     ircd_modes.chan_limit = mode;
 }
 
-int anope_get_invis_mode()
+int xanadu_get_invis_mode()
 {
     return ircd_modes.user_invis;
 }
 
-int anope_get_oper_mode()
+int xanadu_get_oper_mode()
 {
     return ircd_modes.user_oper;
 }
 
-int anope_get_invite_mode()
+int xanadu_get_invite_mode()
 {
     return ircd_modes.chan_invite;
 }
 
-int anope_get_secret_mode()
+int xanadu_get_secret_mode()
 {
     return ircd_modes.chan_secret;
 }
 
-int anope_get_private_mode()
+int xanadu_get_private_mode()
 {
     return ircd_modes.chan_private;
 }
 
-int anope_get_key_mode()
+int xanadu_get_key_mode()
 {
     return ircd_modes.chan_key;
 }
 
-int anope_get_limit_mode()
+int xanadu_get_limit_mode()
 {
     return ircd_modes.chan_limit;
 }

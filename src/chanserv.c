@@ -387,7 +387,7 @@ void chanserv(User * u, char *buf)
         if (!(s = strtok(NULL, ""))) {
             s = "";
         }
-        anope_cmd_ctcp(s_ChanServ, u->nick, "PING %s", s);
+        xanadu_cmd_ctcp(s_ChanServ, u->nick, "PING %s", s);
     } else if (skeleton) {
         notice_lang(s_ChanServ, u, SERVICE_OFFLINE, s_ChanServ);
     } else {
@@ -836,7 +836,7 @@ void load_cs_dbase(void)
 	restore_db(f);						\
 	log_perror("Write error on %s", ChanDBName);		\
 	if (time(NULL) - lastwarn > WarningTimeout) {		\
-	    anope_cmd_global(NULL, "Write error on %s: %s", ChanDBName,	\
+	    xanadu_cmd_global(NULL, "Write error on %s: %s", ChanDBName,	\
 			strerror(errno));			\
 	    lastwarn = time(NULL);				\
 	}							\
@@ -988,32 +988,32 @@ void save_cs_rdb_dbase(void)
     if (!rdb_open())
         return;
 
-    if (rdb_tag_table("anope_cs_info") == 0) {
-        alog("Unable to tag table 'anope_cs_info' - ChanServ RDB save failed.");
+    if (rdb_tag_table("xanadu_cs_info") == 0) {
+        alog("Unable to tag table 'xanadu_cs_info' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table("anope_cs_access") == 0) {
-        alog("Unable to tag table 'anope_cs_access' - ChanServ RDB save failed.");
+    if (rdb_tag_table("xanadu_cs_access") == 0) {
+        alog("Unable to tag table 'xanadu_cs_access' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table("anope_cs_levels") == 0) {
-        alog("Unable to tag table 'anope_cs_levels' - ChanServ RDB save failed.");
+    if (rdb_tag_table("xanadu_cs_levels") == 0) {
+        alog("Unable to tag table 'xanadu_cs_levels' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table("anope_cs_akicks") == 0) {
-        alog("Unable to tag table 'anope_cs_akicks' - ChanServ RDB save failed.");
+    if (rdb_tag_table("xanadu_cs_akicks") == 0) {
+        alog("Unable to tag table 'xanadu_cs_akicks' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table("anope_cs_badwords") == 0) {
-        alog("Unable to tag table 'anope_cs_badwords' - ChanServ RDB save failed.");
+    if (rdb_tag_table("xanadu_cs_badwords") == 0) {
+        alog("Unable to tag table 'xanadu_cs_badwords' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table("anope_cs_ttb") == 0) {
-        alog("Unable to tag table 'anope_cs_ttb' - ChanServ RDB save failed.");
+    if (rdb_tag_table("xanadu_cs_ttb") == 0) {
+        alog("Unable to tag table 'xanadu_cs_ttb' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table_where("anope_ms_info", "serv='CHAN'") == 0) {
-        alog("Unable to tag table 'anope_ms_info' - ChanServ RDB save failed.");
+    if (rdb_tag_table_where("xanadu_ms_info", "serv='CHAN'") == 0) {
+        alog("Unable to tag table 'xanadu_ms_info' - ChanServ RDB save failed.");
         return;
     }
 
@@ -1026,32 +1026,32 @@ void save_cs_rdb_dbase(void)
         }                       /* for (chanlists[i]) */
     }                           /* for (i) */
 
-    if (rdb_clean_table("anope_cs_info") == 0) {
-        alog("Unable to clean table 'anope_cs_info' - ChanServ RDB save failed.");
+    if (rdb_clean_table("xanadu_cs_info") == 0) {
+        alog("Unable to clean table 'xanadu_cs_info' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table("anope_cs_access") == 0) {
-        alog("Unable to clean table 'anope_cs_access' - ChanServ RDB save failed.");
+    if (rdb_clean_table("xanadu_cs_access") == 0) {
+        alog("Unable to clean table 'xanadu_cs_access' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table("anope_cs_levels") == 0) {
-        alog("Unable to clean table 'anope_cs_levels' - ChanServ RDB save failed.");
+    if (rdb_clean_table("xanadu_cs_levels") == 0) {
+        alog("Unable to clean table 'xanadu_cs_levels' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table("anope_cs_akicks") == 0) {
-        alog("Unable to clean table 'anope_cs_akicks' - ChanServ RDB save failed.");
+    if (rdb_clean_table("xanadu_cs_akicks") == 0) {
+        alog("Unable to clean table 'xanadu_cs_akicks' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table("anope_cs_badwords") == 0) {
-        alog("Unable to clean table 'anope_cs_badwords' - ChanServ RDB save failed.");
+    if (rdb_clean_table("xanadu_cs_badwords") == 0) {
+        alog("Unable to clean table 'xanadu_cs_badwords' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table("anope_cs_ttb") == 0) {
-        alog("Unable to clean table 'anope_cs_ttb' - ChanServ RDB save failed.");
+    if (rdb_clean_table("xanadu_cs_ttb") == 0) {
+        alog("Unable to clean table 'xanadu_cs_ttb' - ChanServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table_where("anope_ms_info", "serv='CHAN'") == 0) {
-        alog("Unable to clean table 'anope_ms_info' - ChanServ RDB save failed.");
+    if (rdb_clean_table_where("xanadu_ms_info", "serv='CHAN'") == 0) {
+        alog("Unable to clean table 'xanadu_ms_info' - ChanServ RDB save failed.");
         return;
     }
 
@@ -1089,7 +1089,7 @@ void check_modes(Channel * c)
 
     /* Check for mode bouncing */
     if (c->server_modecount >= 3 && c->chanserv_modecount >= 3) {
-        anope_cmd_global(NULL,
+        xanadu_cmd_global(NULL,
                          "Warning: unable to set modes on channel %s.  "
                          "Are your servers' U:lines configured correctly?",
                          c->name);
@@ -1109,7 +1109,7 @@ void check_modes(Channel * c)
         if (ircd->regmode) {
             if (c->mode & ircd->regmode) {
                 c->mode &= ~ircd->regmode;
-                anope_cmd_mode(whosends(ci), c->name, "-r");
+                xanadu_cmd_mode(whosends(ci), c->name, "-r");
             }
         }
         return;
@@ -1218,7 +1218,7 @@ void check_modes(Channel * c)
     *end = 0;
     *end2 = 0;
 
-    anope_cmd_mode(whosends(ci), c->name, "%s%s", modebuf,
+    xanadu_cmd_mode(whosends(ci), c->name, "%s%s", modebuf,
                    (end2 == argbuf ? "" : argbuf));
 }
 
@@ -1239,13 +1239,13 @@ int check_valid_admin(User * user, Channel * chan, int servermode)
 
     if (servermode && !check_access(user, chan->ci, CA_AUTOPROTECT)) {
         notice_lang(s_ChanServ, user, CHAN_IS_REGISTERED, s_ChanServ);
-        anope_cmd_mode(whosends(chan->ci), chan->name, "%s %s",
+        xanadu_cmd_mode(whosends(chan->ci), chan->name, "%s %s",
                        ircd->adminunset, user->nick);
         return 0;
     }
 
     if (check_access(user, chan->ci, CA_AUTODEOP)) {
-        anope_cmd_mode(whosends(chan->ci), chan->name, "%s %s",
+        xanadu_cmd_mode(whosends(chan->ci), chan->name, "%s %s",
                        ircd->adminunset, user->nick);
         return 0;
     }
@@ -1275,14 +1275,14 @@ int check_valid_op(User * user, Channel * chan, int servermode)
             if (ircd->owner && ircd->protect) {
                 if (check_access(user, chan->ci, CA_AUTOHALFOP)) {
                     tmp = stripModePrefix(ircd->ownerunset);
-                    anope_cmd_mode(whosends(chan->ci), chan->name,
+                    xanadu_cmd_mode(whosends(chan->ci), chan->name,
                                    "%so%s %s %s %s", ircd->adminunset,
                                    tmp, user->nick,
                                    user->nick, user->nick);
                     free(tmp);
                 } else {
                     tmp = stripModePrefix(ircd->ownerunset);
-                    anope_cmd_mode(whosends(chan->ci), chan->name,
+                    xanadu_cmd_mode(whosends(chan->ci), chan->name,
                                    "%sho%s %s %s %s %s",
                                    ircd->adminunset, tmp,
                                    user->nick, user->nick, user->nick,
@@ -1291,25 +1291,25 @@ int check_valid_op(User * user, Channel * chan, int servermode)
                 }
             } else if (!ircd->owner && ircd->protect) {
                 if (check_access(user, chan->ci, CA_AUTOHALFOP)) {
-                    anope_cmd_mode(whosends(chan->ci), chan->name,
+                    xanadu_cmd_mode(whosends(chan->ci), chan->name,
                                    "%so %s %s", ircd->adminunset,
                                    user->nick, user->nick);
                 } else {
-                    anope_cmd_mode(whosends(chan->ci), chan->name,
+                    xanadu_cmd_mode(whosends(chan->ci), chan->name,
                                    "%soh %s %s %s", ircd->adminunset,
                                    user->nick, user->nick, user->nick);
                 }
             } else {
                 if (check_access(user, chan->ci, CA_AUTOHALFOP)) {
-                    anope_cmd_mode(whosends(chan->ci), chan->name, "-o %s",
+                    xanadu_cmd_mode(whosends(chan->ci), chan->name, "-o %s",
                                    user->nick);
                 } else {
-                    anope_cmd_mode(whosends(chan->ci), chan->name,
+                    xanadu_cmd_mode(whosends(chan->ci), chan->name,
                                    "-ho %s %s", user->nick, user->nick);
                 }
             }
         } else {
-            anope_cmd_mode(whosends(chan->ci), chan->name, "-o %s",
+            xanadu_cmd_mode(whosends(chan->ci), chan->name, "-o %s",
                            user->nick);
         }
         return 0;
@@ -1319,17 +1319,17 @@ int check_valid_op(User * user, Channel * chan, int servermode)
         if (ircd->halfop) {
             if (ircd->owner && ircd->protect) {
                 tmp = stripModePrefix(ircd->ownerunset);
-                anope_cmd_mode(whosends(chan->ci), chan->name,
+                xanadu_cmd_mode(whosends(chan->ci), chan->name,
                                "%sho%s %s %s %s %s", ircd->adminunset,
                                tmp, user->nick, user->nick,
                                user->nick, user->nick);
                 free(tmp);
             } else {
-                anope_cmd_mode(whosends(chan->ci), chan->name, "-ho %s %s",
+                xanadu_cmd_mode(whosends(chan->ci), chan->name, "-ho %s %s",
                                user->nick, user->nick);
             }
         } else {
-            anope_cmd_mode(whosends(chan->ci), chan->name, "-o %s",
+            xanadu_cmd_mode(whosends(chan->ci), chan->name, "-o %s",
                            user->nick);
         }
         return 0;
@@ -1355,7 +1355,7 @@ int check_should_op(User * user, char *chan)
         return 0;
 
     if (check_access(user, ci, CA_AUTOOP)) {
-        anope_cmd_mode(whosends(ci), chan, "+o %s", user->nick);
+        xanadu_cmd_mode(whosends(ci), chan, "+o %s", user->nick);
         return 1;
     }
 
@@ -1378,7 +1378,7 @@ int check_should_voice(User * user, char *chan)
         return 0;
 
     if (check_access(user, ci, CA_AUTOVOICE)) {
-        anope_cmd_mode(whosends(ci), chan, "+v %s", user->nick);
+        xanadu_cmd_mode(whosends(ci), chan, "+v %s", user->nick);
         return 1;
     }
 
@@ -1395,7 +1395,7 @@ int check_should_halfop(User * user, char *chan)
         return 0;
 
     if (check_access(user, ci, CA_AUTOHALFOP)) {
-        anope_cmd_mode(whosends(ci), chan, "+h %s", user->nick);
+        xanadu_cmd_mode(whosends(ci), chan, "+h %s", user->nick);
         return 1;
     }
 
@@ -1415,7 +1415,7 @@ int check_should_owner(User * user, char *chan)
     if (((ci->flags & CI_SECUREFOUNDER) && is_real_founder(user, ci))
         || (!(ci->flags & CI_SECUREFOUNDER) && is_founder(user, ci))) {
         tmp = stripModePrefix(ircd->ownerset);
-        anope_cmd_mode(whosends(ci), chan, "+o%s %s %s", tmp, user->nick,
+        xanadu_cmd_mode(whosends(ci), chan, "+o%s %s %s", tmp, user->nick,
                        user->nick);
         free(tmp);
         return 1;
@@ -1436,7 +1436,7 @@ int check_should_protect(User * user, char *chan)
 
     if (check_access(user, ci, CA_AUTOPROTECT)) {
         tmp = stripModePrefix(ircd->adminset);
-        anope_cmd_mode(whosends(ci), chan, "+o%s %s %s", tmp, user->nick,
+        xanadu_cmd_mode(whosends(ci), chan, "+o%s %s %s", tmp, user->nick,
                        user->nick);
         free(tmp);
         return 1;
@@ -1457,7 +1457,7 @@ static void timeout_leave(Timeout * to)
     if (ci)                     /* Check cos the channel may be dropped in the meantime */
         ci->flags &= ~CI_INHABIT;
 
-    anope_cmd_part(s_ChanServ, chan, NULL);
+    xanadu_cmd_part(s_ChanServ, chan, NULL);
     free(to->data);
 }
 
@@ -1563,7 +1563,7 @@ int check_kick(User * user, char *chan, time_t chants)
      * c may be NULL even if it exists */
     if ((!(c = findchan(chan)) || c->usercount == 0)
         && !(ci->flags & CI_INHABIT)) {
-        anope_cmd_join(s_ChanServ, chan, (c ? c->creation_time : chants));
+        xanadu_cmd_join(s_ChanServ, chan, (c ? c->creation_time : chants));
         t = add_timeout(CSInhabit, timeout_leave, 0);
         t->data = sstrdup(chan);
         ci->flags |= CI_INHABIT;
@@ -1577,8 +1577,8 @@ int check_kick(User * user, char *chan, time_t chants)
         free(av[1]);
     }
 
-    anope_cmd_mode(whosends(ci), chan, "+b %s %lu", mask, time(NULL));
-    anope_cmd_kick(whosends(ci), chan, user->nick, "%s", reason);
+    xanadu_cmd_mode(whosends(ci), chan, "+b %s %lu", mask, time(NULL));
+    xanadu_cmd_kick(whosends(ci), chan, user->nick, "%s", reason);
 
     return 1;
 }
@@ -1645,15 +1645,15 @@ void restore_topic(char *chan)
     }
     if (ircd->join2set) {
         if (whosends(ci) == s_ChanServ) {
-            anope_cmd_join(s_ChanServ, chan, c->creation_time);
-            anope_cmd_mode(NULL, chan, "+o %s", s_ChanServ);
+            xanadu_cmd_join(s_ChanServ, chan, c->creation_time);
+            xanadu_cmd_mode(NULL, chan, "+o %s", s_ChanServ);
         }
     }
-    anope_cmd_topic(whosends(ci), c->name, c->topic_setter,
+    xanadu_cmd_topic(whosends(ci), c->name, c->topic_setter,
                     c->topic ? c->topic : "", c->topic_time);
     if (ircd->join2set) {
         if (whosends(ci) == s_ChanServ) {
-            anope_cmd_part(s_ChanServ, c->name, NULL);
+            xanadu_cmd_part(s_ChanServ, c->name, NULL);
         }
     }
 }
@@ -1707,17 +1707,17 @@ int check_topiclock(Channel * c, time_t topic_time)
 
     if (ircd->join2set) {
         if (whosends(ci) == s_ChanServ) {
-            anope_cmd_join(s_ChanServ, c->name, c->creation_time);
-            anope_cmd_mode(NULL, c->name, "+o %s", s_ChanServ);
+            xanadu_cmd_join(s_ChanServ, c->name, c->creation_time);
+            xanadu_cmd_mode(NULL, c->name, "+o %s", s_ChanServ);
         }
     }
 
-    anope_cmd_topic(whosends(ci), c->name, c->topic_setter,
+    xanadu_cmd_topic(whosends(ci), c->name, c->topic_setter,
                     c->topic ? c->topic : "", c->topic_time);
 
     if (ircd->join2set) {
         if (whosends(ci) == s_ChanServ) {
-            anope_cmd_part(s_ChanServ, c->ci->name, NULL);
+            xanadu_cmd_part(s_ChanServ, c->ci->name, NULL);
         }
     }
     return 1;
@@ -1786,7 +1786,7 @@ void cs_remove_nick(const NickCore * nc)
                         /* Maybe move this to delchan() ? */
                         if ((ci->c) && (ci->c->mode & ircd->regmode)) {
                             ci->c->mode &= ~ircd->regmode;
-                            anope_cmd_mode(whosends(ci), ci->name, "-r");
+                            xanadu_cmd_mode(whosends(ci), ci->name, "-r");
                         }
                     }
 
@@ -1990,7 +1990,7 @@ int delchan(ChannelInfo * ci)
     }
     if (ci->c) {
         if (ci->bi && ci->c->usercount >= BSMinUsers) {
-            anope_cmd_part(ci->bi->nick, ci->c->name, NULL);
+            xanadu_cmd_part(ci->bi->nick, ci->c->name, NULL);
         }
         ci->c->ci = NULL;
     }
@@ -2372,7 +2372,7 @@ void cs_set_flood(ChannelInfo * ci, char *value)
         free(ci->mlock_flood);
 
     /* This looks ugly, but it works ;) */
-    if (anope_flood_mode_check(value)) {
+    if (xanadu_flood_mode_check(value)) {
         ci->mlock_flood = sstrdup(value);
     } else {
         ci->mlock_on &= ~ircd->chan_fmode;
@@ -2395,7 +2395,7 @@ void cs_set_key(ChannelInfo * ci, char *value)
     if (value && *value != ':' && !strchr(value, ',')) {
         ci->mlock_key = sstrdup(value);
     } else {
-        ci->mlock_on &= ~anope_get_key_mode();
+        ci->mlock_on &= ~xanadu_get_key_mode();
         ci->mlock_key = NULL;
     }
 }
@@ -2411,7 +2411,7 @@ void cs_set_limit(ChannelInfo * ci, char *value)
     ci->mlock_limit = value ? strtoul(value, NULL, 10) : 0;
 
     if (ci->mlock_limit <= 0)
-        ci->mlock_on &= ~anope_get_limit_mode();
+        ci->mlock_on &= ~xanadu_get_limit_mode();
 }
 
 /*************************************************************************/
@@ -2554,7 +2554,7 @@ void stick_mask(ChannelInfo * ci, AutoKick * akick)
 
     av[0] = sstrdup("+b");
     av[1] = akick->u.mask;
-    anope_cmd_mode(whosends(ci), ci->c->name, "+b %s", akick->u.mask);
+    xanadu_cmd_mode(whosends(ci), ci->c->name, "+b %s", akick->u.mask);
     chan_set_modes(s_ChanServ, ci->c, 2, av, 1);
     free(av[0]);
 }
@@ -2578,7 +2578,7 @@ void stick_all(ChannelInfo * ci)
 
         av[0] = sstrdup("+b");
         av[1] = akick->u.mask;
-        anope_cmd_mode(whosends(ci), ci->c->name, "+b %s", akick->u.mask);
+        xanadu_cmd_mode(whosends(ci), ci->c->name, "+b %s", akick->u.mask);
         chan_set_modes(s_ChanServ, ci->c, 2, av, 1);
         free(av[0]);
     }

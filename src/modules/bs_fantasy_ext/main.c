@@ -1060,7 +1060,7 @@ int do_fantasy(int ac, char **av) {
 #ifdef ENABLE_TOPIC
 	if (stricmp(av[0], "topic") == 0) {
 		if (ac == 3)
-			anope_cmd_notice(ci->bi->nick, ci->name, "Channel Topic: %s", (((c->topic))?c->topic:""));
+			xanadu_cmd_notice(ci->bi->nick, ci->name, "Channel Topic: %s", (((c->topic))?c->topic:""));
 
 		else {
 			if (readonly)
@@ -1986,7 +1986,7 @@ int do_fantasy_denied(int ac, char **av) {
 #ifdef ENABLE_TOPIC
 	if (stricmp(av[0], "topic") == 0) {
 		if (ac == 3)
-			anope_cmd_notice(ci->bi->nick, ci->name, "Channel Topic: %s", c->topic);
+			xanadu_cmd_notice(ci->bi->nick, ci->name, "Channel Topic: %s", c->topic);
 		else
 			notice_lang(ci->bi->nick, u, ACCESS_DENIED);
 	} else

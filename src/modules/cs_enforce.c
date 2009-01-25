@@ -120,9 +120,9 @@ void do_enforce_restricted(Channel * c)
         if (check_access(u, c->ci, CA_NOJOIN)) {
             get_idealban(ci, u, mask, sizeof(mask));
             reason = getstring(u->na, CHAN_NOT_ALLOWED_TO_JOIN);
-            anope_cmd_mode(whosends(ci), ci->name, "+b %s %lu", mask,
+            xanadu_cmd_mode(whosends(ci), ci->name, "+b %s %lu", mask,
                            time(NULL));
-            anope_cmd_kick(whosends(ci), ci->name, u->nick, "%s", reason);
+            xanadu_cmd_kick(whosends(ci), ci->name, u->nick, "%s", reason);
             av[0] = ci->name;
             av[1] = u->nick;
             av[2] = reason;
@@ -160,9 +160,9 @@ void do_enforce_cmode_R(Channel * c)
             reason = getstring(u->na, CHAN_NOT_ALLOWED_TO_JOIN);
             if (((cbm = &cbmodes['R'])->flag == 0)
                 || !(c->mode & cbm->flag))
-                anope_cmd_mode(whosends(ci), ci->name, "+b %s %lu", mask,
+                xanadu_cmd_mode(whosends(ci), ci->name, "+b %s %lu", mask,
                                time(NULL));
-            anope_cmd_kick(whosends(ci), ci->name, u->nick, "%s", reason);
+            xanadu_cmd_kick(whosends(ci), ci->name, u->nick, "%s", reason);
             av[0] = ci->name;
             av[1] = u->nick;
             av[2] = reason;

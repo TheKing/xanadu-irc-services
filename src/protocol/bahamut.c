@@ -200,7 +200,7 @@ void bahamut_set_umode(User * user, int ac, char **av)
                 opcnt++;
 
                 if (WallOper)
-                    anope_cmd_global(s_OperServ,
+                    xanadu_cmd_global(s_OperServ,
                                      "\2%s\2 is now an IRC operator.",
                                      user->nick);
                 display_news(user, NEWS_OPER);
@@ -522,11 +522,11 @@ void bahamut_cmd_svsmode_chan(char *name, char *mode, char *nick)
 
 void bahamut_cmd_bot_chan_mode(char *nick, char *chan)
 {
-    anope_cmd_mode(nick, chan, "%s %s", ircd->botchanumode, nick);
+    xanadu_cmd_mode(nick, chan, "%s %s", ircd->botchanumode, nick);
 }
 
 /* EVENT: SJOIN */
-int anope_event_sjoin(char *source, int ac, char **av)
+int xanadu_event_sjoin(char *source, int ac, char **av)
 {
     do_sjoin(source, ac, av);
     return MOD_CONT;
@@ -550,7 +550,7 @@ int anope_event_sjoin(char *source, int ac, char **av)
 **	parv[0] = new nickname
 **      parv[1] = hopcount
 */
-int anope_event_nick(char *source, int ac, char **av)
+int xanadu_event_nick(char *source, int ac, char **av)
 {
     User *user;
 
@@ -559,7 +559,7 @@ int anope_event_nick(char *source, int ac, char **av)
                        strtoul(av[2], NULL, 10), strtoul(av[7], NULL, 0),
                        strtoul(av[8], NULL, 0), NULL, NULL);
         if (user) {
-            anope_set_umode(user, 1, &av[3]);
+            xanadu_set_umode(user, 1, &av[3]);
         }
     } else {
         do_nick(source, av[0], NULL, NULL, NULL, NULL,
@@ -569,14 +569,14 @@ int anope_event_nick(char *source, int ac, char **av)
 }
 
 /* EVENT : CAPAB */
-int anope_event_capab(char *source, int ac, char **av)
+int xanadu_event_capab(char *source, int ac, char **av)
 {
     capab_parse(ac, av);
     return MOD_CONT;
 }
 
 /* EVENT : OS */
-int anope_event_os(char *source, int ac, char **av)
+int xanadu_event_os(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -585,7 +585,7 @@ int anope_event_os(char *source, int ac, char **av)
 }
 
 /* EVENT : NS */
-int anope_event_ns(char *source, int ac, char **av)
+int xanadu_event_ns(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -594,7 +594,7 @@ int anope_event_ns(char *source, int ac, char **av)
 }
 
 /* EVENT : MS */
-int anope_event_ms(char *source, int ac, char **av)
+int xanadu_event_ms(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -603,7 +603,7 @@ int anope_event_ms(char *source, int ac, char **av)
 }
 
 /* EVENT : HS */
-int anope_event_hs(char *source, int ac, char **av)
+int xanadu_event_hs(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -612,7 +612,7 @@ int anope_event_hs(char *source, int ac, char **av)
 }
 
 /* EVENT : CS */
-int anope_event_cs(char *source, int ac, char **av)
+int xanadu_event_cs(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -620,7 +620,7 @@ int anope_event_cs(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_436(char *source, int ac, char **av)
+int xanadu_event_436(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -638,59 +638,59 @@ void moduleAddIRCDMsgs(void) {
     updateProtectDetails("PROTECT","PROTECTME","protect","deprotect","AUTOPROTECT","+","-");
 	
     /* now add the commands */
-    m = createMessage("401",       anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("402",       anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("436",       anope_event_436); addCoreMessage(IRCD,m);
-    m = createMessage("AWAY",      anope_event_away); addCoreMessage(IRCD,m);
-    m = createMessage("INVITE",    anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("JOIN",      anope_event_join); addCoreMessage(IRCD,m);
-    m = createMessage("KICK",      anope_event_kick); addCoreMessage(IRCD,m);
-    m = createMessage("KILL",      anope_event_kill); addCoreMessage(IRCD,m);
-    m = createMessage("MODE",      anope_event_mode); addCoreMessage(IRCD,m);
-    m = createMessage("MOTD",      anope_event_motd); addCoreMessage(IRCD,m);
-    m = createMessage("NICK",      anope_event_nick); addCoreMessage(IRCD,m);
-    m = createMessage("NOTICE",    anope_event_notice); addCoreMessage(IRCD,m);
-    m = createMessage("PART",      anope_event_part); addCoreMessage(IRCD,m);
-    m = createMessage("PASS",      anope_event_pass); addCoreMessage(IRCD,m);
-    m = createMessage("PING",      anope_event_ping); addCoreMessage(IRCD,m);
-    m = createMessage("PRIVMSG",   anope_event_privmsg); addCoreMessage(IRCD,m);
-    m = createMessage("QUIT",      anope_event_quit); addCoreMessage(IRCD,m);
-    m = createMessage("SERVER",    anope_event_server); addCoreMessage(IRCD,m);
-    m = createMessage("SQUIT",     anope_event_squit); addCoreMessage(IRCD,m);
-    m = createMessage("TOPIC",     anope_event_topic); addCoreMessage(IRCD,m);
-    m = createMessage("USER",      anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("WALLOPS",   anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("WHOIS",     anope_event_whois); addCoreMessage(IRCD,m);
-    m = createMessage("AKILL",     anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("GLOBOPS",   anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("GNOTICE",   anope_event_gnotice); addCoreMessage(IRCD,m);
-    m = createMessage("GOPER",     anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("RAKILL",    anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("SILENCE",   anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("SVSKILL",   anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("SVSMODE",   anope_event_mode); addCoreMessage(IRCD,m);
-    m = createMessage("SVSNICK",   anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("SVSNOOP",   anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("SQLINE",    anope_event_sqline); addCoreMessage(IRCD,m);
-    m = createMessage("UNSQLINE",  anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("CAPAB", 	   anope_event_capab); addCoreMessage(IRCD,m);
-    m = createMessage("CS",        anope_event_cs); addCoreMessage(IRCD,m);
-    m = createMessage("HS",        anope_event_hs); addCoreMessage(IRCD,m);
-    m = createMessage("MS",        anope_event_ms); addCoreMessage(IRCD,m);
-    m = createMessage("NS",        anope_event_ns); addCoreMessage(IRCD,m);
-    m = createMessage("OS",        anope_event_os); addCoreMessage(IRCD,m);
-    m = createMessage("RS",        anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("SGLINE",    anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("SJOIN",     anope_event_sjoin); addCoreMessage(IRCD,m);
-    m = createMessage("SS",        anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("SVINFO",    anope_event_svinfo); addCoreMessage(IRCD,m);
-    m = createMessage("SZLINE",    anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("UNSGLINE",  anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("UNSZLINE",  anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("ERROR",     anope_event_error); addCoreMessage(IRCD,m);
-    m = createMessage("LUSERSLOCK",anope_event_luserslock); addCoreMessage(IRCD,m);
-    m = createMessage("BURST",     anope_event_burst); addCoreMessage(IRCD,m);
-    m = createMessage("ADMIN",     anope_event_admin); addCoreMessage(IRCD,m);
+    m = createMessage("401",       xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("402",       xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("436",       xanadu_event_436); addCoreMessage(IRCD,m);
+    m = createMessage("AWAY",      xanadu_event_away); addCoreMessage(IRCD,m);
+    m = createMessage("INVITE",    xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("JOIN",      xanadu_event_join); addCoreMessage(IRCD,m);
+    m = createMessage("KICK",      xanadu_event_kick); addCoreMessage(IRCD,m);
+    m = createMessage("KILL",      xanadu_event_kill); addCoreMessage(IRCD,m);
+    m = createMessage("MODE",      xanadu_event_mode); addCoreMessage(IRCD,m);
+    m = createMessage("MOTD",      xanadu_event_motd); addCoreMessage(IRCD,m);
+    m = createMessage("NICK",      xanadu_event_nick); addCoreMessage(IRCD,m);
+    m = createMessage("NOTICE",    xanadu_event_notice); addCoreMessage(IRCD,m);
+    m = createMessage("PART",      xanadu_event_part); addCoreMessage(IRCD,m);
+    m = createMessage("PASS",      xanadu_event_pass); addCoreMessage(IRCD,m);
+    m = createMessage("PING",      xanadu_event_ping); addCoreMessage(IRCD,m);
+    m = createMessage("PRIVMSG",   xanadu_event_privmsg); addCoreMessage(IRCD,m);
+    m = createMessage("QUIT",      xanadu_event_quit); addCoreMessage(IRCD,m);
+    m = createMessage("SERVER",    xanadu_event_server); addCoreMessage(IRCD,m);
+    m = createMessage("SQUIT",     xanadu_event_squit); addCoreMessage(IRCD,m);
+    m = createMessage("TOPIC",     xanadu_event_topic); addCoreMessage(IRCD,m);
+    m = createMessage("USER",      xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("WALLOPS",   xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("WHOIS",     xanadu_event_whois); addCoreMessage(IRCD,m);
+    m = createMessage("AKILL",     xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("GLOBOPS",   xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("GNOTICE",   xanadu_event_gnotice); addCoreMessage(IRCD,m);
+    m = createMessage("GOPER",     xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("RAKILL",    xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SILENCE",   xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SVSKILL",   xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SVSMODE",   xanadu_event_mode); addCoreMessage(IRCD,m);
+    m = createMessage("SVSNICK",   xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SVSNOOP",   xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SQLINE",    xanadu_event_sqline); addCoreMessage(IRCD,m);
+    m = createMessage("UNSQLINE",  xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("CAPAB", 	   xanadu_event_capab); addCoreMessage(IRCD,m);
+    m = createMessage("CS",        xanadu_event_cs); addCoreMessage(IRCD,m);
+    m = createMessage("HS",        xanadu_event_hs); addCoreMessage(IRCD,m);
+    m = createMessage("MS",        xanadu_event_ms); addCoreMessage(IRCD,m);
+    m = createMessage("NS",        xanadu_event_ns); addCoreMessage(IRCD,m);
+    m = createMessage("OS",        xanadu_event_os); addCoreMessage(IRCD,m);
+    m = createMessage("RS",        xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SGLINE",    xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SJOIN",     xanadu_event_sjoin); addCoreMessage(IRCD,m);
+    m = createMessage("SS",        xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SVINFO",    xanadu_event_svinfo); addCoreMessage(IRCD,m);
+    m = createMessage("SZLINE",    xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("UNSGLINE",  xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("UNSZLINE",  xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("ERROR",     xanadu_event_error); addCoreMessage(IRCD,m);
+    m = createMessage("LUSERSLOCK",xanadu_event_luserslock); addCoreMessage(IRCD,m);
+    m = createMessage("BURST",     xanadu_event_burst); addCoreMessage(IRCD,m);
+    m = createMessage("ADMIN",     xanadu_event_admin); addCoreMessage(IRCD,m);
 
 }
 
@@ -913,7 +913,7 @@ void bahamut_cmd_connect(int servernum)
 
 
 /* EVENT : SERVER */
-int anope_event_server(char *source, int ac, char **av)
+int xanadu_event_server(char *source, int ac, char **av)
 {
     if (!stricmp(av[1], "1")) {
         uplink = sstrdup(av[0]);
@@ -924,7 +924,7 @@ int anope_event_server(char *source, int ac, char **av)
 }
 
 /* EVENT : PRIVMSG */
-int anope_event_privmsg(char *source, int ac, char **av)
+int xanadu_event_privmsg(char *source, int ac, char **av)
 {
     if (ac != 2)
         return MOD_CONT;
@@ -940,13 +940,13 @@ int anope_event_privmsg(char *source, int ac, char **av)
  *       parv[3] = server is standalone or connected to non-TS only 
  *       parv[4] = server's idea of UTC time
  */
-int anope_event_svinfo(char *source, int ac, char **av)
+int xanadu_event_svinfo(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
 
-int anope_event_part(char *source, int ac, char **av)
+int xanadu_event_part(char *source, int ac, char **av)
 {
     if (ac < 1 || ac > 2)
         return MOD_CONT;
@@ -954,7 +954,7 @@ int anope_event_part(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_whois(char *source, int ac, char **av)
+int xanadu_event_whois(char *source, int ac, char **av)
 {
     if (source && ac >= 1) {
         m_whois(source, av[0]);
@@ -962,7 +962,7 @@ int anope_event_whois(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_topic(char *source, int ac, char **av)
+int xanadu_event_topic(char *source, int ac, char **av)
 {
     if (ac != 4)
         return MOD_CONT;
@@ -970,7 +970,7 @@ int anope_event_topic(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_squit(char *source, int ac, char **av)
+int xanadu_event_squit(char *source, int ac, char **av)
 {
     if (ac != 2)
         return MOD_CONT;
@@ -978,7 +978,7 @@ int anope_event_squit(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_quit(char *source, int ac, char **av)
+int xanadu_event_quit(char *source, int ac, char **av)
 {
     if (ac != 1)
         return MOD_CONT;
@@ -987,7 +987,7 @@ int anope_event_quit(char *source, int ac, char **av)
 }
 
 /* EVENT: MODE */
-int anope_event_mode(char *source, int ac, char **av)
+int xanadu_event_mode(char *source, int ac, char **av)
 {
     if (ac < 2)
         return MOD_CONT;
@@ -1001,7 +1001,7 @@ int anope_event_mode(char *source, int ac, char **av)
 }
 
 /* EVENT: KILL */
-int anope_event_kill(char *source, int ac, char **av)
+int xanadu_event_kill(char *source, int ac, char **av)
 {
     if (ac != 2)
         return MOD_CONT;
@@ -1011,7 +1011,7 @@ int anope_event_kill(char *source, int ac, char **av)
 }
 
 /* EVENT: KICK */
-int anope_event_kick(char *source, int ac, char **av)
+int xanadu_event_kick(char *source, int ac, char **av)
 {
     if (ac != 3)
         return MOD_CONT;
@@ -1020,7 +1020,7 @@ int anope_event_kick(char *source, int ac, char **av)
 }
 
 /* EVENT: JOIN */
-int anope_event_join(char *source, int ac, char **av)
+int xanadu_event_join(char *source, int ac, char **av)
 {
     if (ac != 1)
         return MOD_CONT;
@@ -1029,7 +1029,7 @@ int anope_event_join(char *source, int ac, char **av)
 }
 
 /* EVENT: MOTD */
-int anope_event_motd(char *source, int ac, char **av)
+int xanadu_event_motd(char *source, int ac, char **av)
 {
     if (!source) {
         return MOD_CONT;
@@ -1283,7 +1283,7 @@ void bahamut_cmd_quit(char *source, char *buf)
     }
 }
 
-int anope_event_away(char *source, int ac, char **av)
+int xanadu_event_away(char *source, int ac, char **av)
 {
     if (!source) {
         return MOD_CONT;
@@ -1292,7 +1292,7 @@ int anope_event_away(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_ping(char *source, int ac, char **av)
+int xanadu_event_ping(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -1395,7 +1395,7 @@ void bahamut_cmd_chg_nick(char *oldnick, char *newnick)
     send_cmd(oldnick, "NICK %s", newnick);
 }
 
-int anope_event_error(char *source, int ac, char **av)
+int xanadu_event_error(char *source, int ac, char **av)
 {
     if (ac >= 1) {
         if (debug) {
@@ -1405,23 +1405,23 @@ int anope_event_error(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_notice(char *source, int ac, char **av)
+int xanadu_event_notice(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_sqline(char *source, int ac, char **av)
+int xanadu_event_sqline(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
 
-int anope_event_gnotice(char *source, int ac, char **av)
+int xanadu_event_gnotice(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_pass(char *source, int ac, char **av)
+int xanadu_event_pass(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
@@ -1447,7 +1447,7 @@ void bahamut_cmd_eob()
     send_cmd(NULL, "BURST 0");
 }
 
-int anope_event_burst(char *source, int ac, char **av)
+int xanadu_event_burst(char *source, int ac, char **av)
 {
     Server *s;
     s = findserver(servlist, source);
@@ -1465,22 +1465,22 @@ int anope_event_burst(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_luserslock(char *source, int ac, char **av)
+int xanadu_event_luserslock(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_rehash(char *source, int ac, char **av)
+int xanadu_event_rehash(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_credits(char *source, int ac, char **av)
+int xanadu_event_credits(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_admin(char *source, int ac, char **av)
+int xanadu_event_admin(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }

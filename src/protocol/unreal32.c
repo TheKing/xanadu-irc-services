@@ -461,7 +461,7 @@ void unreal_set_umode(User * user, int ac, char **av)
             if (add) {
                 opcnt++;
                 if (WallOper) {
-                    anope_cmd_global(s_OperServ,
+                    xanadu_cmd_global(s_OperServ,
                                      "\2%s\2 is now an IRC operator.",
                                      user->nick);
                 }
@@ -487,7 +487,7 @@ void unreal_set_umode(User * user, int ac, char **av)
 
 
 /* Event: PROTOCTL */
-int anope_event_capab(char *source, int ac, char **av)
+int xanadu_event_capab(char *source, int ac, char **av)
 {
     capab_parse(ac, av);
     return MOD_CONT;
@@ -705,7 +705,7 @@ void unreal_cmd_serv_privmsg(char *source, char *dest, char *msg)
 
 void unreal_cmd_bot_chan_mode(char *nick, char *chan)
 {
-    anope_cmd_mode(nick, chan, "%s %s %s", myIrcd->botchanumode, nick,
+    xanadu_cmd_mode(nick, chan, "%s %s %s", myIrcd->botchanumode, nick,
                    nick);
 }
 
@@ -1101,7 +1101,7 @@ void unreal_cmd_connect(int servernum)
 
 /* Events */
 
-int anope_event_ping(char *source, int ac, char **av)
+int xanadu_event_ping(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -1126,7 +1126,7 @@ void unreal_cmd_netinfo(int ac, char **av)
  *  argv[6] = free(**)
  *  argv[7] = ircnet
  */
-int anope_event_netinfo(char *source, int ac, char **av)
+int xanadu_event_netinfo(char *source, int ac, char **av)
 {
     unreal_cmd_netinfo(ac, av);
     return MOD_CONT;
@@ -1147,12 +1147,12 @@ int anope_event_netinfo(char *source, int ac, char **av)
  * parv[10]:                                     regex              
  *
 */
-int anope_event_tkl(char *source, int ac, char **av)
+int xanadu_event_tkl(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_eos(char *source, int ac, char **av)
+int xanadu_event_eos(char *source, int ac, char **av)
 {
     Server *s;
     s = findserver(servlist, source);
@@ -1166,7 +1166,7 @@ int anope_event_eos(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_436(char *source, int ac, char **av)
+int xanadu_event_436(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -1180,7 +1180,7 @@ int anope_event_436(char *source, int ac, char **av)
 **      parv[0] = sender prefix
 **      parv[1] = away message
 */
-int anope_event_away(char *source, int ac, char **av)
+int xanadu_event_away(char *source, int ac, char **av)
 {
     if (!source) {
         return MOD_CONT;
@@ -1201,7 +1201,7 @@ int anope_event_away(char *source, int ac, char **av)
 **	parv[3] = topic time
 **	parv[4] = topic text
 */
-int anope_event_topic(char *source, int ac, char **av)
+int xanadu_event_topic(char *source, int ac, char **av)
 {
     if (ac != 4)
         return MOD_CONT;
@@ -1209,7 +1209,7 @@ int anope_event_topic(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_squit(char *source, int ac, char **av)
+int xanadu_event_squit(char *source, int ac, char **av)
 {
     if (ac != 2)
         return MOD_CONT;
@@ -1217,7 +1217,7 @@ int anope_event_squit(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_quit(char *source, int ac, char **av)
+int xanadu_event_quit(char *source, int ac, char **av)
 {
     if (ac != 1)
         return MOD_CONT;
@@ -1225,13 +1225,13 @@ int anope_event_quit(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_pass(char *source, int ac, char **av)
+int xanadu_event_pass(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
 
-int anope_event_mode(char *source, int ac, char **av)
+int xanadu_event_mode(char *source, int ac, char **av)
 {
     if (ac < 2)
         return MOD_CONT;
@@ -1250,7 +1250,7 @@ int anope_event_mode(char *source, int ac, char **av)
     parv[0] - sender
     parv[1] - modes to change
 */
-int anope_event_umode2(char *source, int ac, char **av)
+int xanadu_event_umode2(char *source, int ac, char **av)
 {
     if (ac < 1)
         return MOD_CONT;
@@ -1259,7 +1259,7 @@ int anope_event_umode2(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_kill(char *source, int ac, char **av)
+int xanadu_event_kill(char *source, int ac, char **av)
 {
     if (ac != 2)
         return MOD_CONT;
@@ -1268,7 +1268,7 @@ int anope_event_kill(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_kick(char *source, int ac, char **av)
+int xanadu_event_kick(char *source, int ac, char **av)
 {
     if (ac != 3)
         return MOD_CONT;
@@ -1277,7 +1277,7 @@ int anope_event_kick(char *source, int ac, char **av)
 }
 
 
-int anope_event_join(char *source, int ac, char **av)
+int xanadu_event_join(char *source, int ac, char **av)
 {
     if (ac != 1)
         return MOD_CONT;
@@ -1285,7 +1285,7 @@ int anope_event_join(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_motd(char *source, int ac, char **av)
+int xanadu_event_motd(char *source, int ac, char **av)
 {
     if (!source) {
         return MOD_CONT;
@@ -1295,7 +1295,7 @@ int anope_event_motd(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_setname(char *source, int ac, char **av)
+int xanadu_event_setname(char *source, int ac, char **av)
 {
     User *u;
 
@@ -1314,7 +1314,7 @@ int anope_event_setname(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_chgname(char *source, int ac, char **av)
+int xanadu_event_chgname(char *source, int ac, char **av)
 {
     User *u;
 
@@ -1333,7 +1333,7 @@ int anope_event_chgname(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_setident(char *source, int ac, char **av)
+int xanadu_event_setident(char *source, int ac, char **av)
 {
     User *u;
 
@@ -1351,7 +1351,7 @@ int anope_event_setident(char *source, int ac, char **av)
     change_user_username(u, av[0]);
     return MOD_CONT;
 }
-int anope_event_chgident(char *source, int ac, char **av)
+int xanadu_event_chgident(char *source, int ac, char **av)
 {
     User *u;
 
@@ -1370,7 +1370,7 @@ int anope_event_chgident(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_sethost(char *source, int ac, char **av)
+int xanadu_event_sethost(char *source, int ac, char **av)
 {
     User *u;
 
@@ -1420,7 +1420,7 @@ int anope_event_sethost(char *source, int ac, char **av)
               char *server, char *realname, time_t ts, uint32 svid,
               uint32 ip, char *vhost, char *uid)
 */
-int anope_event_nick(char *source, int ac, char **av)
+int xanadu_event_nick(char *source, int ac, char **av)
 {
     User *user;
 
@@ -1441,7 +1441,7 @@ int anope_event_nick(char *source, int ac, char **av)
                                                              0),
                            ntohl(decode_ip(av[9])), av[8], NULL);
             if (user)
-                anope_set_umode(user, 1, &av[7]);
+                xanadu_set_umode(user, 1, &av[7]);
 
         } else {
             /* NON NICKIP */
@@ -1450,7 +1450,7 @@ int anope_event_nick(char *source, int ac, char **av)
                                                              0), 0, av[8],
                            NULL);
             if (user)
-                anope_set_umode(user, 1, &av[7]);
+                xanadu_set_umode(user, 1, &av[7]);
         }
     } else {
         do_nick(source, av[0], NULL, NULL, NULL, NULL,
@@ -1460,7 +1460,7 @@ int anope_event_nick(char *source, int ac, char **av)
 }
 
 
-int anope_event_chghost(char *source, int ac, char **av)
+int xanadu_event_chghost(char *source, int ac, char **av)
 {
     User *u;
 
@@ -1480,7 +1480,7 @@ int anope_event_chghost(char *source, int ac, char **av)
 }
 
 /* EVENT: SERVER */
-int anope_event_server(char *source, int ac, char **av)
+int xanadu_event_server(char *source, int ac, char **av)
 {
     char *desc;
     char *vl;
@@ -1502,7 +1502,7 @@ int anope_event_server(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_privmsg(char *source, int ac, char **av)
+int xanadu_event_privmsg(char *source, int ac, char **av)
 {
     if (ac != 2)
         return MOD_CONT;
@@ -1510,7 +1510,7 @@ int anope_event_privmsg(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_part(char *source, int ac, char **av)
+int xanadu_event_part(char *source, int ac, char **av)
 {
     if (ac < 1 || ac > 2)
         return MOD_CONT;
@@ -1518,7 +1518,7 @@ int anope_event_part(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_whois(char *source, int ac, char **av)
+int xanadu_event_whois(char *source, int ac, char **av)
 {
     if (source && ac >= 1) {
         m_whois(source, av[0]);
@@ -1632,7 +1632,7 @@ void unreal_cmd_svid_umode3(User * u, char *ts)
     /* not used */
 }
 
-int anope_event_error(char *source, int ac, char **av)
+int xanadu_event_error(char *source, int ac, char **av)
 {
     if (av[0]) {
         if (debug) {
@@ -1645,12 +1645,12 @@ int anope_event_error(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_notice(char *source, int ac, char **av)
+int xanadu_event_notice(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_smo(char *source, int ac, char **av)
+int xanadu_event_smo(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
@@ -1683,32 +1683,32 @@ void unreal_cmd_svspart(char *source, char *nick, char *chan)
     send_cmd(source, "%s %s :%s", send_token("SVSPART", "BT"), nick, chan);
 }
 
-int anope_event_globops(char *source, int ac, char **av)
+int xanadu_event_globops(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_swhois(char *source, int ac, char **av)
+int xanadu_event_swhois(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_rehash(char *source, int ac, char **av)
+int xanadu_event_rehash(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_credits(char *source, int ac, char **av)
+int xanadu_event_credits(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_admin(char *source, int ac, char **av)
+int xanadu_event_admin(char *source, int ac, char **av)
 {
     return MOD_CONT;
 }
 
-int anope_event_sdesc(char *source, int ac, char **av)
+int xanadu_event_sdesc(char *source, int ac, char **av)
 {
     Server *s;
     s = findserver(servlist, source);
@@ -1720,7 +1720,7 @@ int anope_event_sdesc(char *source, int ac, char **av)
     return MOD_CONT;
 }
 
-int anope_event_sjoin(char *source, int ac, char **av)
+int xanadu_event_sjoin(char *source, int ac, char **av)
 {
     do_sjoin(source, ac, av);
     return MOD_CONT;
@@ -1852,246 +1852,246 @@ void moduleAddIRCDMsgs(void) {
 
     updateProtectDetails("PROTECT","PROTECTME","protect","deprotect","AUTOPROTECT","+a","-a");
 
-    m = createMessage("401",       anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("402",       anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("436",       anope_event_436); addCoreMessage(IRCD,m);
-    m = createMessage("451",       anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("461",       anope_event_null); addCoreMessage(IRCD,m);
-    m = createMessage("AWAY",      anope_event_away); addCoreMessage(IRCD,m);
+    m = createMessage("401",       xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("402",       xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("436",       xanadu_event_436); addCoreMessage(IRCD,m);
+    m = createMessage("451",       xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("461",       xanadu_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("AWAY",      xanadu_event_away); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("6",        anope_event_away); addCoreMessage(IRCD,m);
+     m = createMessage("6",        xanadu_event_away); addCoreMessage(IRCD,m);
     }
-    m = createMessage("INVITE",    anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("INVITE",    xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("*",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("*",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("JOIN",      anope_event_join); addCoreMessage(IRCD,m);
+    m = createMessage("JOIN",      xanadu_event_join); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("C",        anope_event_join); addCoreMessage(IRCD,m);
+     m = createMessage("C",        xanadu_event_join); addCoreMessage(IRCD,m);
     }
-    m = createMessage("KICK",      anope_event_kick); addCoreMessage(IRCD,m);
+    m = createMessage("KICK",      xanadu_event_kick); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("H",        anope_event_kick); addCoreMessage(IRCD,m);
+     m = createMessage("H",        xanadu_event_kick); addCoreMessage(IRCD,m);
     }
-    m = createMessage("KILL",      anope_event_kill); addCoreMessage(IRCD,m);
+    m = createMessage("KILL",      xanadu_event_kill); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage(".",        anope_event_kill); addCoreMessage(IRCD,m);
+     m = createMessage(".",        xanadu_event_kill); addCoreMessage(IRCD,m);
     }
-    m = createMessage("MODE",      anope_event_mode); addCoreMessage(IRCD,m);
+    m = createMessage("MODE",      xanadu_event_mode); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("G",        anope_event_mode); addCoreMessage(IRCD,m);
+     m = createMessage("G",        xanadu_event_mode); addCoreMessage(IRCD,m);
     }
-    m = createMessage("MOTD",      anope_event_motd); addCoreMessage(IRCD,m);
+    m = createMessage("MOTD",      xanadu_event_motd); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("F",        anope_event_motd); addCoreMessage(IRCD,m);
+     m = createMessage("F",        xanadu_event_motd); addCoreMessage(IRCD,m);
     }
-    m = createMessage("NICK",      anope_event_nick); addCoreMessage(IRCD,m);
+    m = createMessage("NICK",      xanadu_event_nick); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("&",        anope_event_nick); addCoreMessage(IRCD,m);
+     m = createMessage("&",        xanadu_event_nick); addCoreMessage(IRCD,m);
     }
-    m = createMessage("NOTICE",    anope_event_notice); addCoreMessage(IRCD,m);
+    m = createMessage("NOTICE",    xanadu_event_notice); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("B",        anope_event_notice); addCoreMessage(IRCD,m);
+     m = createMessage("B",        xanadu_event_notice); addCoreMessage(IRCD,m);
     }
-    m = createMessage("PART",      anope_event_part); addCoreMessage(IRCD,m);
+    m = createMessage("PART",      xanadu_event_part); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("D",        anope_event_part); addCoreMessage(IRCD,m);
+     m = createMessage("D",        xanadu_event_part); addCoreMessage(IRCD,m);
     }
-    m = createMessage("PING",      anope_event_ping); addCoreMessage(IRCD,m);
+    m = createMessage("PING",      xanadu_event_ping); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("8",        anope_event_ping); addCoreMessage(IRCD,m);
+     m = createMessage("8",        xanadu_event_ping); addCoreMessage(IRCD,m);
     }
-    m = createMessage("PRIVMSG",   anope_event_privmsg); addCoreMessage(IRCD,m);
+    m = createMessage("PRIVMSG",   xanadu_event_privmsg); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("!",        anope_event_privmsg); addCoreMessage(IRCD,m);
+     m = createMessage("!",        xanadu_event_privmsg); addCoreMessage(IRCD,m);
     }
-    m = createMessage("QUIT",      anope_event_quit); addCoreMessage(IRCD,m);
+    m = createMessage("QUIT",      xanadu_event_quit); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage(",",        anope_event_quit); addCoreMessage(IRCD,m);
+     m = createMessage(",",        xanadu_event_quit); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SERVER",    anope_event_server); addCoreMessage(IRCD,m);
+    m = createMessage("SERVER",    xanadu_event_server); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("'",        anope_event_server); addCoreMessage(IRCD,m);
+     m = createMessage("'",        xanadu_event_server); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SQUIT",     anope_event_squit); addCoreMessage(IRCD,m);
+    m = createMessage("SQUIT",     xanadu_event_squit); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("-",        anope_event_squit); addCoreMessage(IRCD,m);
+     m = createMessage("-",        xanadu_event_squit); addCoreMessage(IRCD,m);
     }
-    m = createMessage("TOPIC",     anope_event_topic); addCoreMessage(IRCD,m);
+    m = createMessage("TOPIC",     xanadu_event_topic); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage(")",        anope_event_topic); addCoreMessage(IRCD,m);
+     m = createMessage(")",        xanadu_event_topic); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SVSMODE",   anope_event_mode); addCoreMessage(IRCD,m);
+    m = createMessage("SVSMODE",   xanadu_event_mode); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("n",        anope_event_mode); addCoreMessage(IRCD,m);
+      m = createMessage("n",        xanadu_event_mode); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SVS2MODE",   anope_event_mode); addCoreMessage(IRCD,m);
+    m = createMessage("SVS2MODE",   xanadu_event_mode); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("v",       anope_event_mode); addCoreMessage(IRCD,m);
+      m = createMessage("v",       xanadu_event_mode); addCoreMessage(IRCD,m);
     }
-    m = createMessage("USER",      anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("USER",      xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("%",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("%",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("WALLOPS",   anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("WALLOPS",   xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("=",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("=",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("WHOIS",     anope_event_whois); addCoreMessage(IRCD,m);
+    m = createMessage("WHOIS",     xanadu_event_whois); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("#",        anope_event_whois); addCoreMessage(IRCD,m);
+     m = createMessage("#",        xanadu_event_whois); addCoreMessage(IRCD,m);
     }
-    m = createMessage("AKILL",     anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("AKILL",     xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("V",       anope_event_null); addCoreMessage(IRCD,m);
+      m = createMessage("V",       xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("GLOBOPS",   anope_event_globops); addCoreMessage(IRCD,m);
+    m = createMessage("GLOBOPS",   xanadu_event_globops); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("]",        anope_event_globops); addCoreMessage(IRCD,m);
+     m = createMessage("]",        xanadu_event_globops); addCoreMessage(IRCD,m);
     }
-    m = createMessage("GNOTICE",   anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("GNOTICE",   xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("Z",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("Z",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("GOPER",     anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("GOPER",     xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("[",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("[",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("RAKILL",    anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("RAKILL",    xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("Y",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("Y",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SILENCE",   anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SILENCE",   xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("U",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("U",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SVSKILL",   anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SVSKILL",   xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("h",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("h",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SVSNICK",   anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SVSNICK",   xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("e",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("e",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SVSNOOP",   anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SVSNOOP",   xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("f",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("f",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SQLINE",    anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SQLINE",    xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("c",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("c",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("UNSQLINE",  anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("UNSQLINE",  xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("d",        anope_event_null); addCoreMessage(IRCD,m);
+     m = createMessage("d",        xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("PROTOCTL",  anope_event_capab); addCoreMessage(IRCD,m);
+    m = createMessage("PROTOCTL",  xanadu_event_capab); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("_",        anope_event_capab); addCoreMessage(IRCD,m);
+     m = createMessage("_",        xanadu_event_capab); addCoreMessage(IRCD,m);
     }
-    m = createMessage("CHGHOST",   anope_event_chghost); addCoreMessage(IRCD,m);
+    m = createMessage("CHGHOST",   xanadu_event_chghost); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("AL",        anope_event_chghost); addCoreMessage(IRCD,m);
+      m = createMessage("AL",        xanadu_event_chghost); addCoreMessage(IRCD,m);
     }
-    m = createMessage("CHGIDENT",  anope_event_chgident); addCoreMessage(IRCD,m);
+    m = createMessage("CHGIDENT",  xanadu_event_chgident); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("AZ",        anope_event_chgident); addCoreMessage(IRCD,m);
+     m = createMessage("AZ",        xanadu_event_chgident); addCoreMessage(IRCD,m);
     }
-    m = createMessage("CHGNAME",   anope_event_chgname); addCoreMessage(IRCD,m);
+    m = createMessage("CHGNAME",   xanadu_event_chgname); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("BK",        anope_event_chgname); addCoreMessage(IRCD,m);
+     m = createMessage("BK",        xanadu_event_chgname); addCoreMessage(IRCD,m);
     }
-    m = createMessage("NETINFO",   anope_event_netinfo); addCoreMessage(IRCD,m);
+    m = createMessage("NETINFO",   xanadu_event_netinfo); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("AO",       anope_event_netinfo); addCoreMessage(IRCD,m);
+     m = createMessage("AO",       xanadu_event_netinfo); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SETHOST",   anope_event_sethost); addCoreMessage(IRCD,m);
+    m = createMessage("SETHOST",   xanadu_event_sethost); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("AA",        anope_event_sethost); addCoreMessage(IRCD,m);
+     m = createMessage("AA",        xanadu_event_sethost); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SETIDENT",  anope_event_setident); addCoreMessage(IRCD,m);
+    m = createMessage("SETIDENT",  xanadu_event_setident); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("AD",        anope_event_setident); addCoreMessage(IRCD,m);
+     m = createMessage("AD",        xanadu_event_setident); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SETNAME",   anope_event_setname); addCoreMessage(IRCD,m);
+    m = createMessage("SETNAME",   xanadu_event_setname); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("AE",        anope_event_setname); addCoreMessage(IRCD,m);
+     m = createMessage("AE",        xanadu_event_setname); addCoreMessage(IRCD,m);
     }
-    m = createMessage("TKL", 	   anope_event_tkl); addCoreMessage(IRCD,m);
+    m = createMessage("TKL", 	   xanadu_event_tkl); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("BD",       anope_event_tkl); addCoreMessage(IRCD,m);
+     m = createMessage("BD",       xanadu_event_tkl); addCoreMessage(IRCD,m);
     }
-    m = createMessage("EOS", 	   anope_event_eos); addCoreMessage(IRCD,m);
+    m = createMessage("EOS", 	   xanadu_event_eos); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("ES",       anope_event_eos); addCoreMessage(IRCD,m);
+     m = createMessage("ES",       xanadu_event_eos); addCoreMessage(IRCD,m);
     }
-    m = createMessage("PASS", 	   anope_event_pass); addCoreMessage(IRCD,m);
+    m = createMessage("PASS", 	   xanadu_event_pass); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("<",        anope_event_pass); addCoreMessage(IRCD,m);
+     m = createMessage("<",        xanadu_event_pass); addCoreMessage(IRCD,m);
     }
-    m = createMessage("ERROR", 	   anope_event_error); addCoreMessage(IRCD,m);
+    m = createMessage("ERROR", 	   xanadu_event_error); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("5",        anope_event_error); addCoreMessage(IRCD,m);
+      m = createMessage("5",        xanadu_event_error); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SMO", 	   anope_event_smo); addCoreMessage(IRCD,m);
+    m = createMessage("SMO", 	   xanadu_event_smo); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("AU",       anope_event_smo); addCoreMessage(IRCD,m);
+     m = createMessage("AU",       xanadu_event_smo); addCoreMessage(IRCD,m);
     }
-    m = createMessage("UMODE2",    anope_event_umode2); addCoreMessage(IRCD,m);
+    m = createMessage("UMODE2",    xanadu_event_umode2); addCoreMessage(IRCD,m);
     if (UseTokens) {
-     m = createMessage("|",        anope_event_umode2); addCoreMessage(IRCD,m);
+     m = createMessage("|",        xanadu_event_umode2); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SWHOIS",    anope_event_swhois); addCoreMessage(IRCD,m);
+    m = createMessage("SWHOIS",    xanadu_event_swhois); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("BA",        anope_event_swhois); addCoreMessage(IRCD,m);
+      m = createMessage("BA",        xanadu_event_swhois); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SJOIN",      anope_event_sjoin); addCoreMessage(IRCD,m);
+    m = createMessage("SJOIN",      xanadu_event_sjoin); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("~",        anope_event_sjoin); addCoreMessage(IRCD,m);
+      m = createMessage("~",        xanadu_event_sjoin); addCoreMessage(IRCD,m);
     }
-    m = createMessage("REHASH",     anope_event_rehash); addCoreMessage(IRCD,m);
+    m = createMessage("REHASH",     xanadu_event_rehash); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("O",        anope_event_rehash); addCoreMessage(IRCD,m);
+      m = createMessage("O",        xanadu_event_rehash); addCoreMessage(IRCD,m);
     }
-    m = createMessage("ADMIN",      anope_event_admin); addCoreMessage(IRCD,m);
+    m = createMessage("ADMIN",      xanadu_event_admin); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("@",        anope_event_admin); addCoreMessage(IRCD,m);
+      m = createMessage("@",        xanadu_event_admin); addCoreMessage(IRCD,m);
     }
-    m = createMessage("CREDITS",    anope_event_credits); addCoreMessage(IRCD,m);
+    m = createMessage("CREDITS",    xanadu_event_credits); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("AJ",       anope_event_credits); addCoreMessage(IRCD,m);
+      m = createMessage("AJ",       xanadu_event_credits); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SDESC",      anope_event_sdesc); addCoreMessage(IRCD,m);
+    m = createMessage("SDESC",      xanadu_event_sdesc); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("AG",       anope_event_sdesc); addCoreMessage(IRCD,m);
+      m = createMessage("AG",       xanadu_event_sdesc); addCoreMessage(IRCD,m);
     }
-    m = createMessage("HTM",        anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("HTM",        xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("BH",       anope_event_null); addCoreMessage(IRCD,m);
+      m = createMessage("BH",       xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("HELP",        anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("HELP",        xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("4",       anope_event_null); addCoreMessage(IRCD,m);
+      m = createMessage("4",       xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("TRACE",        anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("TRACE",        xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("b",       anope_event_null); addCoreMessage(IRCD,m);
+      m = createMessage("b",       xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("LAG",        anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("LAG",        xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("AF",       anope_event_null); addCoreMessage(IRCD,m);
+      m = createMessage("AF",       xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("RPING",        anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("RPING",        xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("AM",       anope_event_null); addCoreMessage(IRCD,m);
+      m = createMessage("AM",       xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SENDSNO",    anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SENDSNO",    xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("Ss",       anope_event_null); addCoreMessage(IRCD,m);
+      m = createMessage("Ss",       xanadu_event_null); addCoreMessage(IRCD,m);
     }
-    m = createMessage("SENDUMODE",  anope_event_null); addCoreMessage(IRCD,m);
+    m = createMessage("SENDUMODE",  xanadu_event_null); addCoreMessage(IRCD,m);
     if (UseTokens) {
-      m = createMessage("AP",       anope_event_null); addCoreMessage(IRCD,m);
+      m = createMessage("AP",       xanadu_event_null); addCoreMessage(IRCD,m);
     }
 
     /* The none token version of these is in messages.c */

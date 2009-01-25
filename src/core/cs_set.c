@@ -394,7 +394,7 @@ int do_set_password(User * u, ChannelInfo * ci, char *param)
         alog("%s: %s!%s@%s set password as Services admin for %s",
              s_ChanServ, u->nick, u->username, u->host, ci->name);
         if (WallSetpass)
-            anope_cmd_global(s_ChanServ,
+            xanadu_cmd_global(s_ChanServ,
                              "\2%s\2 set password as Services admin for channel \2%s\2",
                              u->nick, ci->name);
     } else {
@@ -532,7 +532,7 @@ int do_set_mlock(User * u, ChannelInfo * ci, char *param)
     if (ircd->Lmode) {
         /* We can't mlock +L if +l is not mlocked as well. */
         if ((ci->mlock_on & ircd->chan_lmode)
-            && !(ci->mlock_on & anope_get_limit_mode())) {
+            && !(ci->mlock_on & xanadu_get_limit_mode())) {
             ci->mlock_on &= ~ircd->chan_lmode;
             free(ci->mlock_redirect);
             notice_lang(s_ChanServ, u, CHAN_SET_MLOCK_L_REQUIRED);
@@ -543,7 +543,7 @@ int do_set_mlock(User * u, ChannelInfo * ci, char *param)
     /* So check if we need there is a NOKNOCK MODE and that we need INVITEONLY */
     if (ircd->noknock && ircd->knock_needs_i) {
         if ((ci->mlock_on & ircd->noknock)
-            && !(ci->mlock_on & anope_get_invite_mode())) {
+            && !(ci->mlock_on & xanadu_get_invite_mode())) {
             ci->mlock_on &= ~ircd->noknock;
             notice_lang(s_ChanServ, u, CHAN_SET_MLOCK_K_REQUIRED);
         }

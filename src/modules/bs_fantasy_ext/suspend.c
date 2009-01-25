@@ -66,13 +66,13 @@ int do_suspend(User * u, ChannelInfo *ci, char *reason) {
 			av[0] = c->name;
 			av[1] = cu->user->nick;
 			av[2] = reason ? reason : "CHAN_SUSPEND_REASON";
-			anope_cmd_kick(ci->bi->nick, av[0], av[1], av[2]);
+			xanadu_cmd_kick(ci->bi->nick, av[0], av[1], av[2]);
 			do_kick(ci->bi->nick, 3, av);
 		}
 	}
 
 	if (WallForbid)
-		anope_cmd_global(ci->bi->nick, "\2%s\2 used SUSPEND on channel \2%s\2",
+		xanadu_cmd_global(ci->bi->nick, "\2%s\2 used SUSPEND on channel \2%s\2",
 				u->nick, ci->name);
 
 	alog("%s: %s set SUSPEND for channel %s", ci->bi->nick, u->nick, ci->name);

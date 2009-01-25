@@ -77,10 +77,10 @@ int do_jupe(User * u)
         if (!isValidHost(jserver, 3)) {
             notice_lang(s_OperServ, u, OPER_JUPE_HOST_ERROR);
         } else {
-            anope_cmd_jupe(jserver, u->nick, reason);
+            xanadu_cmd_jupe(jserver, u->nick, reason);
 
             if (WallOSJupe)
-                anope_cmd_global(s_OperServ, "\2%s\2 used JUPE on \2%s\2",
+                xanadu_cmd_global(s_OperServ, "\2%s\2 used JUPE on \2%s\2",
                                  u->nick, jserver);
         }
     }

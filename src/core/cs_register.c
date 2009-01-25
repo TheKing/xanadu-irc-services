@@ -95,7 +95,7 @@ int do_register(User * u)
         notice_lang(s_ChanServ, u, CHAN_REGISTER_NOT_LOCAL);
     } else if (*chan != '#') {
         notice_lang(s_ChanServ, u, CHAN_SYMBOL_REQUIRED);
-    } else if (!anope_valid_chan(chan)) {
+    } else if (!xanadu_valid_chan(chan)) {
         notice_lang(s_ChanServ, u, CHAN_X_INVALID, chan);
     } else if (!u->na || !(nc = u->na->nc)) {
         notice_lang(s_ChanServ, u, CHAN_MUST_REGISTER_NICK, s_NickServ);
@@ -180,11 +180,11 @@ int do_register(User * u)
         check_modes(c);
         /* On most ircds you do not receive the admin/owner mode till its registered */
         if (ircd->admin) {
-            anope_cmd_mode(s_ChanServ, chan, "%s %s", ircd->adminset,
+            xanadu_cmd_mode(s_ChanServ, chan, "%s %s", ircd->adminset,
                            u->nick);
         }
         if (ircd->owner && ircd->ownerset) {
-            anope_cmd_mode(s_ChanServ, chan, "%s %s", ircd->ownerset,
+            xanadu_cmd_mode(s_ChanServ, chan, "%s %s", ircd->ownerset,
                            u->nick);
         }
         send_event(EVENT_CHAN_REGISTERED, 1, chan);

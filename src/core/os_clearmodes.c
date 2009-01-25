@@ -105,13 +105,13 @@ int do_clearmodes(User * u)
         }
 
         if (WallOSClearmodes) {
-            anope_cmd_global(s_OperServ, "%s used CLEARMODES%s on %s",
+            xanadu_cmd_global(s_OperServ, "%s used CLEARMODES%s on %s",
                              u->nick, all ? " ALL" : "", chan);
         }
         if (all) {
             /* Clear mode +o */
             if (ircd->svsmode_ucmode) {
-                anope_cmd_svsmode_chan(c->name, "-o", NULL);
+                xanadu_cmd_svsmode_chan(c->name, "-o", NULL);
                 for (cu = c->users; cu; cu = next) {
                     next = cu->next;
                     if (!chan_has_user_status(c, cu->user, CUS_OP)) {
@@ -129,7 +129,7 @@ int do_clearmodes(User * u)
                         continue;
                     argv[0] = sstrdup("-o");
                     argv[1] = cu->user->nick;
-                    anope_cmd_mode(s_OperServ, c->name, "-o %s",
+                    xanadu_cmd_mode(s_OperServ, c->name, "-o %s",
                                    cu->user->nick);
                     chan_set_modes(s_OperServ, c, 2, argv, 0);
                     free(argv[0]);
@@ -137,7 +137,7 @@ int do_clearmodes(User * u)
             }
 
             if (ircd->svsmode_ucmode) {
-                anope_cmd_svsmode_chan(c->name, "-v", NULL);
+                xanadu_cmd_svsmode_chan(c->name, "-v", NULL);
                 for (cu = c->users; cu; cu = next) {
                     next = cu->next;
                     if (!chan_has_user_status(c, cu->user, CUS_VOICE)) {
@@ -156,7 +156,7 @@ int do_clearmodes(User * u)
                         continue;
                     argv[0] = sstrdup("-v");
                     argv[1] = sstrdup(cu->user->nick);
-                    anope_cmd_mode(s_OperServ, c->name, "-v %s",
+                    xanadu_cmd_mode(s_OperServ, c->name, "-v %s",
                                    cu->user->nick);
                     chan_set_modes(s_OperServ, c, 2, argv, 0);
                     free(argv[0]);
@@ -165,7 +165,7 @@ int do_clearmodes(User * u)
 
             /* Clear mode +h */
             if (ircd->svsmode_ucmode && ircd->halfop) {
-                anope_cmd_svsmode_chan(c->name, "-h", NULL);
+                xanadu_cmd_svsmode_chan(c->name, "-h", NULL);
                 for (cu = c->users; cu; cu = next) {
                     next = cu->next;
                     if (!chan_has_user_status(c, cu->user, CUS_HALFOP)) {
@@ -183,7 +183,7 @@ int do_clearmodes(User * u)
                         continue;
                     argv[0] = sstrdup("-h");
                     argv[1] = sstrdup(cu->user->nick);
-                    anope_cmd_mode(s_OperServ, c->name, "-h %s",
+                    xanadu_cmd_mode(s_OperServ, c->name, "-h %s",
                                    cu->user->nick);
                     chan_set_modes(s_OperServ, c, 2, argv, 0);
                     free(argv[0]);
@@ -191,7 +191,7 @@ int do_clearmodes(User * u)
             }
             /* Clear mode Owners */
             if (ircd->svsmode_ucmode && ircd->owner) {
-                anope_cmd_svsmode_chan(c->name, ircd->ownerunset, NULL);
+                xanadu_cmd_svsmode_chan(c->name, ircd->ownerunset, NULL);
                 for (cu = c->users; cu; cu = next) {
                     next = cu->next;
                     if (!chan_has_user_status(c, cu->user, CUS_HALFOP)) {
@@ -209,7 +209,7 @@ int do_clearmodes(User * u)
                         continue;
                     argv[0] = sstrdup(ircd->ownerunset);
                     argv[1] = sstrdup(cu->user->nick);
-                    anope_cmd_mode(s_OperServ, c->name, "%s %s",
+                    xanadu_cmd_mode(s_OperServ, c->name, "%s %s",
                                    ircd->ownerunset, cu->user->nick);
                     chan_set_modes(s_OperServ, c, 2, argv, 0);
                     free(argv[0]);
@@ -218,7 +218,7 @@ int do_clearmodes(User * u)
             /* Clear mode protected or admins */
             if (ircd->svsmode_ucmode && (ircd->protect || ircd->admin)) {
 
-                anope_cmd_svsmode_chan(c->name, ircd->adminunset, NULL);
+                xanadu_cmd_svsmode_chan(c->name, ircd->adminunset, NULL);
                 for (cu = c->users; cu; cu = next) {
                     next = cu->next;
                     if (!chan_has_user_status(c, cu->user, CUS_HALFOP)) {
@@ -236,7 +236,7 @@ int do_clearmodes(User * u)
                         continue;
                     argv[0] = sstrdup(ircd->adminunset);
                     argv[1] = sstrdup(cu->user->nick);
-                    anope_cmd_mode(s_OperServ, c->name, "%s %s",
+                    xanadu_cmd_mode(s_OperServ, c->name, "%s %s",
                                    ircd->adminunset, cu->user->nick);
                     chan_set_modes(s_OperServ, c, 2, argv, 0);
                     free(argv[0]);
@@ -248,7 +248,7 @@ int do_clearmodes(User * u)
 
         if (c->mode) {
             /* Clear modes the bulk of the modes */
-            anope_cmd_mode(s_OperServ, c->name, "%s", ircd->modestoremove);
+            xanadu_cmd_mode(s_OperServ, c->name, "%s", ircd->modestoremove);
             argv[0] = sstrdup(ircd->modestoremove);
             chan_set_modes(s_OperServ, c, 1, argv, 0);
             free(argv[0]);
@@ -256,14 +256,14 @@ int do_clearmodes(User * u)
             /* to prevent the internals from complaining send -k, -L, -f by themselves if we need
                to send them - TSL */
             if (c->key) {
-                anope_cmd_mode(s_OperServ, c->name, "-k %s", c->key);
+                xanadu_cmd_mode(s_OperServ, c->name, "-k %s", c->key);
                 argv[0] = sstrdup("-k");
                 argv[1] = c->key;
                 chan_set_modes(s_OperServ, c, 2, argv, 0);
                 free(argv[0]);
             }
             if (ircd->Lmode && c->redirect) {
-                anope_cmd_mode(s_OperServ, c->name, "-L %s", c->redirect);
+                xanadu_cmd_mode(s_OperServ, c->name, "-L %s", c->redirect);
                 argv[0] = sstrdup("-L");
                 argv[1] = c->redirect;
                 chan_set_modes(s_OperServ, c, 2, argv, 0);
@@ -271,7 +271,7 @@ int do_clearmodes(User * u)
             }
             if (ircd->fmode && c->flood) {
                 if (flood_mode_char_remove) {
-                    anope_cmd_mode(s_OperServ, c->name, "%s %s",
+                    xanadu_cmd_mode(s_OperServ, c->name, "%s %s",
                                    flood_mode_char_remove, c->flood);
                     argv[0] = sstrdup(flood_mode_char_remove);
                     argv[1] = c->flood;
@@ -295,7 +295,7 @@ int do_clearmodes(User * u)
         for (i = 0; i < count; i++) {
             argv[0] = sstrdup("-b");
             argv[1] = bans[i];
-            anope_cmd_mode(s_OperServ, c->name, "-b %s", argv[1]);
+            xanadu_cmd_mode(s_OperServ, c->name, "-b %s", argv[1]);
             chan_set_modes(s_OperServ, c, 2, argv, 0);
             free(argv[1]);
             free(argv[0]);
@@ -316,7 +316,7 @@ int do_clearmodes(User * u)
             for (i = 0; i < exceptcount; i++) {
                 argv[0] = sstrdup("-e");
                 argv[1] = excepts[i];
-                anope_cmd_mode(s_OperServ, c->name, "-e %s", argv[1]);
+                xanadu_cmd_mode(s_OperServ, c->name, "-e %s", argv[1]);
                 chan_set_modes(s_OperServ, c, 2, argv, 0);
                 free(argv[1]);
                 free(argv[0]);
@@ -338,7 +338,7 @@ int do_clearmodes(User * u)
             for (i = 0; i < invitecount; i++) {
                 argv[0] = sstrdup("-I");
                 argv[1] = invites[i];
-                anope_cmd_mode(s_OperServ, c->name, "-I %s", argv[1]);
+                xanadu_cmd_mode(s_OperServ, c->name, "-I %s", argv[1]);
                 chan_set_modes(s_OperServ, c, 2, argv, 0);
                 free(argv[1]);
                 free(argv[0]);

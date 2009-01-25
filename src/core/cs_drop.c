@@ -99,12 +99,12 @@ int do_drop(User * u)
         if (ci->c) {
             if (ircd->regmode) {
                 ci->c->mode &= ~ircd->regmode;
-                anope_cmd_mode(whosends(ci), ci->name, "-r");
+                xanadu_cmd_mode(whosends(ci), ci->name, "-r");
             }
         }
 
         if (ircd->chansqline && (ci->flags & CI_VERBOTEN)) {
-            anope_cmd_unsqline(ci->name);
+            xanadu_cmd_unsqline(ci->name);
         }
 
         alog("%s: Channel %s dropped by %s!%s@%s (founder: %s)",
@@ -117,7 +117,7 @@ int do_drop(User * u)
          * drop the channel before issuing the wallops.
          */
         if (WallDrop && is_servadmin && level < ACCESS_FOUNDER)
-            anope_cmd_global(s_ChanServ,
+            xanadu_cmd_global(s_ChanServ,
                              "\2%s\2 used DROP on channel \2%s\2", u->nick,
                              chan);
 

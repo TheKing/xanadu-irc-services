@@ -270,7 +270,7 @@ char *db_mysql_secure(char *pass)
 /* Save the given NickRequest into the database
  * Return 1 on success, 0 on failure
  * These tables are tagged and will be cleaned:
- * - anope_ns_request
+ * - xanadu_ns_request
  */
 int db_mysql_save_ns_req(NickRequest * nr)
 {
@@ -282,14 +282,14 @@ int db_mysql_save_ns_req(NickRequest * nr)
     q_password = db_mysql_quote(nr->password);
     q_email = db_mysql_quote(nr->email);
 
-    ret = db_mysql_try("UPDATE anope_ns_request "
+    ret = db_mysql_try("UPDATE xanadu_ns_request "
                        "SET passcode = '%s', password = '%s', email = '%s', requested = %d, active = 1 "
                        "WHERE nick = '%s'",
                        q_passcode, q_password, q_email, (int) nr->requested,
                        q_nick);
 
     if (ret && (mysql_affected_rows(mysql) == 0)) {
-    	ret = db_mysql_try("INSERT DELAYED INTO anope_ns_request "
+    	ret = db_mysql_try("INSERT DELAYED INTO xanadu_ns_request "
     	                   "(nick, passcode, password, email, requested, active) "
                            "VALUES ('%s', '%s', '%s', '%s', %d, 1)",
                            q_nick, q_passcode, q_password, q_email, 
@@ -310,10 +310,10 @@ int db_mysql_save_ns_req(NickRequest * nr)
  * Also save the access list and memo's for this user
  * Return 1 on success, 0 on failure
  * These tables are tagged and will be cleaned:
- * - anope_ns_core
- * - anope_ns_alias
- * - anope_ns_access
- * - anope_ms_info (serv='NICK')
+ * - xanadu_ns_core
+ * - xanadu_ns_alias
+ * - xanadu_ns_access
+ * - xanadu_ms_info (serv='NICK')
  */
 int db_mysql_save_ns_core(NickCore * nc)
 {
@@ -333,7 +333,7 @@ int db_mysql_save_ns_core(NickCore * nc)
 
     /* Let's take care of the core itself */
     /* Update the existing records */
-    ret = db_mysql_try("UPDATE anope_ns_core "
+    ret = db_mysql_try("UPDATE xanadu_ns_core "
                        "SET pass = %s, email = '%s', greet = '%s', icq = %d, url = '%s', flags = %d, language = %d, accesscount = %d, memocount = %d, "
                        "    memomax = %d, channelcount = %d, channelmax = %d, active = 1 "
                        "WHERE display = '%s'",
@@ -344,7 +344,7 @@ int db_mysql_save_ns_core(NickCore * nc)
 
     /* Our previous UPDATE affected no rows, therefore this is a new record */
     if (ret && (mysql_affected_rows(mysql) == 0)) {
-        ret = db_mysql_try("INSERT DELAYED INTO anope_ns_core "
+        ret = db_mysql_try("INSERT DELAYED INTO xanadu_ns_core "
                            "(display, pass, email, greet, icq, url, flags, language, accesscount, memocount, memomax, channelcount, channelmax, active) "
                            "VALUES ('%s', %s, '%s', '%s', %d, '%s', %d, %d, %d, %d, %d, %d, %d, 1)",
                            q_display, epass, q_email, q_greet, nc->icq, q_url,
@@ -357,13 +357,13 @@ int db_mysql_save_ns_core(NickCore * nc)
     for (i = 0; ret && (i < nc->accesscount); i++) {
         q_access = db_mysql_quote(nc->access[i]);
 
-        ret = db_mysql_try("UPDATE anope_ns_access "
+        ret = db_mysql_try("UPDATE xanadu_ns_access "
                            "SET access = '%s' "
                            "WHERE display = '%s'",
                            q_access, q_display);
 
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT DELAYED INTO anope_ns_access "
+            ret = db_mysql_try("INSERT DELAYED INTO xanadu_ns_access "
                                "(display, access) "
                                "VALUES ('%s','%s')",
                                q_display, q_access);
@@ -377,7 +377,7 @@ int db_mysql_save_ns_core(NickCore * nc)
         q_sender = db_mysql_quote(nc->memos.memos[i].sender);
         q_text = db_mysql_quote(nc->memos.memos[i].text);
 
-        ret = db_mysql_try("UPDATE anope_ms_info "
+        ret = db_mysql_try("UPDATE xanadu_ms_info "
                            "SET receiver = '%s', number = %d, flags = %d, time = %d, sender = '%s', text = '%s', active = 1 "
                            "WHERE  nm_id = %d AND serv = 'NICK'",
                            q_display, nc->memos.memos[i].number,
@@ -386,7 +386,7 @@ int db_mysql_save_ns_core(NickCore * nc)
                            nc->memos.memos[i].id);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT INTO anope_ms_info "
+            ret = db_mysql_try("INSERT INTO xanadu_ms_info "
                                "(receiver, number, flags, time, sender, text, serv, active) "
                                "VALUES ('%s', %d, %d, %d, '%s', '%s', 'NICK', 1)",
                                q_display, nc->memos.memos[i].number,
@@ -422,10 +422,10 @@ int db_mysql_save_ns_core(NickCore * nc)
 /* Save the given NickAlias into the database
  * Return 1 on success, 0 on failure
  * These tables are tagged and will be cleaned:
- * - anope_ns_core
- * - anope_ns_alias
- * - anope_ns_access
- * - anope_ms_info (serv='NICK')
+ * - xanadu_ns_core
+ * - xanadu_ns_alias
+ * - xanadu_ns_access
+ * - xanadu_ms_info (serv='NICK')
  */
 int db_mysql_save_ns_alias(NickAlias * na)
 {
@@ -438,7 +438,7 @@ int db_mysql_save_ns_alias(NickAlias * na)
     q_lastquit = db_mysql_quote(na->last_quit);
     q_display = db_mysql_quote(na->nc->display);
 
-    ret = db_mysql_try("UPDATE anope_ns_alias "
+    ret = db_mysql_try("UPDATE xanadu_ns_alias "
                        "SET last_usermask = '%s', last_realname = '%s', last_quit = '%s', time_registered = %d, last_seen = %d, status = %d, "
                        "    display = '%s', active = 1 "
                        "WHERE nick = '%s'",
@@ -448,7 +448,7 @@ int db_mysql_save_ns_alias(NickAlias * na)
 
     /* Our previous UPDATE affected no rows, therefore this is a new record */
     if (ret && (mysql_affected_rows(mysql) == 0)) {
-        ret = db_mysql_try("INSERT DELAYED INTO anope_ns_alias "
+        ret = db_mysql_try("INSERT DELAYED INTO xanadu_ns_alias "
                            "(nick, last_usermask, last_realname, last_quit, time_registered, last_seen, status, display, active) "
                            "VALUES ('%s', '%s', '%s', '%s', %d, %d, %d, '%s', 1)",
                            q_nick, q_lastmask, q_lastrname, q_lastquit,
@@ -477,13 +477,13 @@ int db_mysql_save_ns_alias(NickAlias * na)
  * Also save the access list, levels, akicks, badwords, ttb, and memo's for this channel
  * Return 1 on success, 0 on failure
  * These tables are tagged and will be cleaned:
- * - anope_cs_info
- * - anope_cs_access
- * - anope_cs_levels
- * - anope_cs_akicks
- * - anope_cs_badwords
- * - anope_cs_ttb
- * - anope_ms_info (serv='CHAN')
+ * - xanadu_cs_info
+ * - xanadu_cs_access
+ * - xanadu_cs_levels
+ * - xanadu_cs_akicks
+ * - xanadu_cs_badwords
+ * - xanadu_cs_ttb
+ * - xanadu_ms_info (serv='CHAN')
  */
 int db_mysql_save_cs_info(ChannelInfo * ci)
 {
@@ -547,7 +547,7 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
     free(q_pass);
 
     /* Let's take care of the core itself */
-    ret = db_mysql_try("UPDATE anope_cs_info "
+    ret = db_mysql_try("UPDATE xanadu_cs_info "
                        "SET founder = '%s', successor = '%s', founderpass = %s, descr = '%s', url = '%s', email = '%s', time_registered = %d, "
                        "    last_used = %d, last_topic = '%s', last_topic_setter = '%s', last_topic_time = %d, flags = %d, forbidby = '%s', "
                        "    forbidreason = '%s', bantype = %d, accesscount = %d, akickcount = %d, mlock_on = %d,  mlock_off = %d, mlock_limit = %d, "
@@ -570,7 +570,7 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
 
     /* Our previous UPDATE affected no rows, therefore this is a new record */
     if (ret && (mysql_affected_rows(mysql) == 0)) {
-        ret = db_mysql_try("INSERT DELAYED INTO anope_cs_info "
+        ret = db_mysql_try("INSERT DELAYED INTO xanadu_cs_info "
                            "(name, founder, successor, founderpass, descr, url, email, time_registered, last_used,  last_topic, last_topic_setter, "
                            "    last_topic_time, flags, forbidby, forbidreason, bantype, accesscount, akickcount, mlock_on, mlock_off, mlock_limit, "
                            "    mlock_key, mlock_flood, mlock_redirect, entry_message, botnick, botflags, bwcount, capsmin, capspercent, floodlines, "
@@ -597,7 +597,7 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
         q_sender = db_mysql_quote(ci->memos.memos[i].sender);
         q_text = db_mysql_quote(ci->memos.memos[i].text);
 
-        ret = db_mysql_try("UPDATE anope_ms_info "
+        ret = db_mysql_try("UPDATE xanadu_ms_info "
                            "SET receiver = '%s', number = %d, flags = %d, time = %d, sender = '%s', text = '%s', active = 1 "
                            "WHERE nm_id = %d AND serv = 'CHAN'",
                            q_name, ci->memos.memos[i].number,
@@ -606,7 +606,7 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
                            ci->memos.memos[i].id);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT INTO anope_ms_info "
+            ret = db_mysql_try("INSERT INTO xanadu_ms_info "
                                "(receiver, number,flags, time, sender, text, serv, active) "
                                "VALUES ('%s', %d, %d, %d, '%s', '%s', 'CHAN', 1)",
                                q_name, ci->memos.memos[i].number,
@@ -628,7 +628,7 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
         if (ci->access[i].in_use) {
             q_accessdisp = db_mysql_quote(ci->access[i].nc->display);
             
-            ret = db_mysql_try("UPDATE anope_cs_access "
+            ret = db_mysql_try("UPDATE xanadu_cs_access "
                                "SET in_use = %d, level = %d, last_seen = %d, active = 1 "
                                "WHERE channel = '%s' AND display = '%s'",
                                (int) ci->access[i].in_use,
@@ -637,7 +637,7 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
                                q_name, q_accessdisp);
             
             if (ret && (mysql_affected_rows(mysql) == 0)) {
-                ret = db_mysql_try("INSERT DELAYED INTO anope_cs_access "
+                ret = db_mysql_try("INSERT DELAYED INTO xanadu_cs_access "
                                    "(channel, display, in_use, level, last_seen, active) "
                                    "VALUES ('%s', '%s', %d, %d, %d, 1)",
                                    q_name, q_accessdisp,
@@ -652,13 +652,13 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
 
     /* Levels */
     for (i = 0; ret && (i < CA_SIZE); i++) {
-        ret = db_mysql_try("UPDATE anope_cs_levels "
+        ret = db_mysql_try("UPDATE xanadu_cs_levels "
                            "SET level = %d, active = 1 "
                            "WHERE channel = '%s' AND position = %d",
                            (int) ci->levels[i], q_name, i);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT DELAYED INTO anope_cs_levels "
+            ret = db_mysql_try("INSERT DELAYED INTO xanadu_cs_levels "
                                "(channel, position, level, active) "
                                "VALUES ('%s', %d, %d, 1)",
                                q_name, i, (int) ci->levels[i]);
@@ -681,7 +681,7 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
             q_akickcreator = "";
         }
 
-        ret = db_mysql_try("UPDATE anope_cs_akicks "
+        ret = db_mysql_try("UPDATE xanadu_cs_akicks "
                            "SET flags = %d, reason = '%s', creator = '%s', addtime = %d, active = 1 "
                            "WHERE channel = '%s' AND dmask = '%s'",
                            (int) ci->akick[i].flags, q_akickreason,
@@ -690,7 +690,7 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
                            q_name, q_akickdisp);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT DELAYED INTO anope_cs_akicks "
+            ret = db_mysql_try("INSERT DELAYED INTO xanadu_cs_akicks "
                                "(channel, dmask, flags, reason, creator, addtime, active) "
                                "VALUES ('%s', '%s', %d, '%s', '%s', %d, 1)",
                                q_name, q_akickdisp, (int) ci->akick[i].flags,
@@ -711,14 +711,14 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
         if (ci->badwords[i].in_use) {
             q_badwords = db_mysql_quote(ci->badwords[i].word);
 
-            ret = db_mysql_try("UPDATE anope_cs_badwords "
+            ret = db_mysql_try("UPDATE xanadu_cs_badwords "
                                "SET type = %d, active = 1 "
                                "WHERE channel = '%s' AND word = '%s'",
                                (int) ci->badwords[i].type, q_name,
                                q_badwords);
             
             if (ret && (mysql_affected_rows(mysql) == 0)) {
-                ret = db_mysql_try("INSERT DELAYED INTO anope_cs_badwords "
+                ret = db_mysql_try("INSERT DELAYED INTO xanadu_cs_badwords "
                                    "(channel, word, type, active) "
                                    "VALUES ('%s', '%s', %d, 1)",
                                    q_name, q_badwords,
@@ -731,13 +731,13 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
 
     /* TTB's */
     for (i = 0; ret && (i < TTB_SIZE); i++) {
-        ret = db_mysql_try("UPDATE anope_cs_ttb "
+        ret = db_mysql_try("UPDATE xanadu_cs_ttb "
                            "SET value = %d, active = 1 "
                            "WHERE channel = '%s' AND ttb_id = %d",
                            ci->ttb[i], q_name, i);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT DELAYED INTO anope_cs_ttb "
+            ret = db_mysql_try("INSERT DELAYED INTO xanadu_cs_ttb "
                                "(channel, ttb_id, value, active) "
                                "VALUES ('%s', %d, %d, 1)",
                                q_name, i, ci->ttb[i]);
@@ -776,12 +776,12 @@ int db_mysql_save_cs_info(ChannelInfo * ci)
 /* Save the OperServ database into MySQL
  * Return 1 on success, 0 on failure
  * These tables are tagged and will be cleaned:
- * - anope_os_akills
- * - anope_os_sglines
- * - anope_os_sqlines
- * - anope_os_szlines
+ * - xanadu_os_akills
+ * - xanadu_os_sglines
+ * - xanadu_os_sqlines
+ * - xanadu_os_szlines
  * These tables are emptied:
- * - anope_os_core
+ * - xanadu_os_core
  */
 
 int db_mysql_save_os_db(unsigned int maxucnt, unsigned int maxutime,
@@ -799,7 +799,7 @@ int db_mysql_save_os_db(unsigned int maxucnt, unsigned int maxutime,
 
 
     /* First save the core info */
-    ret = db_mysql_try("INSERT DELAYED INTO anope_os_core "
+    ret = db_mysql_try("INSERT DELAYED INTO xanadu_os_core "
                        "(maxusercnt, maxusertime, akills_count, sglines_count, sqlines_count, szlines_count) "
                        "VALUES (%d, %d, %d, %d, %d, %d)",
                        maxucnt, maxutime, ak->count, sgl->count, sql->count,
@@ -813,14 +813,14 @@ int db_mysql_save_os_db(unsigned int maxucnt, unsigned int maxutime,
         q_by = db_mysql_quote(akl->by);
         q_reason = db_mysql_quote(akl->reason);
 
-        ret = db_mysql_try("UPDATE anope_os_akills "
+        ret = db_mysql_try("UPDATE xanadu_os_akills "
                            "SET xby = '%s', reason = '%s', seton = %d, expire = %d, active = 1 "
                            "WHERE user = '%s' AND host = '%s'",
                            q_by, q_reason, (int) akl->seton,
                            (int) akl->expires, q_user, q_host);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT DELAYED INTO anope_os_akills "
+            ret = db_mysql_try("INSERT DELAYED INTO xanadu_os_akills "
                                "(user, host, xby, reason, seton, expire, active) "
                                "VALUES ('%s', '%s', '%s', '%s', %d, %d, 1)",
                                 q_user, q_host, q_by, q_reason,
@@ -840,14 +840,14 @@ int db_mysql_save_os_db(unsigned int maxucnt, unsigned int maxutime,
         q_by = db_mysql_quote(sl->by);
         q_reason = db_mysql_quote(sl->reason);
 
-        ret = db_mysql_try("UPDATE anope_os_sglines "
+        ret = db_mysql_try("UPDATE xanadu_os_sglines "
                            "SET xby = '%s', reason = '%s', seton = %d, expire = %d, active = 1 "
                            "WHERE mask = '%s'",
                            q_by, q_reason, (int) sl->seton, (int) sl->expires,
                            q_mask);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT DELAYED INTO anope_os_sglines "
+            ret = db_mysql_try("INSERT DELAYED INTO xanadu_os_sglines "
                                "(mask, xby, reason, seton, expire, active) "
                                "VALUES ('%s', '%s', '%s', %d, %d, 1)",
                                q_mask, q_by, q_reason, (int) sl->seton,
@@ -867,14 +867,14 @@ int db_mysql_save_os_db(unsigned int maxucnt, unsigned int maxutime,
         q_by = db_mysql_quote(sl->by);
         q_reason = db_mysql_quote(sl->reason);
 
-        ret = db_mysql_try("UPDATE anope_os_sqlines "
+        ret = db_mysql_try("UPDATE xanadu_os_sqlines "
                            "SET xby = '%s', reason = '%s',  seton = %d, expire = %d, active = 1 "
                            "WHERE mask = '%s'",
                            q_by, q_reason, (int) sl->seton, (int) sl->expires,
                            q_mask);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT DELAYED INTO anope_os_sqlines "
+            ret = db_mysql_try("INSERT DELAYED INTO xanadu_os_sqlines "
                                "(mask, xby, reason, seton, expire, active) "
                                "VALUES ('%s', '%s', '%s', %d, %d, 1)",
                                q_mask, q_by, q_reason, (int) sl->seton,
@@ -894,14 +894,14 @@ int db_mysql_save_os_db(unsigned int maxucnt, unsigned int maxutime,
         q_by = db_mysql_quote(sl->by);
         q_reason = db_mysql_quote(sl->reason);
 
-        ret = db_mysql_try("UPDATE anope_os_szlines "
+        ret = db_mysql_try("UPDATE xanadu_os_szlines "
                            "SET xby = '%s', reason = '%s', seton = %d, expire = %d, active = 1 "
                            "WHERE mask = '%s'",
                            q_by, q_reason, (int) sl->seton, (int) sl->expires,
                            q_mask);
         
         if (ret && (mysql_affected_rows(mysql) == 0)) {
-            ret = db_mysql_try("INSERT DELAYED INTO anope_os_szlines "
+            ret = db_mysql_try("INSERT DELAYED INTO xanadu_os_szlines "
                                "(mask, xby, reason, seton, expire, active) "
                                "VALUES ('%s', '%s', '%s', %d, %d, 1)",
                                q_mask, q_by, q_reason, (int) sl->seton,
@@ -920,7 +920,7 @@ int db_mysql_save_os_db(unsigned int maxucnt, unsigned int maxutime,
 
 /* Save the given NewsItem
  * These tables are tagged and will be cleaned:
- * - anope_os_news
+ * - xanadu_os_news
  */
 int db_mysql_save_news(NewsItem * ni)
 {
@@ -931,13 +931,13 @@ int db_mysql_save_news(NewsItem * ni)
     q_text = db_mysql_quote(ni->text);
     q_who = db_mysql_quote(ni->who);
 
-    ret = db_mysql_try("UPDATE anope_os_news "
+    ret = db_mysql_try("UPDATE xanadu_os_news "
                        "SET ntext = '%s', who = '%s', active = 1 "
                        "WHERE type = %d AND num = %d AND `time` = %d",
                        q_text, q_who, ni->type, ni->num, (int) ni->time);
     
     if (ret && (mysql_affected_rows(mysql) == 0)) {
-        ret = db_mysql_try("INSERT DELAYED INTO anope_os_news "
+        ret = db_mysql_try("INSERT DELAYED INTO xanadu_os_news "
                            "(type, num, ntext, who, `time`, active) "
                            "VALUES (%d, %d, '%s', '%s', %d, 1)",
                            ni->type, ni->num, q_text, q_who, (int) ni->time);
@@ -953,7 +953,7 @@ int db_mysql_save_news(NewsItem * ni)
 
 /* Save the given Exception
  * These tables are tagged and will be cleaned:
- * - anope_os_exceptions
+ * - xanadu_os_exceptions
  */
 
 int db_mysql_save_exceptions(Exception * e)
@@ -967,14 +967,14 @@ int db_mysql_save_exceptions(Exception * e)
     q_who = db_mysql_quote(e->who);
     q_reason = db_mysql_quote(e->reason);
 
-    ret = db_mysql_try("UPDATE anope_os_exceptions "
+    ret = db_mysql_try("UPDATE xanadu_os_exceptions "
                        "SET lim = %d, who = '%s', reason = '%s', `time` = %d, expires = %d, active = 1 "
                        "WHERE mask = '%s'",
                        e->limit, q_who, q_reason, (int) e->time,
                        (int) e->expires, q_mask);
     
     if (ret && (mysql_affected_rows(mysql)) == 0) {
-        ret = db_mysql_try("INSERT DELAYED INTO anope_os_exceptions "
+        ret = db_mysql_try("INSERT DELAYED INTO xanadu_os_exceptions "
                            "(mask, lim, who, reason, `time`, expires, active) "
                            "VALUES ('%s', %d, '%s', '%s', %d, %d, 1)",
                            q_mask, e->limit, q_who, q_reason, (int) e->time,
@@ -999,7 +999,7 @@ int db_mysql_save_exceptions(Exception * e)
 
 /* Save the given HostCore
  * These tables are tagged and will be cleaned:
- * - anope_hs_core
+ * - xanadu_hs_core
  */
 
 int db_mysql_save_hs_core(HostCore * hc)
@@ -1015,13 +1015,13 @@ int db_mysql_save_hs_core(HostCore * hc)
     q_host = db_mysql_quote(hc->vHost);
     q_creator = db_mysql_quote(hc->creator);
 
-    ret = db_mysql_try("UPDATE anope_hs_core "
+    ret = db_mysql_try("UPDATE xanadu_hs_core "
                        "SET vident = '%s', vhost = '%s', creator = '%s', `time` = %d, active = 1 "
                        "WHERE nick = '%s'",
                        q_ident, q_host, q_creator, (int) hc->time, q_nick);
     
     if (ret && (mysql_affected_rows(mysql) == 0)) {
-        ret = db_mysql_try("INSERT DELAYED INTO anope_hs_core "
+        ret = db_mysql_try("INSERT DELAYED INTO xanadu_hs_core "
                            "(nick, vident, vhost, creator, `time`, active) "
                            "VALUES ('%s', '%s', '%s', '%s', %d, 1)",
                            q_nick, q_ident, q_host, q_creator,
@@ -1057,14 +1057,14 @@ int db_mysql_save_bs_core(BotInfo * bi)
     q_host = db_mysql_quote(bi->host);
     q_real = db_mysql_quote(bi->real);
 
-    ret = db_mysql_try("UPDATE anope_bs_core "
+    ret = db_mysql_try("UPDATE xanadu_bs_core "
                        "SET user = '%s', host = '%s', rname = '%s', flags = %d, created = %d, chancount = %d, active = 1 "
                        "WHERE nick = '%s'",
                        q_user, q_host, q_real, bi->flags, (int) bi->created,
                        bi->chancount, q_nick);
     
     if (ret && (mysql_affected_rows(mysql) == 0)) {
-        ret = db_mysql_try("INSERT DELAYED INTO anope_bs_core "
+        ret = db_mysql_try("INSERT DELAYED INTO xanadu_bs_core "
                            "(nick, user, host, rname, flags, created, chancount, active) "
                            "VALUES ('%s', '%s', '%s', '%s', %d, %d, %d, 1)",
                            q_nick, q_user, q_host, q_real, bi->flags,
@@ -1096,7 +1096,7 @@ int db_mysql_load_bs_dbase(void)
         return 0;
 
     ret = db_mysql_try("SELECT nick, user, host, rname, flags, created "
-                       "FROM anope_bs_core "
+                       "FROM xanadu_bs_core "
                        "WHERE active = 1");
     
     if (!ret)
@@ -1128,7 +1128,7 @@ int db_mysql_load_hs_dbase(void)
         return 0;
 
     ret = db_mysql_try("SELECT nick, vident, vhost, creator, `time` "
-                       "FROM anope_hs_core "
+                       "FROM xanadu_hs_core "
                        "WHERE active = 1");
 
     if (!ret)
@@ -1156,7 +1156,7 @@ int db_mysql_load_news(void)
         return 0;
 
     ret = db_mysql_try("SELECT type, num, ntext, who, `time` "
-                       "FROM anope_os_news "
+                       "FROM xanadu_os_news "
                        "WHERE active = 1");
 
     if (!ret)
@@ -1198,7 +1198,7 @@ int db_mysql_load_exceptions(void)
         return 0;
 
     ret = db_mysql_try("SELECT mask, lim, who, reason, `time`, expires "
-                       "FROM anope_os_exceptions "
+                       "FROM xanadu_os_exceptions "
                        "WHERE active = 1");
 
     if (!ret)
@@ -1235,7 +1235,7 @@ int db_mysql_load_os_dbase(void)
         return 0;
 
     ret = db_mysql_try("SELECT maxusercnt, maxusertime, akills_count, sglines_count, sqlines_count, szlines_count "
-                       "FROM anope_os_core");
+                       "FROM xanadu_os_core");
     
     if (!ret)
         return 0;
@@ -1270,7 +1270,7 @@ int db_mysql_load_os_dbase(void)
     /* Load the AKILLs */
 
     ret = db_mysql_try("SELECT user, host, xby, reason, seton, expire "
-                       "FROM anope_os_akills "
+                       "FROM xanadu_os_akills "
                        "WHERE active = 1");
 
     if (!ret)
@@ -1296,7 +1296,7 @@ int db_mysql_load_os_dbase(void)
     /* Load the SGLINEs */
 
     ret = db_mysql_try("SELECT mask, xby, reason, seton, expire "
-                       "FROM anope_os_sglines "
+                       "FROM xanadu_os_sglines "
                        "WHERE active = 1");
 
     if (!ret)
@@ -1321,7 +1321,7 @@ int db_mysql_load_os_dbase(void)
     /* Load the SQLINEs */
 
     ret = db_mysql_try("SELECT mask, xby, reason, seton, expire "
-                       "FROM anope_os_sqlines "
+                       "FROM xanadu_os_sqlines "
                        "WHERE active = 1");
     
     if (!ret)
@@ -1346,7 +1346,7 @@ int db_mysql_load_os_dbase(void)
     /* Load the SZLINEs */
 
     ret = db_mysql_try("SELECT mask, xby, reason, seton, expire "
-                       "FROM anope_os_szlines "
+                       "FROM xanadu_os_szlines "
                        "WHERE active = 1");
 
     if (!ret)
@@ -1386,7 +1386,7 @@ int db_mysql_load_cs_dbase(void)
                        "       last_topic_time, flags, forbidby, forbidreason, bantype, accesscount, akickcount, mlock_on, mlock_off, mlock_limit, "
                        "       mlock_key, mlock_flood, mlock_redirect, entry_message, memomax, botnick, botflags, bwcount, capsmin, capspercent, floodlines, "
                        "       floodsecs, repeattimes "
-                       "FROM anope_cs_info "
+                       "FROM xanadu_cs_info "
                        "WHERE active = 1");
 
     if (!ret)
@@ -1465,7 +1465,7 @@ int db_mysql_load_cs_dbase(void)
 
         /* Get the LEVELS list */
         ret = db_mysql_try("SELECT position, level "
-                           "FROM anope_cs_levels "
+                           "FROM xanadu_cs_levels "
                            "WHERE channel = '%s' AND active = 1",
                            q_name);
 
@@ -1487,7 +1487,7 @@ int db_mysql_load_cs_dbase(void)
             ci->access = scalloc(ci->accesscount, sizeof(ChanAccess));
 
             ret = db_mysql_try("SELECT level, display, last_seen "
-                               "FROM anope_cs_access "
+                               "FROM xanadu_cs_access "
                                "WHERE channel = '%s' AND in_use = 1 AND active = 1",
                                q_name);
             
@@ -1515,7 +1515,7 @@ int db_mysql_load_cs_dbase(void)
             ci->akick = scalloc(ci->akickcount, sizeof(AutoKick));
 
             ret = db_mysql_try("SELECT flags, dmask, reason, creator, addtime "
-                               "FROM anope_cs_akicks "
+                               "FROM xanadu_cs_akicks "
                                "WHERE channel = '%s' AND active = 1 AND (flags & %d) <> 0",
                                q_name, AK_USED);
             
@@ -1545,7 +1545,7 @@ int db_mysql_load_cs_dbase(void)
         if (ret) {
             /* Get the channel memos */
             ret = db_mysql_try("SELECT nm_id, number, flags, time, sender, text "
-                               "FROM anope_ms_info "
+                               "FROM xanadu_ms_info "
                                "WHERE receiver = '%s' AND serv = 'CHAN' AND active = 1",
                                q_name);
             
@@ -1580,7 +1580,7 @@ int db_mysql_load_cs_dbase(void)
             ci->ttb = scalloc(TTB_SIZE, sizeof(*ci->ttb));
 
             ret = db_mysql_try("SELECT ttb_id, value "
-                               "FROM anope_cs_ttb "
+                               "FROM xanadu_cs_ttb "
                                "WHERE channel = '%s' AND active = 1",
                                q_name);
         
@@ -1602,7 +1602,7 @@ int db_mysql_load_cs_dbase(void)
             ci->badwords = scalloc(ci->bwcount, sizeof(BadWord));
 
             ret = db_mysql_try("SELECT word, type "
-                               "FROM anope_cs_badwords "
+                               "FROM xanadu_cs_badwords "
                                "WHERE channel = '%s' AND active = 1",
                                q_name);
 
@@ -1658,7 +1658,7 @@ int db_mysql_load_ns_req_dbase(void)
         return 0;
 
     ret = db_mysql_try("SELECT nick, passcode, password, email, requested "
-                       "FROM anope_ns_request "
+                       "FROM xanadu_ns_request "
                        "WHERE active = 1");
 
     if (ret) {
@@ -1696,7 +1696,7 @@ int db_mysql_load_ns_dbase(void)
         return 0;
 
     ret = db_mysql_try("SELECT display, pass, email, icq, url, flags, language, accesscount, memocount, memomax, channelcount, channelmax, greet "
-                       "FROM anope_ns_core "
+                       "FROM xanadu_ns_core "
                        "WHERE active = 1");
 
     if (!ret)
@@ -1755,7 +1755,7 @@ int db_mysql_load_ns_dbase(void)
             nc->access = scalloc(nc->accesscount, sizeof(char *));
 
             ret = db_mysql_try("SELECT access "
-                               "FROM anope_ns_access "
+                               "FROM xanadu_ns_access "
                                "WHERE display = '%s' AND active = 1",
                                q_display);
 
@@ -1779,7 +1779,7 @@ int db_mysql_load_ns_dbase(void)
             nc->memos.memos = scalloc(nc->memos.memocount, sizeof(Memo));
 
             ret = db_mysql_try("SELECT nm_id, number, flags, time, sender, text "
-                               "FROM anope_ms_info "
+                               "FROM xanadu_ms_info "
                                "WHERE receiver = '%s' AND active = 1 AND serv = 'NICK' "
                                "ORDER BY number ASC",
                                q_display);
@@ -1814,7 +1814,7 @@ int db_mysql_load_ns_dbase(void)
 
     /* Load the nickaliases */
     ret = db_mysql_try("SELECT nick, display, time_registered, last_seen, status, last_usermask, last_realname, last_quit "
-                       "FROM anope_ns_alias "
+                       "FROM xanadu_ns_alias "
                        "WHERE active = 1");
 
     if (!ret)

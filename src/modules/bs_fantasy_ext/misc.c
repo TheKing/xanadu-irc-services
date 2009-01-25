@@ -135,7 +135,7 @@ static int do_core_fantasy(int ac, User *u, ChannelInfo *ci, char *cmd, char *pa
 						newav[1] = modes;
 					newac++;
 
-					anope_cmd_mode(ci->bi->nick, ci->name, "%s %s", modes, nicks);
+					xanadu_cmd_mode(ci->bi->nick, ci->name, "%s %s", modes, nicks);
 					do_cmode(ci->bi->nick, newac, newav);
 				}
 
@@ -324,7 +324,7 @@ static int do_up_down(User *u, Channel *c, char *cmd, int target) {
 					get_str(mode[0]), get_str(mode[1]), get_str(mode[2]), get_str(mode[3]), get_str(mode[4]),
 					get_str(param[0]), get_str(param[1]), get_str(param[2]), get_str(param[3]), get_str(param[4]));
 
-			anope_cmd_mode(c->ci->bi->nick, c->name,"%s%s%s%s%s %s %s %s %s %s ", get_str(mode[0]), get_str(mode[1]),
+			xanadu_cmd_mode(c->ci->bi->nick, c->name,"%s%s%s%s%s %s %s %s %s %s ", get_str(mode[0]), get_str(mode[1]),
 				get_str(mode[2]), get_str(mode[3]), get_str(mode[4]), get_str(param[0]), get_str(param[1]),
 				get_str(param[2]), get_str(param[3]), get_str(param[4]));;
 
@@ -629,7 +629,7 @@ void addTempBan(Channel * c, time_t timeout, char *banmask) {
 	av[0] = sstrdup("+b");
 	av[1] = banmask;
 
-	anope_cmd_mode(c->ci->bi->nick, c->name, "+b %s", av[1]);
+	xanadu_cmd_mode(c->ci->bi->nick, c->name, "+b %s", av[1]);
 	chan_set_modes(c->ci->bi->nick, c, 2, av, 1);
 
 	free(av[0]);
@@ -649,7 +649,7 @@ int delTempBan(int argc, char **argv) {
 	av[1] = argv[1];
 
 	if ((c = findchan(argv[0])) && c->ci && c->ci->bi) {
-		anope_cmd_mode(c->ci->bi->nick, c->name, "-b %s", av[1]);
+		xanadu_cmd_mode(c->ci->bi->nick, c->name, "-b %s", av[1]);
 		chan_set_modes(c->ci->bi->nick, c, 2, av, 1);
 	}
 
@@ -714,7 +714,7 @@ int delBan(ChannelInfo *ci, char *target) {
 	}
 
 	if (ci && ci->bi) {
-		anope_cmd_mode(ci->bi->nick, ci->name, "-b %s", target);
+		xanadu_cmd_mode(ci->bi->nick, ci->name, "-b %s", target);
 		do_cmode(ci->bi->nick, ac, av);
 	}
 
@@ -939,8 +939,8 @@ int do_info(User * u, Channel *c, char *param) {
 		tm = localtime(&ci->last_used);
 		strftime_lang(buf, sizeof(buf), u, STRFTIME_DATE_TIME_FORMAT, tm);
 		notice_lang(ci->bi->nick, u, CHAN_INFO_LAST_USED, buf);
-		if (ci->last_topic && (show_all || (!(ci->mlock_on & anope_get_secret_mode()) &&
-		(!ci->c || !(ci->c->mode & anope_get_secret_mode()))))) {
+		if (ci->last_topic && (show_all || (!(ci->mlock_on & xanadu_get_secret_mode()) &&
+		(!ci->c || !(ci->c->mode & xanadu_get_secret_mode()))))) {
 			notice_lang(ci->bi->nick, u, CHAN_INFO_LAST_TOPIC, ci->last_topic);
 			notice_lang(ci->bi->nick, u, CHAN_INFO_TOPIC_SET_BY, ci->last_topic_setter);
 		}

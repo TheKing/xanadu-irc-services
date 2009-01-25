@@ -76,7 +76,7 @@ int do_off(User * u)
             if (vhost == NULL && vident == NULL)
                 notice_lang(s_HostServ, u, HOST_NOT_ASSIGNED);
             else
-                anope_cmd_vhost_off(u);
+                xanadu_cmd_vhost_off(u);
         } else {
             notice_lang(s_HostServ, u, HOST_ID);
         }

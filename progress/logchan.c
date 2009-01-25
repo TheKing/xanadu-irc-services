@@ -331,14 +331,14 @@ int log_topic(int argc, char **argv)
 int log_shutdown(int argc, char **argv)
 {
 	alog("\002[LogChan]\002: Services Shutting Down"); 
-    anope_cmd_quit("LogBot", "Quit: SHUTDOWN");
+    xanadu_cmd_quit("LogBot", "Quit: SHUTDOWN");
     return MOD_CONT; 
 }
 
 int log_restart(int argc, char **argv)
 {
 	alog("\002[LogChan]\002: Services Restarting"); 
-	anope_cmd_quit("LogBot", "Quit: RESTART"); 
+	xanadu_cmd_quit("LogBot", "Quit: RESTART"); 
 	return MOD_CONT; 
 }
 

@@ -84,7 +84,7 @@ int do_forbid(User * u)
     if (*chan != '#') {
         notice_lang(s_ChanServ, u, CHAN_SYMBOL_REQUIRED);
         return MOD_CONT;
-    } else if (!anope_valid_chan(chan)) {
+    } else if (!xanadu_valid_chan(chan)) {
         notice_lang(s_ChanServ, u, CHAN_X_INVALID, chan);
         return MOD_CONT;
     }
@@ -112,18 +112,18 @@ int do_forbid(User * u)
                 av[0] = c->name;
                 av[1] = cu->user->nick;
                 av[2] = reason ? reason : "CHAN_FORBID_REASON";
-                anope_cmd_kick(s_ChanServ, av[0], av[1], av[2]);
+                xanadu_cmd_kick(s_ChanServ, av[0], av[1], av[2]);
                 do_kick(s_ChanServ, 3, av);
             }
         }
 
         if (WallForbid)
-            anope_cmd_global(s_ChanServ,
+            xanadu_cmd_global(s_ChanServ,
                              "\2%s\2 used FORBID on channel \2%s\2",
                              u->nick, ci->name);
 
         if (ircd->chansqline) {
-            anope_cmd_sqline(ci->name, ((reason) ? reason : "Forbidden"));
+            xanadu_cmd_sqline(ci->name, ((reason) ? reason : "Forbidden"));
         }
 
         alog("%s: %s set FORBID for channel %s", s_ChanServ, u->nick,

@@ -85,7 +85,7 @@ int do_forbid(User * u)
 
     if (readonly)
         notice_lang(s_NickServ, u, READ_ONLY_MODE);
-    if (!anope_valid_nick(nick)) {
+    if (!xanadu_valid_nick(nick)) {
         notice_lang(s_NickServ, u, NICK_X_FORBIDDEN, nick);
         return MOD_CONT;
     }
@@ -115,11 +115,11 @@ int do_forbid(User * u)
 
 
         if (ircd->sqline) {
-            anope_cmd_sqline(na->nick, ((reason) ? reason : "Forbidden"));
+            xanadu_cmd_sqline(na->nick, ((reason) ? reason : "Forbidden"));
         }
 
         if (WallForbid)
-            anope_cmd_global(s_NickServ, "\2%s\2 used FORBID on \2%s\2",
+            xanadu_cmd_global(s_NickServ, "\2%s\2 used FORBID on \2%s\2",
                              u->nick, nick);
 
         alog("%s: %s set FORBID for nick %s", s_NickServ, u->nick, nick);

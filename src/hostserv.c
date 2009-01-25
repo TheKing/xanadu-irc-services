@@ -69,7 +69,7 @@ void hostserv(User * u, char *buf)
         if (!(s = strtok(NULL, ""))) {
             s = "";
         }
-        anope_cmd_ctcp(s_HostServ, u->nick, "PING %s", s);
+        xanadu_cmd_ctcp(s_HostServ, u->nick, "PING %s", s);
     } else if (skeleton) {
         notice_lang(s_HostServ, u, SERVICE_OFFLINE, s_HostServ);
     } else {
@@ -106,7 +106,7 @@ HostCore *createHostCorelist(HostCore * next, char *nick, char *vIdent,
 
     next = malloc(sizeof(HostCore));
     if (next == NULL) {
-        anope_cmd_global(s_HostServ,
+        xanadu_cmd_global(s_HostServ,
                          "Unable to allocate memory to create the vHost LL, problems i sense..");
     } else {
         next->nick = malloc(sizeof(char) * strlen(nick) + 1);
@@ -116,7 +116,7 @@ HostCore *createHostCorelist(HostCore * next, char *nick, char *vIdent,
             next->vIdent = malloc(sizeof(char) * strlen(vIdent) + 1);
         if ((next->nick == NULL) || (next->vHost == NULL)
             || (next->creator == NULL)) {
-            anope_cmd_global(s_HostServ,
+            xanadu_cmd_global(s_HostServ,
                              "Unable to allocate memory to create the vHost LL, problems i sense..");
             return NULL;
         }
@@ -125,7 +125,7 @@ HostCore *createHostCorelist(HostCore * next, char *nick, char *vIdent,
         strcpy(next->creator, creator);
         if (vIdent) {
             if ((next->vIdent == NULL)) {
-                anope_cmd_global(s_HostServ,
+                xanadu_cmd_global(s_HostServ,
                                  "Unable to allocate memory to create the vHost LL, problems i sense..");
                 return NULL;
             }
@@ -194,7 +194,7 @@ HostCore *insertHostCore(HostCore * head, HostCore * prev, char *nick,
 
     newCore = malloc(sizeof(HostCore));
     if (newCore == NULL) {
-        anope_cmd_global(s_HostServ,
+        xanadu_cmd_global(s_HostServ,
                          "Unable to allocate memory to insert into the vHost LL, problems i sense..");
         return NULL;
     } else {
@@ -205,7 +205,7 @@ HostCore *insertHostCore(HostCore * head, HostCore * prev, char *nick,
             newCore->vIdent = malloc(sizeof(char) * strlen(vIdent) + 1);
         if ((newCore->nick == NULL) || (newCore->vHost == NULL)
             || (newCore->creator == NULL)) {
-            anope_cmd_global(s_HostServ,
+            xanadu_cmd_global(s_HostServ,
                              "Unable to allocate memory to create the vHost LL, problems i sense..");
             return NULL;
         }
@@ -214,7 +214,7 @@ HostCore *insertHostCore(HostCore * head, HostCore * prev, char *nick,
         strcpy(newCore->creator, creator);
         if (vIdent) {
             if ((newCore->vIdent == NULL)) {
-                anope_cmd_global(s_HostServ,
+                xanadu_cmd_global(s_HostServ,
                                  "Unable to allocate memory to create the vHost LL, problems i sense..");
                 return NULL;
             }
@@ -331,8 +331,8 @@ void delHostCore(char *nick)
         if (rdb_open()) {
             q_nick = rdb_quote(nick);
             snprintf(clause, sizeof(clause), "nick='%s'", q_nick);
-            if (rdb_scrub_table("anope_hs_core", clause) == 0)
-                alog("Unable to scrub table 'anope_hs_core' - HostServ RDB update failed.");
+            if (rdb_scrub_table("xanadu_hs_core", clause) == 0)
+                alog("Unable to scrub table 'xanadu_hs_core' - HostServ RDB update failed.");
             rdb_close();
             free(q_nick);
         }
@@ -465,7 +465,7 @@ void load_hs_dbase_v3(dbFILE * f)
 	restore_db(f);						\
 	log_perror("Write error on %s", HostDBName);		\
 	if (time(NULL) - lastwarn > WarningTimeout) {		\
-	    anope_cmd_global(NULL, "Write error on %s: %s", HostDBName,	\
+	    xanadu_cmd_global(NULL, "Write error on %s: %s", HostDBName,	\
 			strerror(errno));			\
 	    lastwarn = time(NULL);				\
 	}							\
@@ -507,8 +507,8 @@ void save_hs_rdb_dbase(void)
     if (!rdb_open())
         return;
 
-    if (rdb_tag_table("anope_hs_core") == 0) {
-        alog("Unable to tag table 'anope_hs_core' - HostServ RDB save failed.");
+    if (rdb_tag_table("xanadu_hs_core") == 0) {
+        alog("Unable to tag table 'xanadu_hs_core' - HostServ RDB save failed.");
         return;
     }
 
@@ -521,8 +521,8 @@ void save_hs_rdb_dbase(void)
         current = current->next;
     }
 
-    if (rdb_clean_table("anope_hs_core") == 0) {
-        alog("Unable to clean table 'anope_hs_core' - HostServ RDB save failed.");
+    if (rdb_clean_table("xanadu_hs_core") == 0) {
+        alog("Unable to clean table 'xanadu_hs_core' - HostServ RDB save failed.");
         return;
     }
 
@@ -564,7 +564,7 @@ int do_on_id(User * u)
         } else {
             notice_lang(s_HostServ, u, HOST_ACTIVATED, vHost);
         }
-        anope_cmd_vhost_on(u->nick, vIdent, vHost);
+        xanadu_cmd_vhost_on(u->nick, vIdent, vHost);
         if (ircd->vhost) {
             u->vhost = sstrdup(vHost);
         }

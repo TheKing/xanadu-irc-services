@@ -85,9 +85,9 @@ int do_os_kick(User * u)
         notice_lang(s_OperServ, u, OPER_BOUNCY_MODES_U_LINE);
         return MOD_CONT;
     }
-    anope_cmd_kick(s_OperServ, chan, nick, "%s (%s)", u->nick, s);
+    xanadu_cmd_kick(s_OperServ, chan, nick, "%s (%s)", u->nick, s);
     if (WallOSKick)
-        anope_cmd_global(s_OperServ, "%s used KICK on %s/%s", u->nick,
+        xanadu_cmd_global(s_OperServ, "%s used KICK on %s/%s", u->nick,
                          nick, chan);
     argv[0] = sstrdup(chan);
     argv[1] = sstrdup(nick);

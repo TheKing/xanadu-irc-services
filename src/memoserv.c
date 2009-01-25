@@ -64,7 +64,7 @@ void memoserv(User * u, char *buf)
         if (!(s = strtok(NULL, ""))) {
             s = "";
         }
-        anope_cmd_ctcp(s_MemoServ, u->nick, "PING %s", s);
+        xanadu_cmd_ctcp(s_MemoServ, u->nick, "PING %s", s);
     } else if (skeleton) {
         notice_lang(s_MemoServ, u, SERVICE_OFFLINE, s_MemoServ);
     } else {

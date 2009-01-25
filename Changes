@@ -20,7 +20,7 @@ Provided by Kein <kein-of@yandex.ru> - 2008
 
 Anope Version 1.7.20
 --------------------
-12/28 F Some silly logic errors in anope_event_capab() in inspircd11.c    [ #00]
+12/28 F Some silly logic errors in xanadu_event_capab() in inspircd11.c    [ #00]
 12/28 F RSQUIT support for InspIRCd 1.1                                   [#692]
 12/24 F inspircd11 module now uses FMODE instead of MODE                  [#724]
 08/29 A Session limit exceptions now support IP numbers as hostmask.      [#723]
@@ -275,7 +275,7 @@ Provided by Trystan <trystan@nomadirc.net> - 2006
 07/15 F Fixed max param count for SJOINs.                                 [#549]
 07/15 F Fixed !halfop fantasy stuff.                                      [#534]
 07/25 F Fixed /newmask stuff for ptlink.                                  [#560]
-07/14 A Added anope_cmd_action() and new param for EVENT_PART_CHANNEL.    [#550]
+07/14 A Added xanadu_cmd_action() and new param for EVENT_PART_CHANNEL.    [#550]
 
 Anope Version 1.7.14
 --------------------
@@ -552,8 +552,8 @@ Provided by Anope Dev. <dev@anope.org> - 2005
 05/04 F Missing check for valid ChannelInfo in topic handling.            [#363]
 05/04 F Module language texts sometimes being mixed.                      [ #00]
 05/04 F Wrong datatype in the config parser for OSInfoDBName.             [ #00]
-05/03 F Wrong variable checking in anope_event_away().                    [ #00]
-05/02 F Wrong use of anope_cmd_mode() for dreamforge and ultimate2.       [#332]
+05/03 F Wrong variable checking in xanadu_event_away().                    [ #00]
+05/02 F Wrong use of xanadu_cmd_mode() for dreamforge and ultimate2.       [#332]
 05/02 F Usermode +R instead of +Z used for services roots with Ultimate3. [#361]
 05/02 F Getting op if you had access to protect and not op on a channel.  [#355]
 05/01 F Typo in include/extern.h with restore_unsynced_topics.            [#354]
@@ -679,7 +679,7 @@ Provided by Anope Dev. <dev@anope.org> - 2005
 01/29 F Fixes help for HS HELP LIST.                                      [#290]
 01/29 F Memoserv rsend issue.                                             [#291]
 01/23 F Fixed u_char warnings under OpenBSD.                              [ #00]
-01/23 F anope_cmd_ctcp() fixed it was setup wrong.                        [ #00]
+01/23 F xanadu_cmd_ctcp() fixed it was setup wrong.                        [ #00]
 01/23 F Checks to make sure Services and Services Alias are not the same  [ #00]
 01/23 F SIGINT now shuts down Anope correctly when running with -nofork.  [ #00]
 01/23 F Attempting to set +h (helper) modes on ircd where there is no +h  [ #00]
@@ -717,7 +717,7 @@ Provided by Anope Dev. <dev@anope.org> - 2004/2005
 11/27 A OperServ SET SQL [on|off] disable/enable SQL during run time.     [ #00]
 11/21 A Opened SGLINE to all ircd that support GEOS bans.                 [ #00]
 11/21 A Opened SZLINE to all ircd that support ZLINE's.                   [ #00]
-11/19 A Added anope_cmd_ctcp() to code API, for sending CTCP messages.    [ #00]
+11/19 A Added xanadu_cmd_ctcp() to code API, for sending CTCP messages.    [ #00]
 11/18 A Unable to use registered nicknames as bot nicks from now on.      [ #00]
 11/18 A NSAddAccessOnReg to control access list on registration.          [ #00]
 01/08 F /NS Status always returns 0 for unregisterd nicks like help says  [ #00]
@@ -776,7 +776,7 @@ Provided by Anope Dev. <dev@anope.org> - 2004/2005
 11/27 F Unreal3.2 supports SVSMODE -b on clearing bans.                   [ #00]
 11/27 F Removed +d references from the PTlink protocol file.              [ #00]
 11/23 F Rage 2 updated to support BETA 7.                                 [#226]
-11/23 F PTLink anope_cmd_server() message.                                [ #00]
+11/23 F PTLink xanadu_cmd_server() message.                                [ #00]
 11/21 F Fixed session decrease on /NS GHOST.                              [#229]
 11/20 F Disables UseRDB if there is an error during SQL init.             [ #00]
 11/20 F MS CHECK now checks if the nick is forbidden.                     [#225]
@@ -828,7 +828,7 @@ Provided by Anope Dev. <dev@anope.org> - 2004
 09/19 F Rewrote the internals of moduleData to save lots of memory.       [ #00]
 09/14 F Protection unsetting now does -a instead of +a.                   [ #00]
 09/12 F Updated Dutch language file.                                      [ #00]
-09/10 F Typo in anope_cmd_relase_svshold function name.                   [ #00]
+09/10 F Typo in xanadu_cmd_relase_svshold function name.                   [ #00]
 09/09 F Fixed bug with uninitialized pointer in check_sqline.             [ #00]
 09/08 F Fixed gcc2 support with multiple C++ style comments.              [ #00]
 08/26 F Fixed spelling stuff in the german langfile.                      [#159]
@@ -1027,7 +1027,7 @@ Anope Version 1.7.2
 --------------------
 Provided by Anope Dev. <dev@anope.org>
 2004/04/17 Fixed table.sql usage on mydbgen script (Bug #10)
-2004/04/17 Fixed bug where anope_ns_req was being referenced
+2004/04/17 Fixed bug where xanadu_ns_req was being referenced
 2004/04/17 Added SIGUSR2 signal to Rehash Config and Save DBs
 2004/04/16 Fixed broken password saves to MySQL (Bug #11)
 

@@ -79,12 +79,12 @@ int do_noop(User * u)
         char reason[NICKMAX + 32];
 
         /* Remove the O:lines */
-        anope_cmd_svsnoop(server, 1);
+        xanadu_cmd_svsnoop(server, 1);
 
         snprintf(reason, sizeof(reason), "NOOP command used by %s",
                  u->nick);
         if (WallOSNoOp)
-            anope_cmd_global(s_OperServ, "\2%s\2 used NOOP on \2%s\2",
+            xanadu_cmd_global(s_OperServ, "\2%s\2 used NOOP on \2%s\2",
                              u->nick, server);
         notice_lang(s_OperServ, u, OPER_NOOP_SET, server);
 
@@ -97,7 +97,7 @@ int do_noop(User * u)
             }
         }
     } else if (!stricmp(cmd, "REVOKE")) {
-        anope_cmd_svsnoop(server, 0);
+        xanadu_cmd_svsnoop(server, 0);
         notice_lang(s_OperServ, u, OPER_NOOP_REVOKE, server);
     } else {
         syntax_error(s_OperServ, u, "NOOP", OPER_NOOP_SYNTAX);

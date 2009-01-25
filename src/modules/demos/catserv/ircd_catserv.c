@@ -81,12 +81,12 @@ int my_privmsg(char *source, int ac, char **av)
 
 void addClient(char *nick, char *realname)
 {
-    anope_cmd_bot_nick(nick, "catserv", "meow.meow.land", realname, "+");
+    xanadu_cmd_bot_nick(nick, "catserv", "meow.meow.land", realname, "+");
 }
 
 void delClient(void)
 {
-    anope_cmd_quit(s_CatServ, "QUIT :Module Unloaded!");
+    xanadu_cmd_quit(s_CatServ, "QUIT :Module Unloaded!");
 }
 
 /*****************************************************************************/

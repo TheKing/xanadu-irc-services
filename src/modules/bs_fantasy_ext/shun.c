@@ -112,14 +112,14 @@ int do_shun(User *u, Channel *c, char *arg) {
 								(wall_expiry == 1) ? "" : "s");
 					}
 
-					anope_cmd_global(ci->bi->nick, "%s added a SHUN on %s [*@%s] (%s) (%s)",
+					xanadu_cmd_global(ci->bi->nick, "%s added a SHUN on %s [*@%s] (%s) (%s)",
 									 u->nick, u2->nick, u2->host, reason, buf);
 				}
 
 			} else {
 				send_cmd(NULL, "TKL - s * %s %s", u2->host, u->nick);
 				moduleNoticeLang(ci->bi->nick, u, LANG_SHUN_DELETION, "*", u2->host);
-				anope_cmd_global(ci->bi->nick, "%s removed SHUN on %s [*@%s] ", u->nick, u2->nick,
+				xanadu_cmd_global(ci->bi->nick, "%s removed SHUN on %s [*@%s] ", u->nick, u2->nick,
 						u2->host);
 			}
 		} else if (my_match_wild_nocase("*@*", target) && !my_match_wild_nocase("*!*@*", target)) {
@@ -157,14 +157,14 @@ int do_shun(User *u, Channel *c, char *arg) {
 								(wall_expiry == 1) ? "" : "s");
 					}
 
-					anope_cmd_global(ci->bi->nick, "%s added a SHUN on %s@%s (%s) (%s)",
+					xanadu_cmd_global(ci->bi->nick, "%s added a SHUN on %s@%s (%s) (%s)",
 									 u->nick, uname, host, reason, buf);
 				}
 
 			} else {
 				send_cmd(NULL, "TKL - s %s %s %s", uname, host, u->nick);
 				moduleNoticeLang(ci->bi->nick, u, LANG_SHUN_DELETION, uname, host);
-				anope_cmd_global(ci->bi->nick, "%s removed SHUN on %s@%s ", u->nick, uname, host);
+				xanadu_cmd_global(ci->bi->nick, "%s removed SHUN on %s@%s ", u->nick, uname, host);
 			}
 
 			free(uname);
@@ -231,11 +231,11 @@ int do_tshun(User *u, Channel *c, char *arg) {
 		if (!action) {
 			send_cmd(NULL, "TEMPSHUN +%s %s", u2->nick, reason);
 			moduleNoticeLang(ci->bi->nick, u, LANG_TSHUN_ADDED, u2->nick);
-			anope_cmd_global(ci->bi->nick, "%s added a TEMPSHUN on %s (%s)", u->nick, u2->nick, reason);
+			xanadu_cmd_global(ci->bi->nick, "%s added a TEMPSHUN on %s (%s)", u->nick, u2->nick, reason);
 		} else {
 			send_cmd(NULL, "TEMPSHUN -%s", u2->nick);
 			moduleNoticeLang(ci->bi->nick, u, LANG_TSHUN_DELETION, u2->nick);
-			anope_cmd_global(ci->bi->nick, "%s removed TEMPSHUN on %s", u->nick, u2->nick);
+			xanadu_cmd_global(ci->bi->nick, "%s removed TEMPSHUN on %s", u->nick, u2->nick);
 		}
 	}
 

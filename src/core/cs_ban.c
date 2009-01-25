@@ -118,7 +118,7 @@ int do_ban(User * u)
                 av[0] = sstrdup("+b");
                 get_idealban(ci, u, mask, sizeof(mask));
                 av[1] = mask;
-                anope_cmd_mode(whosends(ci), uc->chan->name, "+b %s",
+                xanadu_cmd_mode(whosends(ci), uc->chan->name, "+b %s",
                                av[1]);
                 chan_set_modes(s_ChanServ, uc->chan, 2, av, 1);
                 free(av[0]);
@@ -126,10 +126,10 @@ int do_ban(User * u)
                 if ((ci->flags & CI_SIGNKICK)
                     || ((ci->flags & CI_SIGNKICK_LEVEL)
                         && !check_access(u, ci, CA_SIGNKICK)))
-                    anope_cmd_kick(whosends(ci), ci->name, u->nick,
+                    xanadu_cmd_kick(whosends(ci), ci->name, u->nick,
                                    "%s (%s)", reason, u->nick);
                 else
-                    anope_cmd_kick(whosends(ci), ci->name, u->nick, "%s",
+                    xanadu_cmd_kick(whosends(ci), ci->name, u->nick, "%s",
                                    reason);
                 av[0] = ci->name;
                 av[1] = u->nick;
@@ -174,7 +174,7 @@ int do_ban(User * u)
         av[0] = sstrdup("+b");
         get_idealban(ci, u2, mask, sizeof(mask));
         av[1] = mask;
-        anope_cmd_mode(whosends(ci), c->name, "+b %s", av[1]);
+        xanadu_cmd_mode(whosends(ci), c->name, "+b %s", av[1]);
         chan_set_modes(s_ChanServ, c, 2, av, 1);
         free(av[0]);
 
@@ -185,10 +185,10 @@ int do_ban(User * u)
         if ((ci->flags & CI_SIGNKICK)
             || ((ci->flags & CI_SIGNKICK_LEVEL)
                 && !check_access(u, ci, CA_SIGNKICK)))
-            anope_cmd_kick(whosends(ci), ci->name, params, "%s (%s)",
+            xanadu_cmd_kick(whosends(ci), ci->name, params, "%s (%s)",
                            reason, u->nick);
         else
-            anope_cmd_kick(whosends(ci), ci->name, params, "%s", reason);
+            xanadu_cmd_kick(whosends(ci), ci->name, params, "%s", reason);
 
         av[0] = ci->name;
         av[1] = params;

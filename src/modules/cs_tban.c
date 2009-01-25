@@ -141,7 +141,7 @@ void addBan(Channel * c, time_t timeout, char *banmask)
     av[0] = sstrdup("+b");
     av[1] = banmask;
 
-    anope_cmd_mode(whosends(c->ci), c->name, "+b %s", av[1]);
+    xanadu_cmd_mode(whosends(c->ci), c->name, "+b %s", av[1]);
     chan_set_modes(s_ChanServ, c, 2, av, 1);
 
     free(av[0]);
@@ -157,7 +157,7 @@ int delBan(int argc, char **argv)
     av[1] = argv[1];
 
     if ((c = findchan(argv[0])) && c->ci) {
-        anope_cmd_mode(whosends(c->ci), c->name, "-b %s", av[1]);
+        xanadu_cmd_mode(whosends(c->ci), c->name, "-b %s", av[1]);
         chan_set_modes(s_ChanServ, c, 2, av, 1);
     }
 

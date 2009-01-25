@@ -82,11 +82,11 @@ int do_act(User * u)
         notice_lang(s_BotServ, u, ACCESS_DENIED);
     else {
         strnrepl(text, BUFSIZE, "\001", "");
-        anope_cmd_privmsg(ci->bi->nick, ci->name, "%cACTION %s %c", 1,
+        xanadu_cmd_privmsg(ci->bi->nick, ci->name, "%cACTION %s %c", 1,
                           text, 1);
         ci->bi->lastmsg = time(NULL);
         if (logchan && LogBot)
-            anope_cmd_privmsg(ci->bi->nick, LogChannel, "ACT %s %s %s",
+            xanadu_cmd_privmsg(ci->bi->nick, LogChannel, "ACT %s %s %s",
                               u->nick, ci->name, text);
     }
     return MOD_CONT;

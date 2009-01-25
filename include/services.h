@@ -1105,7 +1105,7 @@ struct session_ {
 /**
  * IRCD Protocol module support struct.
  * protocol modules register the command they want touse for function X with our set
- * functions, we then call the correct function for the anope_ commands.
+ * functions, we then call the correct function for the xanadu_ commands.
  **/
 typedef struct ircd_proto_ {
     void (*ircd_set_mod_current_buffer)(int ac, char **av);

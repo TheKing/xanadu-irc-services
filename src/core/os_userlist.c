@@ -16,8 +16,8 @@
 #include "module.h"
 
 #ifdef _WIN32
-extern MDE int anope_get_invite_mode();
-extern MDE int anope_get_invis_mode();
+extern MDE int xanadu_get_invite_mode();
+extern MDE int xanadu_get_invis_mode();
 #endif
 
 int do_userlist(User * u);
@@ -79,7 +79,7 @@ int do_userlist(User * u)
     int modes = 0;
 
     if (opt && !stricmp(opt, "INVISIBLE"))
-        modes |= anope_get_invis_mode();
+        modes |= xanadu_get_invis_mode();
 
     if (pattern && (c = findchan(pattern))) {
         struct c_userlist *cu;

@@ -70,7 +70,7 @@ int do_ban(User * u, Channel *c, char *params) {
 			av[0] = sstrdup("+b");
 			get_idealban(ci, u2, mask, sizeof(mask));
 			av[1] = sstrdup(mask);
-			anope_cmd_mode(ci->bi->nick, c->name, "+b %s", av[1]);
+			xanadu_cmd_mode(ci->bi->nick, c->name, "+b %s", av[1]);
 			chan_set_modes(ci->bi->nick, c, 2, av, 1);
 
 			if (av[0]) free(av[0]);
@@ -128,7 +128,7 @@ int do_ban(User * u, Channel *c, char *params) {
 			av[0] = "+b";
 			av[1] = target;
 
-			anope_cmd_mode(ci->bi->nick, c->name, "+b %s", av[1]);
+			xanadu_cmd_mode(ci->bi->nick, c->name, "+b %s", av[1]);
 			chan_set_modes(ci->bi->nick, c, 2, av, 1);
 
 #if CPU_USAGE_REDUCTION < 5
@@ -153,7 +153,7 @@ int do_ban(User * u, Channel *c, char *params) {
 
 #ifdef ENABLE_UNBAN
 /**
- * We attempt to unban the user without the use of anope_cmd_unban() which uses svsmode unban
+ * We attempt to unban the user without the use of xanadu_cmd_unban() which uses svsmode unban
  * and can potentially be used to "guess" a users' real IP.
  *
  * To avoid this, we go over the banlist ourselves and check whether it s considered

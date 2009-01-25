@@ -96,7 +96,7 @@ int do_clear(User * u)
         for (i = 0; i < count; i++) {
             av[0] = sstrdup("-b");
             av[1] = bans[i];
-            anope_cmd_mode(whosends(ci), chan, "%s %s", av[0], av[1]);
+            xanadu_cmd_mode(whosends(ci), chan, "%s %s", av[0], av[1]);
             chan_set_modes(whosends(ci), c, 2, av, 0);
             free(av[1]);
             free(av[0]);
@@ -116,7 +116,7 @@ int do_clear(User * u)
         for (i = 0; i < count; i++) {
             av[0] = sstrdup("-e");
             av[1] = excepts[i];
-            anope_cmd_mode(whosends(ci), chan, "%s %s", av[0], av[1]);
+            xanadu_cmd_mode(whosends(ci), chan, "%s %s", av[0], av[1]);
             chan_set_modes(whosends(ci), c, 2, av, 0);
             free(av[1]);
             free(av[0]);
@@ -137,7 +137,7 @@ int do_clear(User * u)
         for (i = 0; i < count; i++) {
             av[0] = sstrdup("-I");
             av[1] = invites[i];
-            anope_cmd_mode(whosends(ci), chan, "%s %s", av[0], av[1]);
+            xanadu_cmd_mode(whosends(ci), chan, "%s %s", av[0], av[1]);
             chan_set_modes(whosends(ci), c, 2, av, 0);
             free(av[1]);
             free(av[0]);
@@ -151,7 +151,7 @@ int do_clear(User * u)
 
         if (c->mode) {
             /* Clear modes the bulk of the modes */
-            anope_cmd_mode(whosends(ci), c->name, "%s",
+            xanadu_cmd_mode(whosends(ci), c->name, "%s",
                            ircd->modestoremove);
             argv[0] = sstrdup(ircd->modestoremove);
             chan_set_modes(whosends(ci), c, 1, argv, 0);
@@ -160,14 +160,14 @@ int do_clear(User * u)
             /* to prevent the internals from complaining send -k, -L, -f by themselves if we need
                to send them - TSL */
             if (c->key) {
-                anope_cmd_mode(whosends(ci), c->name, "-k %s", c->key);
+                xanadu_cmd_mode(whosends(ci), c->name, "-k %s", c->key);
                 argv[0] = sstrdup("-k");
                 argv[1] = c->key;
                 chan_set_modes(whosends(ci), c, 2, argv, 0);
                 free(argv[0]);
             }
             if (ircd->Lmode && c->redirect) {
-                anope_cmd_mode(whosends(ci), c->name, "-L %s",
+                xanadu_cmd_mode(whosends(ci), c->name, "-L %s",
                                c->redirect);
                 argv[0] = sstrdup("-L");
                 argv[1] = c->redirect;
@@ -176,7 +176,7 @@ int do_clear(User * u)
             }
             if (ircd->fmode && c->flood) {
                 if (flood_mode_char_remove) {
-                    anope_cmd_mode(whosends(ci), c->name, "%s %s",
+                    xanadu_cmd_mode(whosends(ci), c->name, "%s %s",
                                    flood_mode_char_remove, c->flood);
                     argv[0] = sstrdup(flood_mode_char_remove);
                     argv[1] = c->flood;
@@ -225,7 +225,7 @@ int do_clear(User * u)
 
             *end = 0;
 
-            anope_cmd_mode(whosends(ci), c->name, "-%s", buf);
+            xanadu_cmd_mode(whosends(ci), c->name, "-%s", buf);
             c->mode = 0;
             check_modes(c);
         }
@@ -236,12 +236,12 @@ int do_clear(User * u)
 
         if (ircd->svsmode_ucmode) {
             av[0] = sstrdup(chan);
-            anope_cmd_svsmode_chan(av[0], "-o", NULL);
+            xanadu_cmd_svsmode_chan(av[0], "-o", NULL);
             if (ircd->owner) {
-                anope_cmd_svsmode_chan(av[0], ircd->ownerunset, NULL);
+                xanadu_cmd_svsmode_chan(av[0], ircd->ownerunset, NULL);
             }
             if (ircd->protect || ircd->admin) {
-                anope_cmd_svsmode_chan(av[0], ircd->adminunset, NULL);
+                xanadu_cmd_svsmode_chan(av[0], ircd->adminunset, NULL);
             }
             for (cu = c->users; cu; cu = next) {
                 next = cu->next;
@@ -290,7 +290,7 @@ int do_clear(User * u)
                     av[1] = sstrdup("-o");
                 }
                 av[2] = sstrdup(cu->user->nick);
-                anope_cmd_mode(whosends(ci), av[0], "%s :%s", av[1],
+                xanadu_cmd_mode(whosends(ci), av[0], "%s :%s", av[1],
                                av[2]);
                 do_cmode(s_ChanServ, 3, av);
                 free(av[2]);
@@ -311,11 +311,11 @@ int do_clear(User * u)
             av[1] = sstrdup("-h");
             av[2] = sstrdup(cu->user->nick);
             if (ircd->svsmode_ucmode) {
-                anope_cmd_svsmode_chan(av[0], av[1], NULL);
+                xanadu_cmd_svsmode_chan(av[0], av[1], NULL);
                 do_cmode(s_ChanServ, 3, av);
                 break;
             } else {
-                anope_cmd_mode(whosends(ci), av[0], "%s :%s", av[1],
+                xanadu_cmd_mode(whosends(ci), av[0], "%s :%s", av[1],
                                av[2]);
             }
             do_cmode(s_ChanServ, 3, av);
@@ -336,11 +336,11 @@ int do_clear(User * u)
             av[1] = sstrdup("-v");
             av[2] = sstrdup(cu->user->nick);
             if (ircd->svsmode_ucmode) {
-                anope_cmd_svsmode_chan(av[0], av[1], NULL);
+                xanadu_cmd_svsmode_chan(av[0], av[1], NULL);
                 do_cmode(s_ChanServ, 3, av);
                 break;
             } else {
-                anope_cmd_mode(whosends(ci), av[0], "%s :%s", av[1],
+                xanadu_cmd_mode(whosends(ci), av[0], "%s :%s", av[1],
                                av[2]);
             }
             do_cmode(s_ChanServ, 3, av);
@@ -361,7 +361,7 @@ int do_clear(User * u)
             av[0] = sstrdup(chan);
             av[1] = sstrdup(cu->user->nick);
             av[2] = sstrdup(buf);
-            anope_cmd_kick(whosends(ci), av[0], av[1], av[2]);
+            xanadu_cmd_kick(whosends(ci), av[0], av[1], av[2]);
             do_kick(s_ChanServ, 3, av);
             free(av[2]);
             free(av[1]);

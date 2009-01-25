@@ -111,7 +111,7 @@ int do_bot(User * u)
             }
 
             /* check for hardcored ircd forbidden nicks */
-            if (!anope_valid_nick(nick)) {
+            if (!xanadu_valid_nick(nick)) {
                 notice_lang(s_BotServ, u, BOT_BAD_NICK);
                 return MOD_CONT;
             }
@@ -164,7 +164,7 @@ int do_bot(User * u)
             EnforceQlinedNick(nick, s_BotServ);
 
             /* We make the bot online, ready to serve */
-            anope_cmd_bot_nick(bi->nick, bi->user, bi->host, bi->real,
+            xanadu_cmd_bot_nick(bi->nick, bi->user, bi->host, bi->real,
                                ircd->botserv_bot_mode);
 
             notice_lang(s_BotServ, u, BOT_BOT_ADDED, bi->nick, bi->user,
@@ -227,7 +227,7 @@ int do_bot(User * u)
             }
 
             /* check for hardcored ircd forbidden nicks */
-            if (!anope_valid_nick(nick)) {
+            if (!xanadu_valid_nick(nick)) {
                 notice_lang(s_BotServ, u, BOT_BAD_NICK);
                 return MOD_CONT;
             }
@@ -265,7 +265,7 @@ int do_bot(User * u)
                 /* The new nick is really different, so we remove the Q line for
                    the old nick. */
                 if (ircd->sqline) {
-                    anope_cmd_unsqline(bi->nick);
+                    xanadu_cmd_unsqline(bi->nick);
                 }
 
                 /* We check whether user with this nick is online, and kill it if so */
@@ -290,14 +290,14 @@ int do_bot(User * u)
 
             /* If only the nick changes, we just make the bot change his nick,
                else we must make it quit and rejoin. We must not forget to set
-			   the Q:Line either (it's otherwise set in anope_cmd_bot_nick) */
+			   the Q:Line either (it's otherwise set in xanadu_cmd_bot_nick) */
             if (!user) {
-                anope_cmd_chg_nick(oldnick, bi->nick);
-				anope_cmd_sqline(bi->nick, "Reserved for services");
+                xanadu_cmd_chg_nick(oldnick, bi->nick);
+				xanadu_cmd_sqline(bi->nick, "Reserved for services");
             } else {
-                anope_cmd_quit(oldnick, "Quit: Be right back");
+                xanadu_cmd_quit(oldnick, "Quit: Be right back");
 
-                anope_cmd_bot_nick(bi->nick, bi->user, bi->host, bi->real,
+                xanadu_cmd_bot_nick(bi->nick, bi->user, bi->host, bi->real,
                                    ircd->botserv_bot_mode);
                 bot_rejoin_all(bi);
             }
@@ -318,11 +318,11 @@ int do_bot(User * u)
             notice_lang(s_BotServ, u, BOT_DOES_NOT_EXIST, nick);
         else {
             send_event(EVENT_BOT_DEL, 1, bi->nick);
-            anope_cmd_quit(bi->nick,
+            xanadu_cmd_quit(bi->nick,
                            "Quit: Help! I'm being deleted by %s!",
                            u->nick);
             if (ircd->sqline) {
-                anope_cmd_unsqline(bi->nick);
+                xanadu_cmd_unsqline(bi->nick);
             }
             delbot(bi);
 

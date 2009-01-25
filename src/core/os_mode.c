@@ -88,14 +88,14 @@ int do_os_mode(User * u)
         notice_lang(s_OperServ, u, PERMISSION_DENIED);
         return MOD_CONT;
     } else {
-        anope_cmd_mode(s_OperServ, chan, "%s", modes);
+        xanadu_cmd_mode(s_OperServ, chan, "%s", modes);
 
         ac = split_buf(modes, &av, 1);
         chan_set_modes(s_OperServ, c, ac, av, -1);
         free(av);
 
         if (WallOSMode)
-            anope_cmd_global(s_OperServ, "%s used MODE %s on %s", u->nick,
+            xanadu_cmd_global(s_OperServ, "%s used MODE %s on %s", u->nick,
                              modes, chan);
     }
     return MOD_CONT;

@@ -154,7 +154,7 @@ int do_szline(User * u)
                              (wall_expiry == 1) ? "" : "s");
                 }
 
-                anope_cmd_global(s_OperServ,
+                xanadu_cmd_global(s_OperServ,
                                  "%s added an SZLINE for %s (%s)", u->nick,
                                  mask, buf);
             }

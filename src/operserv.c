@@ -141,7 +141,7 @@ void operserv(User * u, char *buf)
         if (!(s = strtok(NULL, ""))) {
             s = "";
         }
-        anope_cmd_ctcp(s_OperServ, u->nick, "PING %s", s);
+        xanadu_cmd_ctcp(s_OperServ, u->nick, "PING %s", s);
     } else {
         mod_run_cmd(s_OperServ, u, OPERSERV, cmd);
     }
@@ -205,7 +205,7 @@ static void load_old_akill(void)
 
         /* No nicknames allowed! */
         if (strchr(ak->user, '!')) {
-            anope_cmd_remove_akill(ak->user, ak->host);
+            xanadu_cmd_remove_akill(ak->user, ak->host);
             free(ak);
             continue;
         }
@@ -241,7 +241,7 @@ static void load_old_akill(void)
                 if (match_wild_nocase(amask, mask2)
                     && (entry->expires >= ak->expires
                         || entry->expires == 0)) {
-                    anope_cmd_remove_akill(ak->user, ak->host);
+                    xanadu_cmd_remove_akill(ak->user, ak->host);
                     free(ak);
                     ak = NULL;
                     break;
@@ -423,7 +423,7 @@ void load_os_dbase(void)
 	restore_db(f);						\
 	log_perror("Write error on %s", OperDBName);		\
 	if (time(NULL) - lastwarn > WarningTimeout) {		\
-	    anope_cmd_global(NULL, "Write error on %s: %s", OperDBName,	\
+	    xanadu_cmd_global(NULL, "Write error on %s: %s", OperDBName,	\
 			strerror(errno));			\
 	    lastwarn = time(NULL);				\
 	}							\
@@ -503,25 +503,25 @@ void save_os_rdb_dbase(void)
     if (!rdb_open())
         return;
 
-    if (rdb_tag_table("anope_os_akills") == 0) {
-        alog("Unable to tag table 'anope_os_akills' - OperServ RDB save failed.");
+    if (rdb_tag_table("xanadu_os_akills") == 0) {
+        alog("Unable to tag table 'xanadu_os_akills' - OperServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table("anope_os_sglines") == 0) {
-        alog("Unable to tag table 'anope_os_sglines' - OperServ RDB save failed.");
+    if (rdb_tag_table("xanadu_os_sglines") == 0) {
+        alog("Unable to tag table 'xanadu_os_sglines' - OperServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table("anope_os_sqlines") == 0) {
-        alog("Unable to tag table 'anope_os_sqlines' - OperServ RDB save failed.");
+    if (rdb_tag_table("xanadu_os_sqlines") == 0) {
+        alog("Unable to tag table 'xanadu_os_sqlines' - OperServ RDB save failed.");
         return;
     }
-    if (rdb_tag_table("anope_os_szlines") == 0) {
-        alog("Unable to tag table 'anope_os_szlines' - OperServ RDB save failed.");
+    if (rdb_tag_table("xanadu_os_szlines") == 0) {
+        alog("Unable to tag table 'xanadu_os_szlines' - OperServ RDB save failed.");
         return;
     }
-    /* We empty anope_os_core as required */
-    if (rdb_empty_table("anope_os_core") == 0) {
-        alog("Unable to empty table 'anope_os_core' - OperServ RDB save failed");
+    /* We empty xanadu_os_core as required */
+    if (rdb_empty_table("xanadu_os_core") == 0) {
+        alog("Unable to empty table 'xanadu_os_core' - OperServ RDB save failed");
         return;
     }
 
@@ -532,20 +532,20 @@ void save_os_rdb_dbase(void)
         return;
     }
 
-    if (rdb_clean_table("anope_os_akills") == 0) {
-        alog("Unable to clean table 'anope_os_akills' - OperServ RDB save failed.");
+    if (rdb_clean_table("xanadu_os_akills") == 0) {
+        alog("Unable to clean table 'xanadu_os_akills' - OperServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table("anope_os_sglines") == 0) {
-        alog("Unable to clean table 'anope_os_sglines' - OperServ RDB save failed.");
+    if (rdb_clean_table("xanadu_os_sglines") == 0) {
+        alog("Unable to clean table 'xanadu_os_sglines' - OperServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table("anope_os_sqlines") == 0) {
-        alog("Unable to clean table 'anope_os_sqlines' - OperServ RDB save failed.");
+    if (rdb_clean_table("xanadu_os_sqlines") == 0) {
+        alog("Unable to clean table 'xanadu_os_sqlines' - OperServ RDB save failed.");
         return;
     }
-    if (rdb_clean_table("anope_os_szlines") == 0) {
-        alog("Unable to clean table 'anope_os_szlines' - OperServ RDB save failed.");
+    if (rdb_clean_table("xanadu_os_szlines") == 0) {
+        alog("Unable to clean table 'xanadu_os_szlines' - OperServ RDB save failed.");
         return;
     }
 
@@ -813,7 +813,7 @@ int add_akill(User * u, char *mask, const char *by, const time_t expires,
     slist_add(&akills, entry);
 
     if (AkillOnAdd)
-        anope_cmd_akill(entry->user, entry->host, entry->by, entry->seton,
+        xanadu_cmd_akill(entry->user, entry->host, entry->by, entry->seton,
                         entry->expires, entry->reason);
 
     free(mask2);
@@ -846,7 +846,7 @@ int check_akill(char *nick, const char *username, const char *host,
             continue;
         if (match_wild_nocase(ak->user, username)
             && match_wild_nocase(ak->host, host)) {
-            anope_cmd_akill(ak->user, ak->host, ak->by, ak->seton,
+            xanadu_cmd_akill(ak->user, ak->host, ak->by, ak->seton,
                             ak->expires, ak->reason);
             return 1;
         }
@@ -854,7 +854,7 @@ int check_akill(char *nick, const char *username, const char *host,
             if (vhost) {
                 if (match_wild_nocase(ak->user, username)
                     && match_wild_nocase(ak->host, vhost)) {
-                    anope_cmd_akill(ak->user, ak->host, ak->by, ak->seton,
+                    xanadu_cmd_akill(ak->user, ak->host, ak->by, ak->seton,
                                     ak->expires, ak->reason);
                     return 1;
                 }
@@ -864,7 +864,7 @@ int check_akill(char *nick, const char *username, const char *host,
             if (ip) {
                 if (match_wild_nocase(ak->user, username)
                     && match_wild_nocase(ak->host, ip)) {
-                    anope_cmd_akill(ak->user, ak->host, ak->by, ak->seton,
+                    xanadu_cmd_akill(ak->user, ak->host, ak->by, ak->seton,
                                     ak->expires, ak->reason);
                     return 1;
                 }
@@ -891,7 +891,7 @@ void expire_akills(void)
             continue;
 
         if (WallAkillExpire)
-            anope_cmd_global(s_OperServ, "AKILL on %s@%s has expired",
+            xanadu_cmd_global(s_OperServ, "AKILL on %s@%s has expired",
                              ak->user, ak->host);
         slist_delete(&akills, i);
     }
@@ -902,7 +902,7 @@ static void free_akill_entry(SList * slist, void *item)
     Akill *ak = item;
 
     /* Remove the AKILLs from all the servers */
-    anope_cmd_remove_akill(ak->user, ak->host);
+    xanadu_cmd_remove_akill(ak->user, ak->host);
 
     /* Free the structure */
     free(ak->user);
@@ -1020,7 +1020,7 @@ int add_sgline(User * u, char *mask, const char *by, const time_t expires,
 
     slist_add(&sglines, entry);
 
-    anope_cmd_sgline(entry->mask, entry->reason);
+    xanadu_cmd_sgline(entry->mask, entry->reason);
 
     if (KillonSGline && !ircd->sglineenforce) {
         snprintf(buf, (BUFSIZE - 1), "G-Lined: %s", entry->reason);
@@ -1054,9 +1054,9 @@ int check_sgline(char *nick, const char *realname)
             continue;
 
         if (match_wild_nocase(sx->mask, realname)) {
-            anope_cmd_sgline(sx->mask, sx->reason);
+            xanadu_cmd_sgline(sx->mask, sx->reason);
             /* We kill nick since s_sgline can't */
-            anope_cmd_svskill(ServerName, nick, "G-Lined: %s", sx->reason);
+            xanadu_cmd_svskill(ServerName, nick, "G-Lined: %s", sx->reason);
             return 1;
         }
     }
@@ -1079,7 +1079,7 @@ void expire_sglines(void)
             continue;
 
         if (WallSGLineExpire)
-            anope_cmd_global(s_OperServ, "SGLINE on \2%s\2 has expired",
+            xanadu_cmd_global(s_OperServ, "SGLINE on \2%s\2 has expired",
                              sx->mask);
         slist_delete(&sglines, i);
     }
@@ -1090,7 +1090,7 @@ static void free_sgline_entry(SList * slist, void *item)
     SXLine *sx = item;
 
     /* Remove the SGLINE from all the servers */
-    anope_cmd_unsgline(sx->mask);
+    xanadu_cmd_unsgline(sx->mask);
 
     /* Free the structure */
     free(sx->mask);
@@ -1299,7 +1299,7 @@ void expire_sqlines(void)
             continue;
 
         if (WallSQLineExpire)
-            anope_cmd_global(s_OperServ, "SQLINE on \2%s\2 has expired",
+            xanadu_cmd_global(s_OperServ, "SQLINE on \2%s\2 has expired",
                              sx->mask);
 
         slist_delete(&sqlines, i);
@@ -1311,7 +1311,7 @@ static void free_sqline_entry(SList * slist, void *item)
     SXLine *sx = item;
 
     /* Remove the SQLINE from all the servers */
-    anope_cmd_unsqline(sx->mask);
+    xanadu_cmd_unsqline(sx->mask);
 
     /* Free the structure */
     free(sx->mask);
@@ -1418,7 +1418,7 @@ int add_szline(User * u, char *mask, const char *by, const time_t expires,
     entry->expires = expires;
 
     slist_add(&szlines, entry);
-    anope_cmd_szline(entry->mask, entry->reason, entry->by);
+    xanadu_cmd_szline(entry->mask, entry->reason, entry->by);
 
     return deleted;
 }
@@ -1444,7 +1444,7 @@ int check_szline(char *nick, char *ip)
         }
 
         if (match_wild_nocase(sx->mask, ip)) {
-            anope_cmd_szline(sx->mask, sx->reason, sx->by);
+            xanadu_cmd_szline(sx->mask, sx->reason, sx->by);
             return 1;
         }
     }
@@ -1468,7 +1468,7 @@ void expire_szlines(void)
             continue;
 
         if (WallSZLineExpire)
-            anope_cmd_global(s_OperServ, "SZLINE on \2%s\2 has expired",
+            xanadu_cmd_global(s_OperServ, "SZLINE on \2%s\2 has expired",
                              sx->mask);
         slist_delete(&szlines, i);
     }
@@ -1479,7 +1479,7 @@ static void free_szline_entry(SList * slist, void *item)
     SXLine *sx = item;
 
     /* Remove the SZLINE from all the servers */
-    anope_cmd_unszline(sx->mask);
+    xanadu_cmd_unszline(sx->mask);
 
     /* Free the structure */
     free(sx->mask);
@@ -1586,7 +1586,7 @@ void resetDefCon(int level)
             DefConLevel = level;
             send_event(EVENT_DEFCON_LEVEL, 1, strLevel);
             alog("Defcon level timeout, returning to lvl %d", level);
-            anope_cmd_global(s_OperServ,
+            xanadu_cmd_global(s_OperServ,
                              getstring2(NULL, OPER_DEFCON_WALL),
                              s_OperServ, level);
             if (GlobalOnDefcon) {
@@ -1717,7 +1717,7 @@ int defconParseModeString(const char *str)
     if (ircd->Lmode) {
         /* We can't mlock +L if +l is not mlocked as well. */
         if ((DefConModesOn & ircd->chan_lmode)
-            && !(DefConModesOn & anope_get_limit_mode())) {
+            && !(DefConModesOn & xanadu_get_limit_mode())) {
             DefConModesOn &= ~ircd->chan_lmode;
             free(DefConModesCI.mlock_redirect);
             DefConModesCI.mlock_redirect = NULL;
@@ -1730,7 +1730,7 @@ int defconParseModeString(const char *str)
     /* So check if we need there is a NOKNOCK MODE and that we need INVITEONLY */
     if (ircd->noknock && ircd->knock_needs_i) {
         if ((DefConModesOn & ircd->noknock)
-            && !(DefConModesOn & anope_get_invite_mode())) {
+            && !(DefConModesOn & xanadu_get_invite_mode())) {
             DefConModesOn &= ~ircd->noknock;
             alog("DefConChanModes must lock mode +i as well to lock mode +K");
             return 0;

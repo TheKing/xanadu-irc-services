@@ -362,7 +362,7 @@ int do_find_nochan_users(User * u) {
 									if (!quiet)
 										moduleNoticeLang(s_OperServ, u, LANG_NOTINCHANLIST_JOINING, u2->nick);
 
-									anope_cmd_svsjoin(s_OperServ, u2->nick, niclIdleChan, NULL);
+									xanadu_cmd_svsjoin(s_OperServ, u2->nick, niclIdleChan, NULL);
 								} else
 									moduleNoticeLang(s_OperServ, u, LANG_JOIN_NOT_SUPPORTED);
 

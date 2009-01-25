@@ -28,92 +28,92 @@ void introduce_user(const char *user)
 #undef LTSIZE
 
     if (!user || stricmp(user, s_AdminServ) == 0) {
-        anope_cmd_nick(s_AdminServ, desc_AdminServ, ircd->adminservmode);
+        xanadu_cmd_nick(s_AdminServ, desc_AdminServ, ircd->adminservmode);
     }
 
     if (!user || stricmp(user, s_NickServ) == 0) {
-        anope_cmd_nick(s_NickServ, desc_NickServ, ircd->nickservmode);
+        xanadu_cmd_nick(s_NickServ, desc_NickServ, ircd->nickservmode);
     }
 
     if (!user || stricmp(user, s_ChanServ) == 0) {
-        anope_cmd_nick(s_ChanServ, desc_ChanServ, ircd->chanservmode);
+        xanadu_cmd_nick(s_ChanServ, desc_ChanServ, ircd->chanservmode);
     }
 
     if (s_HostServ && ircd->vhost
         && (!user || stricmp(user, s_HostServ) == 0)) {
-        anope_cmd_nick(s_HostServ, desc_HostServ, ircd->hostservmode);
+        xanadu_cmd_nick(s_HostServ, desc_HostServ, ircd->hostservmode);
     }
 
     if (!user || stricmp(user, s_MemoServ) == 0) {
-        anope_cmd_nick(s_MemoServ, desc_MemoServ, ircd->memoservmode);
+        xanadu_cmd_nick(s_MemoServ, desc_MemoServ, ircd->memoservmode);
     }
 
     if (s_BotServ && (!user || stricmp(user, s_BotServ) == 0)) {
-        anope_cmd_nick(s_BotServ, desc_BotServ, ircd->botservmode);
+        xanadu_cmd_nick(s_BotServ, desc_BotServ, ircd->botservmode);
     }
 
     if (!user || stricmp(user, s_OperServ) == 0) {
-        anope_cmd_nick(s_OperServ, desc_OperServ, ircd->operservmode);
+        xanadu_cmd_nick(s_OperServ, desc_OperServ, ircd->operservmode);
     }
 
     if (s_DevNull && (!user || stricmp(user, s_DevNull) == 0)) {
-        anope_cmd_nick(s_DevNull, desc_DevNull, ircd->devnullmode);
+        xanadu_cmd_nick(s_DevNull, desc_DevNull, ircd->devnullmode);
     }
 
     if (!user || stricmp(user, s_GlobalNoticer) == 0) {
-        anope_cmd_nick(s_GlobalNoticer, desc_GlobalNoticer,
+        xanadu_cmd_nick(s_GlobalNoticer, desc_GlobalNoticer,
                        ircd->globalmode);
     }
 
     /* Aliases */
 
     if (s_AdminServAlias && (!user || stricmp(user, s_AdminServAlias) == 0)) {
-        anope_cmd_nick(s_AdminServAlias, desc_AdminServAlias,
+        xanadu_cmd_nick(s_AdminServAlias, desc_AdminServAlias,
                        ircd->adminservaliasmode);
     }
 
     if (s_NickServAlias && (!user || stricmp(user, s_NickServAlias) == 0)) {
-        anope_cmd_nick(s_NickServAlias, desc_NickServAlias,
+        xanadu_cmd_nick(s_NickServAlias, desc_NickServAlias,
                        ircd->nickservaliasmode);
     }
 
     if (s_ChanServAlias && (!user || stricmp(user, s_ChanServAlias) == 0)) {
-        anope_cmd_nick(s_ChanServAlias, desc_ChanServAlias,
+        xanadu_cmd_nick(s_ChanServAlias, desc_ChanServAlias,
                        ircd->chanservaliasmode);
     }
 
     if (s_MemoServAlias && (!user || stricmp(user, s_MemoServAlias) == 0)) {
-        anope_cmd_nick(s_MemoServAlias, desc_MemoServAlias,
+        xanadu_cmd_nick(s_MemoServAlias, desc_MemoServAlias,
                        ircd->memoservaliasmode);
     }
 
     if (s_BotServAlias && (!user || stricmp(user, s_BotServAlias) == 0)) {
-        anope_cmd_nick(s_BotServAlias, desc_BotServAlias,
+        xanadu_cmd_nick(s_BotServAlias, desc_BotServAlias,
                        ircd->botservaliasmode);
     }
 
     if (s_HelpServAlias && (!user || stricmp(user, s_HelpServAlias) == 0)) {
-        anope_cmd_nick(s_HelpServAlias, desc_HelpServAlias,
+        xanadu_cmd_nick(s_HelpServAlias, desc_HelpServAlias,
                        ircd->helpservaliasmode);
     }
 
     if (s_OperServAlias && (!user || stricmp(user, s_OperServAlias) == 0)) {
-        anope_cmd_nick(s_OperServAlias, desc_OperServAlias,
+        xanadu_cmd_nick(s_OperServAlias, desc_OperServAlias,
                        ircd->operservaliasmode);
     }
 
     if (s_DevNullAlias && (!user || stricmp(user, s_DevNullAlias) == 0)) {
-        anope_cmd_nick(s_DevNullAlias, desc_DevNullAlias,
+        xanadu_cmd_nick(s_DevNullAlias, desc_DevNullAlias,
                        ircd->devnullvaliasmode);
     }
     if (s_HostServAlias && ircd->vhost
         && (!user || stricmp(user, s_HostServAlias) == 0)) {
-        anope_cmd_nick(s_HostServAlias, desc_HostServAlias,
+        xanadu_cmd_nick(s_HostServAlias, desc_HostServAlias,
                        ircd->hostservaliasmode);
     }
     if (s_GlobalNoticerAlias
         && (!user || stricmp(user, s_GlobalNoticerAlias) == 0)) {
-        anope_cmd_nick(s_GlobalNoticerAlias, desc_GlobalNoticerAlias,
+        xanadu_cmd_nick(s_GlobalNoticerAlias, desc_GlobalNoticerAlias,
                        ircd->globalaliasmode);
     }
 
@@ -126,7 +126,7 @@ void introduce_user(const char *user)
             for (bi = botlists[i]; bi; bi = bi->next) {
 
                 if (!user || !stricmp(user, bi->nick))
-                    anope_cmd_bot_nick(bi->nick, bi->user, bi->host,
+                    xanadu_cmd_bot_nick(bi->nick, bi->user, bi->host,
                                        bi->real, ircd->botserv_bot_mode);
             }
     }
@@ -737,7 +737,7 @@ int init_secondary(int ac, char **av)
              RemotePort);
     }
 
-    anope_cmd_connect(servernum);
+    xanadu_cmd_connect(servernum);
     send_event(EVENT_CONNECT, 1, EVENT_STOP);
 
     sgets2(inbuf, sizeof(inbuf), servsock);
@@ -751,7 +751,7 @@ int init_secondary(int ac, char **av)
 
     /* Announce a logfile error if there was one */
     if (openlog_failed) {
-        anope_cmd_global(NULL, "Warning: couldn't open logfile: %s",
+        xanadu_cmd_global(NULL, "Warning: couldn't open logfile: %s",
                          strerror(openlog_errno));
     }
 
@@ -761,10 +761,10 @@ int init_secondary(int ac, char **av)
     /* And hybrid needs Global joined in the logchan */
     if (logchan && ircd->join2msg) {
         /* XXX might desync */
-        anope_cmd_join(s_GlobalNoticer, LogChannel, time(NULL));
+        xanadu_cmd_join(s_GlobalNoticer, LogChannel, time(NULL));
     }
 
-    anope_cmd_eob();
+    xanadu_cmd_eob();
 
     /**
       * Load our delayed modeles - modules that are planing on making clients need to wait till now
