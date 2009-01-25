@@ -1310,7 +1310,7 @@ void ultimate2_cmd_nick(char *nick, char *name, char *mode)
 
 void ultimate2_cmd_351(char *source)
 {
-    send_cmd(ServerName, "351 %s Anope-%s %s :%s - %s (%s) -- %s",
+    send_cmd(ServerName, "351 %s Xanadu-%s %s :%s - %s (%s) -- %s",
              source, version_number, ServerName, ircd->name, version_flags,
              EncModule, version_build);
 }

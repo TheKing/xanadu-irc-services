@@ -1483,7 +1483,7 @@ xanadu_event_mode (char *source, int ac, char **av)
 void
 plexus_cmd_351 (char *source)
 {
-  send_cmd (ServerName, "351 %s Anope-%s %s :%s - %s (%s) -- %s",
+  send_cmd (ServerName, "351 %s Xanadu-%s %s :%s - %s (%s) -- %s",
 	    source, version_number, ServerName, ircd->name, version_flags,
 	    EncModule, version_build);
 }

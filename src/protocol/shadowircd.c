@@ -1475,7 +1475,7 @@ int xanadu_event_tmode(char *source, int ac, char **av)
 void shadowircd_cmd_351(char *source)
 {
     send_cmd(TS6SID,
-             "351 %s Anope-%s %s :%s (ShadowProtocol %d) - %s (%s) -- %s",
+             "351 %s Xanadu-%s %s :%s (ShadowProtocol %d) - %s (%s) -- %s",
              source, version_number, ServerName, ircd->name,
              PROTOCOL_REVISION, version_flags, EncModule, version_build);
 }
