@@ -6,5 +6,8 @@
  * Based on the original code of Epona by Lara.
  * Based on the original code of Services by Andy Church.
  *
- * $Id: ns_addnick.c 1.0 01-17-2009 $
+ * $Id: ns_addnick.c 01-17-2009 digitalman $
  */
+
+#include "services.h"
+#include "pseudo.h"
