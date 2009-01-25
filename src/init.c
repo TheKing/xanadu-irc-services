@@ -191,7 +191,7 @@ static int parse_dir_options(int ac, char **av)
                 }
                 log_filename = av[i];
             } else if (strcmp(s, "version") == 0) {
-                fprintf(stdout, "Anope-%s %s -- %s\n", version_number,
+                fprintf(stdout, "Xanadu-%s %s -- %s\n", version_number,
                         version_flags, version_build);
                 exit(EXIT_SUCCESS);
             }
