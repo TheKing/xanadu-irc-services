@@ -15,15 +15,15 @@
  #ifndef VERSION_H
  #define VERSION_H
  
-#define VERSION_MAJOR	1
-#define VERSION_MINOR	0
+#define VERSION_MAJOR	0
+#define VERSION_MINOR	1
 #define VERSION_PATCH	0
 #define VERSION_EXTRA	"alpha"
 #define VERSION_BUILD	1000
 
 #define BUILD	"1"
-#define VERSION_STRING "1.0.0 (1000)"
-#define VERSION_STRING_DOTTED "1.0.0.1000"
+#define VERSION_STRING "0.1.0 (1000)"
+#define VERSION_STRING_DOTTED "0.1.0.1000"
 
 #ifdef DEBUG_COMMANDS
 # define VER_DEBUG "D"
