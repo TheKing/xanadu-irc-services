@@ -42,6 +42,19 @@ CS_HELP_FLAGS
 	 that alters how %S and users interact with your channel.
 ### MemoServ ###
 ### NickServ ###
+
+NS_HELP_CMD_FLAGS
+	   FLAGS          Add/Remove flags set on your account.
+
+NS_HELP_FLAGS
+	 The user account flag system allows you to easily manage your account
+	 settings and how services, including %S, interacts with you.
+
+NS_FLAGS_SHOW
+	The following flags are currently set on your account: %s
+
+NS_FLAGS_SET
+	The following flags are now set on your account: %s
 ### OperServ ###
 
 OS_ERR_MUSTBEROOT
