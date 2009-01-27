@@ -33,6 +33,8 @@ Key:  [ ] To-do (Agreed To-Do)
 	+k	Kill Protection (60 Sec) (Default)
 	+a	AutoOP On (Default)
 [ ] NickServ: ADDNICK & MYNICKS Stopped working, why? (ALL)
+[~] Config: Add OperChan to config
+[~] Add olog() function to allow logging to operchan
 
 Releases
 ======================
