@@ -555,7 +555,7 @@ void finish_sync(Server * serv, int sync_links)
 
     /* Do some general stuff which should only be done once */
     restore_unsynced_topics();
-    alog("Server %s is done syncing", serv->name);
+    alog("\002Sync\002: Server %s is done syncing", serv->name);
 }
 
 /*******************************************************************/
