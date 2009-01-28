@@ -14,7 +14,7 @@ Key:  [ ] To-do (Agreed To-Do)
 [ ] ChanServ: Add access logging (Liber)
 [ ] Logchan (Liber) 
 	[ ] Add join/part to src/users.c (this should be rather easy) 
-	[ ] Add "AdvancedLogging" conf param
+	[ ] Add "AdvancedLogging" conf param (To do when logchan becomes core) - Liber
 [X] HelpServ: Remove HelpServ's existance (DigitalMan)
 [X] Rename all Anope-named methods, functions, etc (ALL)
 [+] Add the following file header format to each file. (See XHEADER in main dir)
